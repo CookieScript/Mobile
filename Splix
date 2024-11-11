@@ -162,8 +162,8 @@ function library:new(props)
 			BackgroundColor3 = color,
 			BorderColor3 = Color3.fromRGB(12, 12, 12),
 			BorderSizePixel = 1,
-			Size = UDim2.new(0,1,0,4),
-			Position = UDim2.new(0.5,0,0.8,0),
+			Size = UDim2.new(0,600,0,590),
+			Position = UDim2.new(0.5,0,0.5,0),
 			Parent = screen
 		}
 	)
@@ -214,7 +214,7 @@ function library:new(props)
 		{
 			AnchorPoint = Vector2.new(0.5,0),
 			BackgroundTransparency = 1,
-			Size = UDim2.new(15,0,0,5),
+			Size = UDim2.new(1,0,0,20),
 			Position = UDim2.new(0.5,0,0,0),
 			Parent = outline2
 		}
