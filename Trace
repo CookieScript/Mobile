@@ -1,0 +1,3 @@
+-- // variables
+local library = {}
+local Notify = {}
