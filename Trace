@@ -1,6 +1,6 @@
 -- // variables
-local Library = {}
-local Notify = {}
+local library = {}
+local notify = {}
 
 
 local check_exploit = (syn and "Synapse") or (KRNL_LOADED and "Krnl") or (isourclosure and "ScriptWare") or nil
@@ -14,3 +14,6 @@ local ws = game:GetService("Workspace")
 local plr = plrs.LocalPlayer
 local cam = ws.CurrentCamera
 
+-- // indexes
+library.__index = library
+notify.__index = notify
