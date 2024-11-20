@@ -1,0 +1,17 @@
+--// Juju remake \\--
+
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.CoreGui
+
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0.65, 0, 1, 0)
+frame.Position = UDim2.new(0.1, 0, 0, 0)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+frame.BorderSizePixel = 0
+frame.Active = true
+frame.BackgroundTransparency = 0 
+frame.Draggable = true
+frame.Parent = gui
+
