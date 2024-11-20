@@ -1,5 +1,7 @@
 --// Juju remake \\--
 
+getgenv().gay = false
+
 local gui = Instance.new("ScreenGui")
 gui.Parent = game.CoreGui
 
@@ -15,3 +17,26 @@ frame.BackgroundTransparency = 0
 frame.Draggable = true
 frame.Parent = gui
 
+local line = Instance.new("Frame")
+line.Size = UDim2.new(0.98, 0, 0.01, 0)
+line.Position = UDim2.new(0.01, 0, 0.01, 0)
+line.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+line.BorderColor3 = Color3.fromRGB(0, 0, 0)
+line.BorderSizePixel = 0
+line.Active = true
+line.BackgroundTransparency = 0
+line.Parent = gui
+
+if getgenv().gay == true then
+    local function cycleRainbowColors()
+        while true do
+            for i = 0, 360, 10 do
+                line.BackgroundColor3 = Color3.fromHSV(i / 360, 1, 1)
+                wait(0.5)
+            end
+        end
+    end
+end
+
+
+cycleRainbowColors()
