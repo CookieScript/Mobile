@@ -1,57 +1,112 @@
-local gui = Instance.new("ScreenGui")
-gui.Parent = game.CoreGui
+local Library = {}
 
+function Library:CreateWindow(title, size, keybind)
+    local gui = Instance.new("ScreenGui")
+    gui.Parent = game.CoreGui
 
+    local mainFrame = Instance.new("Frame")
+    mainFrame.Size = UDim2.new(0, size.X, 0, size.Y)
+    mainFrame.Position = UDim2.new(0.5, -size.X / 2, 0.5, -size.Y / 2)
+    mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    mainFrame.BorderSizePixel = 0
+    mainFrame.Active = true
+    mainFrame.Draggable = true
+    mainFrame.Parent = gui
 
-local Frame = Instance.new("Frame")
-Frame.Size = UDim2.new(0.6, 0, 1.3, 0)
-Frame.Position = UDim2.new(0.1, 0, 0.1, 0)
-Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame.BorderSizePixel = 0
-Frame.Active = true
-Frame.BackgroundTransparency = 0 
-Frame.Draggable = true
-Frame.Parent = gui
+    local titleBar = Instance.new("TextLabel")
+    titleBar.Size = UDim2.new(1, 0, 0.1, 0)
+    titleBar.Position = UDim2.new(0, 0, 0, 0)
+    titleBar.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+    titleBar.Text = title
+    titleBar.TextColor3 = Color3.fromRGB(255, 255, 255)
+    titleBar.Font = Enum.Font.SourceSans
+    titleBar.TextSize = 18
+    titleBar.BorderSizePixel = 0
+    titleBar.Parent = mainFrame
 
+    local tabHolder = Instance.new("Frame")
+    tabHolder.Size = UDim2.new(0.2, 0, 0.9, 0)
+    tabHolder.Position = UDim2.new(0, 0, 0.1, 0)
+    tabHolder.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    tabHolder.BorderSizePixel = 0
+    tabHolder.Parent = mainFrame
 
-local Utilitiy1 = Instance.new("Frame")
-Utilitiy1.Size = UDim2.new(0.2, 0, 0.98, 0)
-Utilitiy1.Position = UDim2.new(0.01, 0, 0.11, 0)
-Utilitiy1.BackgroundColor3 = Color3.fromRGB(35, 35, 395)
-Utilitiy1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Utilitiy1.BorderSizePixel = 0
-Utilitiy1.Active = true
-Utilitiy1.BackgroundTransparency = 0 
-Utilitiy1.Parent = Frame
+    local contentFrame = Instance.new("Frame")
+    contentFrame.Size = UDim2.new(0.8, 0, 0.9, 0)
+    contentFrame.Position = UDim2.new(0.2, 0, 0.1, 0)
+    contentFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+    contentFrame.BorderSizePixel = 0
+    contentFrame.Parent = mainFrame
 
-local Utilitiy2 = Instance.new("Frame")
-Utilitiy2.Size = UDim2.new(0.78, 0, 0.98, 0)
-Utilitiy2.Position = UDim2.new(0.213, 0, 0.01, 0)
-Utilitiy2.BackgroundColor3 = Color3.fromRGB(199, 1, 1)
-Utilitiy2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Utilitiy2.BorderSizePixel = 0
-Utilitiy2.Active = true
-Utilitiy2.BackgroundTransparency = 0 
-Utilitiy2.Parent = Frame
+    local isVisible = true
+    game:GetService("UserInputService").InputBegan:Connect(function(input)
+        if input.KeyCode == keybind then
+            isVisible = not isVisible
+            mainFrame.Visible = isVisible
+        end
+    end)
 
-local Utilitiy3 = Instance.new("Frame")
-Utilitiy3.Size = UDim2.new(0.99, 0, 0.1, 0)
-Utilitiy3.Position = UDim2.new(0.01, 0, 0.01, 0)
-Utilitiy3.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
-Utilitiy3.BorderColor3 = Color3.fromRGB(30, 30, 30)
-Utilitiy3.BorderSizePixel = 0
-Utilitiy3.Active = true
-Utilitiy3.BackgroundTransparency = 0 
-Utilitiy3.Parent = Frame
+    local window = { Tabs = {}, TabHolder = tabHolder, ContentFrame = contentFrame }
+    setmetatable(window, { __index = self })
+    return window
+end
 
-local Tab = Instance.new("ImageButton")
-Tab.Size = UDim2.new(0.9, 0, 0.18, 0)
-Tab.Position = UDim2.new(0.05, 0, 0.01, 0)
-Tab.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Tab.ImageColor3 = Color3.fromRGB(1, 0, 0)
-Tab.Image = "rbxassetid://0"
-Tab.ImageTransparency = 0.8
-Tab.ScaleType = Enum.ScaleType.Sliced
-Tab.Parent = Utilitiy1
-Tab.BackgroundTransparency = 0 
+function Library:CreateTab(tabImageId)
+    local tab = Instance.new("ImageButton")
+    tab.Size = UDim2.new(0.9, 0, 0.1, 0)
+    tab.Position = UDim2.new(0.05, 0, #self.Tabs * 0.12, 0)
+    tab.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    tab.Image = "rbxassetid://" .. tabImageId
+    tab.ImageTransparency = 0.8
+    tab.ScaleType = Enum.ScaleType.Sliced
+    tab.Parent = self.TabHolder
+
+    local tabContent = Instance.new("Frame")
+    tabContent.Size = UDim2.new(1, 0, 1, 0)
+    tabContent.Position = UDim2.new(0, 0, 0, 0)
+    tabContent.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+    tabContent.Visible = false
+    tabContent.Parent = self.ContentFrame
+
+    tab.MouseButton1Click:Connect(function()
+        for _, t in pairs(self.Tabs) do
+            t.Content.Visible = false
+        end
+        tabContent.Visible = true
+    end)
+
+    local newTab = { Content = tabContent, Sections = {} }
+    table.insert(self.Tabs, newTab)
+    setmetatable(newTab, { __index = self })
+    return newTab
+end
+
+function Library:CreateSector(name, side, width, height)
+    side = side:lower() == "right" and "right" or "left"
+    width = width or 0.5
+    height = height or 200
+
+    local sector = Instance.new("Frame")
+    sector.Size = UDim2.new(width, -10, 0, height)
+    sector.Position = side == "left" and UDim2.new(0, 5, 0, 5) or UDim2.new(1 - width, -5, 0, 5)
+    sector.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    sector.BorderSizePixel = 0
+    sector.Parent = self.Content
+
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(1, 0, 0, 20)
+    label.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    label.Text = name
+    label.TextColor3 = Color3.fromRGB(255, 255, 255)
+    label.Font = Enum.Font.SourceSans
+    label.TextSize = 16
+    label.Parent = sector
+
+    table.insert(self.Sections, sector)
+    return sector
+end
+
+local Window = Library:CreateWindow("sigma | Beta", Vector2.new(435, 450), Enum.KeyCode.RightControl)
+local Tab = Window:CreateTab("9111")
+local Section1 = Tab:CreateSector("bob", "left", 0.5, 200)
+local Section2 = Tab:CreateSector("alice", "right", 0.5, 300)
