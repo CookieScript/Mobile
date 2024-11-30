@@ -1,19 +1,62 @@
--- // variables
-local library = {}
-local notify = {}
+local gui = Instance.new("ScreenGui")
+gui.Name = "patrickGui"
+gui.Parent = game.CoreGui
+
+--///patrick gui maker///--
 
 
-local check_exploit = (syn and "Synapse") or (KRNL_LOADED and "Krnl") or (isourclosure and "ScriptWare") or nil
-local plrs = game:GetService("Players")
-local cre = game:GetService("CoreGui")
-local rs = game:GetService("RunService")
-local ts = game:GetService("TweenService") 
-local uis = game:GetService("UserInputService") 
-local hs = game:GetService("HttpService")
-local ws = game:GetService("Workspace")
-local plr = plrs.LocalPlayer
-local cam = ws.CurrentCamera
 
--- // indexes
-library.__index = library
-notify.__index = notify
+
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0.6, 0, 1.3, 0)
+Frame.Position = UDim2.new(0.1, 0, 0.1, 0)
+Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Active = true
+Frame.BackgroundTransparency = 0 
+Frame.Draggable = true
+Frame.Parent = gui
+
+
+local Utilitiy1 = Instance.new("Frame")
+Utilitiy1.Size = UDim2.new(0.2, 0, 0.98, 0)
+Utilitiy1.Position = UDim2.new(0.01, 0, 0.11, 0)
+Utilitiy1.BackgroundColor3 = Color3.fromRGB(35, 35, 395)
+Utilitiy1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Utilitiy1.BorderSizePixel = 0
+Utilitiy1.Active = true
+Utilitiy1.BackgroundTransparency = 0 
+Utilitiy1.Parent = Frame
+
+local Utilitiy2 = Instance.new("Frame")
+Utilitiy2.Size = UDim2.new(0.78, 0, 0.98, 0)
+Utilitiy2.Position = UDim2.new(0.213, 0, 0.01, 0)
+Utilitiy2.BackgroundColor3 = Color3.fromRGB(199, 1, 1)
+Utilitiy2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Utilitiy2.BorderSizePixel = 0
+Utilitiy2.Active = true
+Utilitiy2.BackgroundTransparency = 0 
+Utilitiy2.Parent = Frame
+
+local Utilitiy3 = Instance.new("Frame")
+Utilitiy3.Size = UDim2.new(0.99, 0, 0.1, 0)
+Utilitiy3.Position = UDim2.new(0.01, 0, 0.01, 0)
+Utilitiy3.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+Utilitiy3.BorderColor3 = Color3.fromRGB(30, 30, 30)
+Utilitiy3.BorderSizePixel = 0
+Utilitiy3.Active = true
+Utilitiy3.BackgroundTransparency = 0 
+Utilitiy3.Parent = Frame
+
+local Tab = Instance.new("ImageButton")
+Tab.Size = UDim2.new(0.9, 0, 0.18, 0)
+Tab.Position = UDim2.new(0.05, 0, 0.01, 0)
+Tab.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Tab.ImageColor3 = Color3.fromRGB(1, 0, 0)
+Tab.Image = "rbxassetid://0"
+Tab.ImageTransparency = 0.8
+Tab.ScaleType = Enum.ScaleType.Sliced
+Tab.Parent = Utilitiy1
+Tab.BackgroundTransparency = 0 
