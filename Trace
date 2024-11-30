@@ -1,10 +1,5 @@
 local gui = Instance.new("ScreenGui")
-gui.Name = "patrickGui"
 gui.Parent = game.CoreGui
-
---///patrick gui maker///--
-
-
 
 
 
