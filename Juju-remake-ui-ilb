@@ -1,0 +1,162 @@
+-- Locals
+local library = { 
+	flags = { }, 
+	items = { } 
+}
+
+-- Services
+local players = game:GetService("Players")
+local uis = game:GetService("UserInputService")
+local runservice = game:GetService("RunService")
+local tweenservice = game:GetService("TweenService")
+local marketplaceservice = game:GetService("MarketplaceService")
+local textservice = game:GetService("TextService")
+local coregui = game:GetService("CoreGui")
+local httpservice = game:GetService("HttpService")
+
+local player = players.LocalPlayer
+local mouse = player:GetMouse()
+local camera = game.Workspace.CurrentCamera
+
+library.theme = {
+    fontsize = 15,
+    font = Enum.Font.Code,
+    background = "rbxassetid://5553946656",
+    tilesize = 90,
+    cursor = true,
+    cursorimg = "https://t0.rbxcdn.com/42f66da98c40252ee151326a82aab51f",
+    backgroundcolor = Color3.fromRGB(20, 20, 20),
+    tabstextcolor = Color3.fromRGB(240, 240, 240),
+    bordercolor = Color3.fromRGB(60, 60, 60),
+    accentcolor = getgenv().UIColor,
+    accentcolor2 = Color3.fromRGB(16, 31, 78),
+    outlinecolor = Color3.fromRGB(60, 60, 60),
+    outlinecolor2 = Color3.fromRGB(0, 0, 0),
+    sectorcolor = Color3.fromRGB(30, 30, 30),
+    toptextcolor = Color3.fromRGB(255, 255, 255),
+    topheight = 48,
+    topcolor = Color3.fromRGB(30, 30, 30),
+    topcolor2 = Color3.fromRGB(30, 30, 30),
+    buttoncolor = Color3.fromRGB(49, 49, 49),
+    buttoncolor2 = Color3.fromRGB(39, 39, 39),
+    itemscolor = Color3.fromRGB(200, 200, 200),
+    itemscolor2 = Color3.fromRGB(210, 210, 210)
+}
+
+
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.CoreGui
+
+
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Size = UDim2.new(0.7, 0, 1.7, 0)
+MainFrame.Position = UDim2.new(0.2, 0, 0.1, 0)
+MainFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+MainFrame.BorderColor3 = Color3.new(0, 0, 0)
+MainFrame.BorderSizePixel = 0
+MainFrame.Active = true
+MainFrame.BackgroundTransparency = 0 
+MainFrame.Draggable = true
+MainFrame.Parent = gui
+
+local Line = Instance.new("Frame")
+Line.Size = UDim2.new(0.99, 0, 0.005, 0)
+Line.Position = UDim2.new(0.005, 0, 0.007, 0)
+Line.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+Line.BorderColor3 = Color3.new(0, 0, 0)
+Line.BorderSizePixel = 0
+Line.Active = true
+Line.BackgroundTransparency = 0 
+Line.Parent = MainFrame
+
+local Line = Instance.new("Frame")
+Line.Size = UDim2.new(0.006, 0, 0.99, 0)
+Line.Position = UDim2.new(0.99, 0, 0.007, 0)
+Line.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+Line.BorderColor3 = Color3.new(0, 0, 0)
+Line.BorderSizePixel = 0
+Line.Active = true
+Line.BackgroundTransparency = 0 
+Line.Parent = MainFrame
+
+local Line = Instance.new("Frame")
+Line.Size = UDim2.new(0.99, 0, 0.005, 0)
+Line.Position = UDim2.new(0.005, 0, 0.991, 0)
+Line.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+Line.BorderColor3 = Color3.new(0, 0, 0)
+Line.BorderSizePixel = 0
+Line.Active = true
+Line.BackgroundTransparency = 0 
+Line.Parent = MainFrame
+
+local Line = Instance.new("Frame")
+Line.Size = UDim2.new(0.006, 0, 0.99, 0)
+Line.Position = UDim2.new(0.005, 0, 0.007, 0)
+Line.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+Line.BorderColor3 = Color3.new(0, 0, 0)
+Line.BorderSizePixel = 0
+Line.Active = true
+Line.BackgroundTransparency = 0 
+Line.Parent = MainFrame
+
+local Line = Instance.new("Frame")
+Line.Size = UDim2.new(0.98, 0, 0.005, 0)
+Line.Position = UDim2.new(0.01, 0, 0.015, 0)
+Line.BackgroundColor3 = Color3.fromRGB(40, 40, 490)
+Line.BorderColor3 = Color3.new(0, 0, 0)
+Line.BorderSizePixel = 0
+Line.Active = true
+Line.BackgroundTransparency = 0 
+Line.Parent = MainFrame
+
+local Tabcontainer = Instance.new("Frame")
+Tabcontainer.Size = UDim2.new(0.18, 0, 0.955, 0)
+Tabcontainer.Position = UDim2.new(0.018, 0, 0.0275, 0)
+Tabcontainer.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+Tabcontainer.BorderColor3 = Color3.fromRGB(35, 35, 35)
+Tabcontainer.BorderSizePixel = 1
+Tabcontainer.Active = true
+Tabcontainer.BackgroundTransparency = 0 
+Tabcontainer.Parent = MainFrame
+
+local Tab = Instance.new("TextButton")
+Tab.Size = UDim2.new(0.93, 0, 0.18, 0)
+Tab.Position = UDim2.new(0.03, 0, 0.007, 0)
+Tab.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Tab.BorderColor3 = Color3.fromRGB(35, 35, 35)
+Tab.BorderSizePixel = 1
+Tab.Text = "⊗"
+Tab.TextSize = 80
+Tab.BackgroundTransparency = 0 
+Tab.TextColor3 = Color3.new(255, 255, 255)
+Tab.Font = Enum.Font.Code
+Tab.Parent = Tabcontainer
+
+local image = Instance.new("ImageLabel")
+image.Size = UDim2.new(1, 0, 1, 0)
+image.Position = UDim2.new(0, 0, 0, 0)
+image.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+image.ImageColor3 = Color3.fromRGB(1, 0, 0)
+image.Image = "rbxassetid://4483345998"
+image.ImageTransparency = 0
+image.ScaleType = Enum.ScaleType.Sliced
+image.Parent = Tab
+image.BackgroundTransparency = 0 
+
+local Straight = Instance.new("UIListLayout")
+Straight.HorizontalAlignment = Enum.HorizontalAlignment.Center
+Straight.SortOrder = Enum.SortOrder.LayoutOrder
+Straight.Padding = UDim.new(0, 10)
+Straight.Parent = Tabcontainer
+
+local Section = Instance.new("Frame")
+Section.Size = UDim2.new(0.4, 0, 5, 0)
+Section.Position = UDim2.new(0.2, 0, 0.955, 0)
+Section.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+Section.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Section.BorderSizePixel = 0
+Section.Active = true
+Section.BackgroundTransparency = 0
+Section.Draggable = false
+Section.Parent = MainFrame
