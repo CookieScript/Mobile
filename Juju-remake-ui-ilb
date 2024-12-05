@@ -1,46 +1,8 @@
--- Locals
-local library = { 
-	flags = { }, 
-	items = { } 
-}
+local library = {}
 
--- Services
-local players = game:GetService("Players")
-local uis = game:GetService("UserInputService")
-local runservice = game:GetService("RunService")
-local tweenservice = game:GetService("TweenService")
-local marketplaceservice = game:GetService("MarketplaceService")
-local textservice = game:GetService("TextService")
-local coregui = game:GetService("CoreGui")
-local httpservice = game:GetService("HttpService")
-
-local player = players.LocalPlayer
-local mouse = player:GetMouse()
-local camera = game.Workspace.CurrentCamera
-
-library.theme = {
-    fontsize = 15,
-    font = Enum.Font.Code,
-    background = "rbxassetid://5553946656",
-    tilesize = 90,
-    cursor = true,
-    cursorimg = "https://t0.rbxcdn.com/42f66da98c40252ee151326a82aab51f",
-    backgroundcolor = Color3.fromRGB(20, 20, 20),
-    tabstextcolor = Color3.fromRGB(240, 240, 240),
-    bordercolor = Color3.fromRGB(60, 60, 60),
-    accentcolor = getgenv().UIColor,
-    accentcolor2 = Color3.fromRGB(16, 31, 78),
-    outlinecolor = Color3.fromRGB(60, 60, 60),
-    outlinecolor2 = Color3.fromRGB(0, 0, 0),
-    sectorcolor = Color3.fromRGB(30, 30, 30),
-    toptextcolor = Color3.fromRGB(255, 255, 255),
-    topheight = 48,
-    topcolor = Color3.fromRGB(30, 30, 30),
-    topcolor2 = Color3.fromRGB(30, 30, 30),
-    buttoncolor = Color3.fromRGB(49, 49, 49),
-    buttoncolor2 = Color3.fromRGB(39, 39, 39),
-    itemscolor = Color3.fromRGB(200, 200, 200),
-    itemscolor2 = Color3.fromRGB(210, 210, 210)
+local theme = {
+    accentColor2 = Color3.fromRGB(80, 80, 80)
+    accentColor = Color3.fromRGB(185, 35, 18)
 }
 
 
@@ -59,6 +21,8 @@ MainFrame.Active = true
 MainFrame.BackgroundTransparency = 0 
 MainFrame.Draggable = true
 MainFrame.Parent = gui
+
+-- Line
 
 local Line = Instance.new("Frame")
 Line.Size = UDim2.new(0.99, 0, 0.005, 0)
@@ -110,6 +74,8 @@ Line.Active = true
 Line.BackgroundTransparency = 0 
 Line.Parent = MainFrame
 
+-- Tab
+
 local Tabcontainer = Instance.new("Frame")
 Tabcontainer.Size = UDim2.new(0.18, 0, 0.955, 0)
 Tabcontainer.Position = UDim2.new(0.018, 0, 0.0275, 0)
@@ -150,13 +116,22 @@ Straight.SortOrder = Enum.SortOrder.LayoutOrder
 Straight.Padding = UDim.new(0, 10)
 Straight.Parent = Tabcontainer
 
-local Section = Instance.new("Frame")
-Section.Size = UDim2.new(0.4, 0, 5, 0)
-Section.Position = UDim2.new(0.2, 0, 0.955, 0)
-Section.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
-Section.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Section.BorderSizePixel = 0
-Section.Active = true
-Section.BackgroundTransparency = 0
-Section.Draggable = false
-Section.Parent = MainFrame
+-- Section
+
+local seccontainer = Instance.new("Frame")
+seccontainer = UDim2.new(0.3, 0, 0.955, 0)
+seccontainer.Position = UDim2.new(0.2, 0, 0.0275, 0)
+seccontainer.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+seccontainer.BorderColor3 = Color3.fromRGB(35, 35, 35)
+seccontainer.BorderSizePixel = 1
+seccontainer.Active = true
+seccontainer.BackgroundTransparency = 0 
+seccontainer.Parent = MainFrame
+
+Tab.MouseButton1Click:Connect(function()
+    seccontainer.Visible then
+        seccontainer.Visible = true
+    else
+        seccontainer.Visinle = false
+    end
+end)
