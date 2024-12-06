@@ -1,0 +1,132 @@
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.CoreGui
+
+
+
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0.7, 0, 1.5, 0)
+Frame.Position = UDim2.new(0.15, 0, 0.1, 0)
+Frame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+Frame.BorderColor3 = Color3.fromRGB(38, 38, 38)
+Frame.BorderSizePixel = 2
+Frame.Active = true
+Frame.BackgroundTransparency = 0 
+Frame.Draggable = true
+Frame.Parent = gui
+
+local line = Instance.new("Frame")
+line.Size = UDim2.new(0.99, 0, 0.005, 0)
+line.Position = UDim2.new(0.005, 0, 0.005, 0)
+line.BackgroundColor3 = Color3.fromRGB(185, 35, 185)
+line.BorderColor3 = Color3.fromRGB(0, 0, 0)
+line.BorderSizePixel = 0
+line.Active = true
+line.BackgroundTransparency = 0 
+line.Parent = Frame
+
+local Frame1 = Instance.new("Frame")
+Frame1.Size = UDim2.new(0.2, 0, 0.975, 0)
+Frame1.Position = UDim2.new(0.007, 0, 0.018, 0)
+Frame1.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+Frame1.BorderColor3 = Color3.fromRGB(39, 39, 39)
+Frame1.BorderSizePixel = 1
+Frame1.Active = true
+Frame1.BackgroundTransparency = 0 
+Frame1.Parent = Frame
+
+local Tab = Instance.new("TextButton")
+Tab.Size = UDim2.new(0.945, 0, 0.2, 0)
+Tab.Position = UDim2.new(0.03, 0, 0.005, 0)
+Tab.BackgroundColor3 = Color3.fromRGB(28, 28, 28)
+Tab.BorderColor3 = Color3.fromRGB(38, 38, 38)
+Tab.BorderSizePixel = 1
+Tab.Text = "⊗"
+Tab.TextSize = 50
+Tab.BackgroundTransparency = 0 
+Tab.TextColor3 = Color3.new(255, 255, 255)
+Tab.Font = Enum.Font.Code
+Tab.Parent = Frame1
+
+local Leftsection = Instance.new("Frame")
+Leftsection.Size = UDim2.new(0.38, 0, 0.955, 0)
+Leftsection.Position = UDim2.new(0.22, 0, 0.04, 0)
+Leftsection.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+Leftsection.BorderColor3 = Color3.fromRGB(39, 39, 39)
+Leftsection.BorderSizePixel = 0
+Leftsection.Active = true
+Leftsection.BackgroundTransparency = 1
+Leftsection.Parent = Frame
+
+local Rightsection = Instance.new("Frame")
+Rightsection.Size = UDim2.new(0.38, 0, 0.955, 0)
+Rightsection.Position = UDim2.new(0.613, 0, 0.04, 0)
+Rightsection.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+Rightsection.BorderColor3 = Color3.fromRGB(39, 39, 39)
+Rightsection.BorderSizePixel = 0
+Rightsection.Active = true
+Rightsection.BackgroundTransparency = 1
+Rightsection.Parent = Frame
+
+local Section = Instance.new("Frame")
+Section.Size = UDim2.new(1, 0, 0.1, 0)
+Section.Position = UDim2.new(0, 0, 0, 0)
+Section.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
+Section.BorderColor3 = Color3.fromRGB(38, 38, 38)
+Section.BorderSizePixel = 1
+Section.Active = true
+Section.BackgroundTransparency = 0
+Section.Parent = Leftsection
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(0.6, 0, 0.02, 0)
+Title.Position = UDim2.new(0.05, 0, -0.02, 0)
+Title.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Title.BorderSizePixel = 0
+Title.Text = "Walkable desync"
+Title.TextSize = 13
+Title.TextXAlignment = Enum.TextXAlignment.Center
+Title.BackgroundTransparency = 0
+Title.TextColor3 = Color3.new(255, 255, 255)
+Title.Font = Enum.Font.Code
+Title.Parent = Section
+
+local Textbox = Instance.new("TextBox")
+Textbox.Size = UDim2.new(0.9, 0, 0.5, 0)
+Textbox.Position = UDim2.new(0, 0, 0, 0)
+Textbox.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Textbox.BorderColor3 = Color3.fromRGB(38, 38, 38)
+Textbox.BorderSizePixel = 1
+Textbox.Text = "0"
+Textbox.TextSize = 10
+Textbox.TextColor3 = Color3.new(255, 255, 255)
+Textbox.BackgroundTransparency = 0
+Textbox.Font = Enum.Font.Code
+Textbox.TextSize = 15
+Textbox.Parent = Section
+
+local straight = Instance.new("UIListLayout")
+straight.HorizontalAlignment = Enum.HorizontalAlignment.Center
+straight.SortOrder = Enum.SortOrder.LayoutOrder
+straight.Padding = UDim.new(0, 5)
+straight.Parent = Frame1
+
+local straight = Instance.new("UIListLayout")
+straight.HorizontalAlignment = Enum.HorizontalAlignment.Center
+straight.SortOrder = Enum.SortOrder.LayoutOrder
+straight.Padding = UDim.new(0, 13)
+straight.Parent = Leftsection
+
+local straight = Instance.new("UIListLayout")
+straight.HorizontalAlignment = Enum.HorizontalAlignment.Center
+straight.SortOrder = Enum.SortOrder.LayoutOrder
+straight.Padding = UDim.new(0, 13)
+straight.Parent = Rightsection
+
+local straight = Instance.new("UIListLayout")
+straight.HorizontalAlignment = Enum.HorizontalAlignment.Center
+straight.SortOrder = Enum.SortOrder.LayoutOrder
+straight.Padding = UDim.new(0, 13)
+straight.Parent = Section
+
