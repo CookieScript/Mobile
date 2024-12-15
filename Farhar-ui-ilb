@@ -1,23 +1,13 @@
---[[
-
-
-Farhar Ui ILBRARY 
-
-Free Ilb.
-
-if you showcase this in your youtube add a
-
-Credit
-
---]]
-
-
 local gui = Instance.new("ScreenGui")
 gui.Parent = game.CoreGui
 
 
+
+
+
+
 local Frame = Instance.new("Frame")
-Frame.Size = UDim2.new(0.8, 0, 1.8, 0)
+Frame.Size = UDim2.new(0.8, 0, 2.5, 0)
 Frame.Position = UDim2.new(0.1, 0, 0.1, 0)
 Frame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
 Frame.BorderColor3 = Color3.fromRGB(50, 50, 
@@ -40,7 +30,7 @@ container.BackgroundTransparency = 0
 container.Parent = Frame
 
 local Tab = Instance.new("TextButton")
-Tab.Size = UDim2.new(0.96, 0, 0.2, 0)
+Tab.Size = UDim2.new(0.96, 0, 0.15, 0)
 Tab.Position = UDim2.new(0.02, 0, 0.005, 0)
 Tab.BackgroundColor3 = Color3.new(0, 0, 0)
 Tab.BorderColor3 = Color3.fromRGB(100, 100, 100)
@@ -52,16 +42,60 @@ Tab.TextColor3 = Color3.new(255, 255, 255)
 Tab.Font = Enum.Font.Code
 Tab.Parent = container
 
+local Tab = Instance.new("TextButton")
+Tab.Size = UDim2.new(0.96, 0, 0.15, 0)
+Tab.Position = UDim2.new(0.02, 0, 0.005, 0)
+Tab.BackgroundColor3 = Color3.new(0, 0, 0)
+Tab.BorderColor3 = Color3.fromRGB(100, 100, 100)
+Tab.BorderSizePixel = 1
+Tab.Text = "⊗"
+Tab.TextSize = 80
+Tab.BackgroundTransparency = 0 
+Tab.TextColor3 = Color3.new(255, 255, 255)
+Tab.Font = Enum.Font.Code
+Tab.Parent = container
+
+local Section = Instance.new("Frame")
+Section.Size = UDim2.new(0.41, 0, 0.5, 0)
+Section.Position = UDim2.new(0.21, 0, 0.005, 0)
+Section.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Section.BorderColor3 = Color3.fromRGB(50, 50, 50)
+Section.BorderSizePixel = 0
+Section.Active = true
+Section.BackgroundTransparency = 1
+Section.Parent = Frame
+
+local Sectext = Instance.new("TextLabel")
+Sectext.Size = UDim2.new(0.9, 0, 0.03, 0)
+Sectext.Position = UDim2.new(0.01, 0, 0.005, 0)
+Sectext.BackgroundColor3 = Color3.fromRGB(999, 0, 0)
+Sectext.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Sectext.BorderSizePixel = 0
+Sectext.TextScaled = true
+Sectext.Text = "Text [skibidi]"
+Sectext.TextSize = 15
+Sectext.TextXAlignment = Enum.TextXAlignment.Left
+Sectext.BackgroundTransparency = 1
+Sectext.TextColor3 = Color3.fromRGB(255, 255, 255)
+Sectext.Font = Enum.Font.Code
+Sectext.Parent = Section
+
 local ScFrame = Instance.new("ScrollingFrame")
-ScFrame.Size = UDim2.new(0.41, 0, 0.5, 0)
-ScFrame.Position = UDim2.new(0.21, 0, 0.005, 0)
+ScFrame.Size = UDim2.new(0.98, 0, 0.953, 0)
+ScFrame.Position = UDim2.new(0.01, 0, 0.04, 0)
 ScFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 ScFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 ScFrame.BorderSizePixel = 0
-ScFrame.Parent = Frame
+ScFrame.Parent = Section
 ScFrame.BackgroundTransparency = 0 
 
 local line = Instance.new("UIStroke")
 line.Color = Color3.fromRGB(50, 50, 50)
 line.Thickness = 1
 line.Parent = ScFrame
+
+local Straight = Instance.new("UIListLayout")
+Straight.HorizontalAlignment = Enum.HorizontalAlignment.Center
+Straight.SortOrder = Enum.SortOrder.LayoutOrder
+Straight.Padding = UDim.new(0, 3)
+Straight.Parent = container
