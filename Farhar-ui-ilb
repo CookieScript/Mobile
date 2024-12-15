@@ -1,0 +1,53 @@
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.CoreGui
+
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0.8, 0, 1.8, 0)
+Frame.Position = UDim2.new(0.1, 0, 0.1, 0)
+Frame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+Frame.BorderColor3 = Color3.fromRGB(50, 50, 
+50)
+Frame.BorderSizePixel = 2
+Frame.Active = true
+Frame.BackgroundTransparency = 0 
+Frame.Draggable = true
+Frame.Parent = gui
+
+
+local container = Instance.new("Frame")
+container.Size = UDim2.new(0.2, 0, 0.99, 0)
+container.Position = UDim2.new(0.003, 0, 0.005, 0)
+container.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+container.BorderColor3 = Color3.fromRGB(80, 80, 80)
+container.BorderSizePixel = 1
+container.Active = true
+container.BackgroundTransparency = 0 
+container.Parent = Frame
+
+local Tab = Instance.new("TextButton")
+Tab.Size = UDim2.new(0.96, 0, 0.2, 0)
+Tab.Position = UDim2.new(0.02, 0, 0.005, 0)
+Tab.BackgroundColor3 = Color3.new(0, 0, 0)
+Tab.BorderColor3 = Color3.fromRGB(100, 100, 100)
+Tab.BorderSizePixel = 1
+Tab.Text = "⊗"
+Tab.TextSize = 80
+Tab.BackgroundTransparency = 0 
+Tab.TextColor3 = Color3.new(255, 255, 255)
+Tab.Font = Enum.Font.Code
+Tab.Parent = container
+
+local ScFrame = Instance.new("ScrollingFrame")
+ScFrame.Size = UDim2.new(0.41, 0, 0.5, 0)
+ScFrame.Position = UDim2.new(0.21, 0, 0.005, 0)
+ScFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+ScFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ScFrame.BorderSizePixel = 0
+ScFrame.Parent = Frame
+ScFrame.BackgroundTransparency = 0 
+
+local line = Instance.new("UIStroke")
+line.Color = Color3.fromRGB(50, 50, 50)
+line.Thickness = 1
+line.Parent = ScFrame
