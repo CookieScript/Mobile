@@ -18,11 +18,11 @@ Frame.Parent = gui
 
 
 local line = Instance.new("Frame")
-line.Size = UDim2.new(0.99, 0, 0.002, 0)
-line.Position = UDim2.new(0.005, 0, 0.005, 0)
-line.BackgroundColor3 = Color3.fromRGB(100, 45, 100)
+line.Size = UDim2.new(0.991, 0, 0.005, 0)
+line.Position = UDim2.new(0.004, 0, 0.004, 0)
+line.BackgroundColor3 = Color3.fromRGB(100, 60, 100)
 line.BorderColor3 = Color3.fromRGB(100, 45, 100)
-line.BorderSizePixel = 1
+line.BorderSizePixel = 0
 line.Active = true
 line.BackgroundTransparency = 0 
 line.Parent = Frame
@@ -45,31 +45,32 @@ UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 UIListLayout.Padding = UDim.new(0, 4)
 UIListLayout.Parent = Tabholder
 
-local Tab = Instance.new("TextButton")
-Tab.Size = UDim2.new(0.93, 0, 0.16, 0)
-Tab.Position = UDim2.new(0, 0, 0, 0)
-Tab.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Tab.BorderColor3 = Color3.fromRGB(80, 80, 80)
-Tab.BorderSizePixel = 1
-Tab.Text = "Legit"
-Tab.TextSize = 20
-Tab.BackgroundTransparency = 0 
-Tab.TextColor3 = Color3.new(255, 255, 255)
-Tab.Font = Enum.Font.Code
-Tab.Parent = Tabholder
+local Tab_1 = Instance.new("TextButton")
+Tab_1.Size = UDim2.new(0.93, 0, 0.16, 0)
+Tab_1.Position = UDim2.new(0, 0, 0, 0)
+Tab_1.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Tab_1.BorderColor3 = Color3.fromRGB(80, 80, 80)
+Tab_1.BorderSizePixel = 1
+Tab_1.Text = "Legit"
+Tab_1.TextSize = 20
+Tab_1.BackgroundTransparency = 0 
+Tab_1.TextColor3 = Color3.new(255, 255, 255)
+Tab_1.Font = Enum.Font.Code
+Tab_1.Parent = Tabholder
+    
 
-local Tab = Instance.new("TextButton")
-Tab.Size = UDim2.new(0.93, 0, 0.16, 0)
-Tab.Position = UDim2.new(0, 0, 0, 0)
-Tab.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Tab.BorderColor3 = Color3.fromRGB(50, 50, 50)
-Tab.BorderSizePixel = 1
-Tab.Text = "Players"
-Tab.TextSize = 20
-Tab.BackgroundTransparency = 0 
-Tab.TextColor3 = Color3.new(255, 255, 255)
-Tab.Font = Enum.Font.Code
-Tab.Parent = Tabholder
+local Tab_2 = Instance.new("TextButton")
+Tab_2.Size = UDim2.new(0.93, 0, 0.16, 0)
+Tab_2.Position = UDim2.new(0, 0, 0, 0)
+Tab_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Tab_2.BorderColor3 = Color3.fromRGB(50, 50, 50)
+Tab_2.BorderSizePixel = 1
+Tab_2.Text = "Players"
+Tab_2.TextSize = 20
+Tab_2.BackgroundTransparency = 0 
+Tab_2.TextColor3 = Color3.new(255, 255, 255)
+Tab_2.Font = Enum.Font.Code
+Tab_2.Parent = Tabholder
 
 local Section_1 = Instance.new("Frame")
 Section_1.Size = UDim2.new(0.38, 0, 0.03, 0)
@@ -79,6 +80,7 @@ Section_1.BorderColor3 = Color3.fromRGB(45, 45, 45)
 Section_1.BorderSizePixel = 1
 Section_1.Active = true
 Section_1.BackgroundTransparency = 0 
+Section_1.Visible = true
 Section_1.Parent = Frame
 
 local SecText = Instance.new("TextLabel")
@@ -102,6 +104,7 @@ Section_2.BorderColor3 = Color3.fromRGB(45, 45, 45)
 Section_2.BorderSizePixel = 1
 Section_2.Active = true
 Section_2.BackgroundTransparency = 0 
+Section_2.Visible = true
 Section_2.Parent = Frame
 
 local SecText = Instance.new("TextLabel")
@@ -116,3 +119,31 @@ SecText.BackgroundTransparency = 0
 SecText.TextColor3 = Color3.new(255, 255, 255)
 SecText.Font = Enum.Font.Code
 SecText.Parent = Section_2
+
+Tab_1.MouseButton1Click:Connect(function()
+    if not Section_1.Visible then
+        Tab_1.BorderColor3 = Color3.fromRGB(80, 80, 80)
+        Tab_2.BorderColor3 = Color3.fromRGB(50, 50, 50)
+        Section_1.Visible = true
+        Section_2.Visible = false
+    else
+        Tab_1.BorderColor3 = Color3.fromRGB(50, 50, 50)
+        Tab_2.BorderColor3 = Color3.fromRGB(80, 80, 80)
+        Section_1.Visible = false
+        Section_2.Visible = true
+    end
+end)
+
+Tab_2.MouseButton1Click:Connect(function()
+    if not Section_2.Visible then
+        Tab_2.BorderColor3 = Color3.fromRGB(80, 80, 80)
+        Tab_1.BorderColor3 = Color3.fromRGB(50, 50, 50)
+        Section_2.Visible = true
+        Section_1.Visible = false
+    else
+        Tab_2.BorderColor3 = Color3.fromRGB(50, 50, 50)
+        Tab_1.BorderColor3 = Color3.fromRGB(80, 80, 80)
+        Section_2.Visible = false
+        Section_1.Visible = true
+    end
+end)
