@@ -84,9 +84,9 @@ Section_1.Visible = true
 Section_1.Parent = Frame
 
 local SecText = Instance.new("TextLabel")
-SecText.Size = UDim2.new(0.6, 0, 0.008, 0)
-SecText.Position = UDim2.new(0.1, 0, -0.004, 0)
-SecText.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+SecText.Size = UDim2.new(0.55, 0, 0.09, 0)
+SecText.Position = UDim2.new(0.1, 0, -0.055, 0)
+SecText.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
 SecText.BorderColor3 = Color3.fromRGB(0, 0, 0)
 SecText.BorderSizePixel = 0
 SecText.Text = "Target aim"
@@ -108,9 +108,9 @@ Section_2.Visible = true
 Section_2.Parent = Frame
 
 local SecText = Instance.new("TextLabel")
-SecText.Size = UDim2.new(0.7, 0, 0.008, 0)
-SecText.Position = UDim2.new(0.1, 0, -0.004, 0)
-SecText.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+SecText.Size = UDim2.new(0.63, 0, 0.09, 0)
+SecText.Position = UDim2.new(0.1, 0, -0.055, 0)
+SecText.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
 SecText.BorderColor3 = Color3.fromRGB(0, 0, 0)
 SecText.BorderSizePixel = 0
 SecText.Text = "Camera aimbot"
