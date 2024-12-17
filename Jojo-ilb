@@ -1,0 +1,118 @@
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.CoreGui
+
+
+
+
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 430, 0, 450)
+Frame.Position = UDim2.new(0.2, 0, 0.1, 0)
+Frame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+Frame.BorderColor3 = Color3.fromRGB(80, 80, 80)
+Frame.BorderSizePixel = 1
+Frame.Active = true
+Frame.BackgroundTransparency = 0 
+Frame.Draggable = true
+Frame.Parent = gui
+
+
+local line = Instance.new("Frame")
+line.Size = UDim2.new(0.99, 0, 0.002, 0)
+line.Position = UDim2.new(0.005, 0, 0.005, 0)
+line.BackgroundColor3 = Color3.fromRGB(100, 45, 100)
+line.BorderColor3 = Color3.fromRGB(100, 45, 100)
+line.BorderSizePixel = 1
+line.Active = true
+line.BackgroundTransparency = 0 
+line.Parent = Frame
+
+
+local Tabholder = Instance.new("Frame")
+Tabholder.Size = UDim2.new(0.2, 0, 0.98, 0)
+Tabholder.Position = UDim2.new(0.005, 0, 0.015, 0)
+Tabholder.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Tabholder.BorderColor3 = Color3.fromRGB(50, 50, 50)
+Tabholder.BorderSizePixel = 1
+Tabholder.Active = true
+Tabholder.BackgroundTransparency = 0 
+Tabholder.Parent = Frame
+
+
+local UIListLayout = Instance.new("UIListLayout")
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 4)
+UIListLayout.Parent = Tabholder
+
+local Tab = Instance.new("TextButton")
+Tab.Size = UDim2.new(0.93, 0, 0.16, 0)
+Tab.Position = UDim2.new(0, 0, 0, 0)
+Tab.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Tab.BorderColor3 = Color3.fromRGB(80, 80, 80)
+Tab.BorderSizePixel = 1
+Tab.Text = "Legit"
+Tab.TextSize = 20
+Tab.BackgroundTransparency = 0 
+Tab.TextColor3 = Color3.new(255, 255, 255)
+Tab.Font = Enum.Font.Code
+Tab.Parent = Tabholder
+
+local Tab = Instance.new("TextButton")
+Tab.Size = UDim2.new(0.93, 0, 0.16, 0)
+Tab.Position = UDim2.new(0, 0, 0, 0)
+Tab.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Tab.BorderColor3 = Color3.fromRGB(50, 50, 50)
+Tab.BorderSizePixel = 1
+Tab.Text = "Players"
+Tab.TextSize = 20
+Tab.BackgroundTransparency = 0 
+Tab.TextColor3 = Color3.new(255, 255, 255)
+Tab.Font = Enum.Font.Code
+Tab.Parent = Tabholder
+
+local Section_1 = Instance.new("Frame")
+Section_1.Size = UDim2.new(0.38, 0, 0.03, 0)
+Section_1.Position = UDim2.new(0.22, 0, 0.05, 0)
+Section_1.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Section_1.BorderColor3 = Color3.fromRGB(45, 45, 45)
+Section_1.BorderSizePixel = 1
+Section_1.Active = true
+Section_1.BackgroundTransparency = 0 
+Section_1.Parent = Frame
+
+local SecText = Instance.new("TextLabel")
+SecText.Size = UDim2.new(0.5, 0, 0.008, 0)
+SecText.Position = UDim2.new(0.1, 0, -0.004, 0)
+SecText.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+SecText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SecText.BorderSizePixel = 0
+SecText.Text = "Target aim"
+SecText.TextSize = 15
+SecText.BackgroundTransparency = 0 
+SecText.TextColor3 = Color3.new(255, 255, 255)
+SecText.Font = Enum.Font.Code
+SecText.Parent = Section_1
+
+local Section_2 = Instance.new("Frame")
+Section_2.Size = UDim2.new(0.38, 0, 0.03, 0)
+Section_2.Position = UDim2.new(0.61, 0, 0.05, 0)
+Section_2.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Section_2.BorderColor3 = Color3.fromRGB(45, 45, 45)
+Section_2.BorderSizePixel = 1
+Section_2.Active = true
+Section_2.BackgroundTransparency = 0 
+Section_2.Parent = Frame
+
+local SecText = Instance.new("TextLabel")
+SecText.Size = UDim2.new(0.5, 0, 0.008, 0)
+SecText.Position = UDim2.new(0.1, 0, -0.004, 0)
+SecText.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+SecText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SecText.BorderSizePixel = 0
+SecText.Text = "Aimbot camera"
+SecText.TextSize = 15
+SecText.BackgroundTransparency = 0 
+SecText.TextColor3 = Color3.new(255, 255, 255)
+SecText.Font = Enum.Font.Code
+SecText.Parent = Section_2
