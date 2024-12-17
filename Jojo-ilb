@@ -53,7 +53,7 @@ Tab_1.BorderColor3 = Color3.fromRGB(80, 80, 80)
 Tab_1.BorderSizePixel = 1
 Tab_1.Text = "Legit"
 Tab_1.TextSize = 20
-Tab_1.BackgroundTransparency = 0 
+Tab_1.BackgroundTransparency = 0
 Tab_1.TextColor3 = Color3.new(255, 255, 255)
 Tab_1.Font = Enum.Font.Code
 Tab_1.Parent = Tabholder
@@ -67,7 +67,7 @@ Tab_2.BorderColor3 = Color3.fromRGB(50, 50, 50)
 Tab_2.BorderSizePixel = 1
 Tab_2.Text = "Players"
 Tab_2.TextSize = 20
-Tab_2.BackgroundTransparency = 0 
+Tab_2.BackgroundTransparency = 0
 Tab_2.TextColor3 = Color3.new(255, 255, 255)
 Tab_2.Font = Enum.Font.Code
 Tab_2.Parent = Tabholder
@@ -113,7 +113,7 @@ SecText.Position = UDim2.new(0.1, 0, -0.004, 0)
 SecText.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
 SecText.BorderColor3 = Color3.fromRGB(0, 0, 0)
 SecText.BorderSizePixel = 0
-SecText.Text = "Aimbot camera"
+SecText.Text = "Aimbot"
 SecText.TextSize = 15
 SecText.BackgroundTransparency = 0 
 SecText.TextColor3 = Color3.new(255, 255, 255)
@@ -121,29 +121,15 @@ SecText.Font = Enum.Font.Code
 SecText.Parent = Section_2
 
 Tab_1.MouseButton1Click:Connect(function()
-    if not Section_1.Visible then
-        Tab_1.BorderColor3 = Color3.fromRGB(80, 80, 80)
-        Tab_2.BorderColor3 = Color3.fromRGB(50, 50, 50)
-        Section_1.Visible = true
-        Section_2.Visible = false
-    else
-        Tab_1.BorderColor3 = Color3.fromRGB(50, 50, 50)
-        Tab_2.BorderColor3 = Color3.fromRGB(80, 80, 80)
-        Section_1.Visible = false
-        Section_2.Visible = true
-    end
+    Tab_1.BorderColor3 = Color3.fromRGB(80, 80, 80)
+    Tab_2.BorderColor3 = Color3.fromRGB(50, 50, 50)
+    Section_1.Visible = true
+    Section_2.Visible = true
 end)
 
 Tab_2.MouseButton1Click:Connect(function()
-    if not Section_2.Visible then
-        Tab_2.BorderColor3 = Color3.fromRGB(80, 80, 80)
-        Tab_1.BorderColor3 = Color3.fromRGB(50, 50, 50)
-        Section_2.Visible = true
-        Section_1.Visible = false
-    else
-        Tab_2.BorderColor3 = Color3.fromRGB(50, 50, 50)
-        Tab_1.BorderColor3 = Color3.fromRGB(80, 80, 80)
-        Section_2.Visible = false
-        Section_1.Visible = true
-    end
+    Tab_2.BorderColor3 = Color3.fromRGB(80, 80, 80)
+    Tab_1.BorderColor3 = Color3.fromRGB(50, 50, 50)
+    Section_1.Visible = false
+    Section_2.Visible = false
 end)
