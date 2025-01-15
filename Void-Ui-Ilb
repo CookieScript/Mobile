@@ -1,0 +1,91 @@
+
+
+
+local Ui = {
+    Accent = Color3.fromRGB(53, 4, 125)
+}
+
+
+
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.CoreGui
+
+
+
+
+
+
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 500, 0, 400)
+Frame.Position = UDim2.new(0, 10, 0, 10)
+Frame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+Frame.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Frame.BorderSizePixel = 0
+Frame.Active = true
+Frame.BackgroundTransparency = 0 
+Frame.Draggable = true
+Frame.Parent = gui
+
+
+local Border = Instance.new("UIStroke")
+Border.Color = Ui.Accent
+Border.Thickness = 1.3
+Border.Parent = Frame
+
+
+local Line = Instance.new("Frame")
+Line.Size = UDim2.new(0, 496, 0, 2)
+Line.Position = UDim2.new(0, 2, 0, 2)
+Line.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Line.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Line.BorderSizePixel = 0
+Line.Active = true
+Line.BackgroundTransparency = 0 
+Line.Parent = Frame
+
+local UIGradient = Instance.new("UIGradient")
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(30, 30, 30)),
+    ColorSequenceKeypoint.new(0.5, Ui.Accent),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(30, 30, 30))}
+UIGradient.Parent = Line
+
+
+local Tabcontaner = Instance.new("Frame")
+Tabcontaner.Size = UDim2.new(0, 85, 0, 390)
+Tabcontaner.Position = UDim2.new(0, 3, 0, 7)
+Tabcontaner.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Tabcontaner.BorderColor3 = Color3.fromRGB(35, 35, 35)
+Tabcontaner.BorderSizePixel = 1
+Tabcontaner.Active = true
+Tabcontaner.BackgroundTransparency = 0 
+Tabcontaner.Parent = Frame
+
+local Holder = Instance.new("Frame")
+Holder.Size = UDim2.new(0.95, 0, 0.99, 0)
+Holder.Position = UDim2.new(0, 2, 0, 2)
+Holder.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Holder.BorderColor3 = Color3.fromRGB(15, 15, 15)
+Holder.BorderSizePixel = 1
+Holder.Active = true
+Holder.BackgroundTransparency = 0 
+Holder.Parent = Tabcontaner
+
+local UIListLayout = Instance.new("UIListLayout")
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 10)
+UIListLayout.Parent = Holder
+
+local Tab = Instance.new("ImageButton")
+Tab.Size = UDim2.new(0, 80, 0, 75)
+Tab.Position = UDim2.new(0, 2, 0, 2)
+Tab.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Tab.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tab.Image = "rbxassetid://0"
+Tab.ImageTransparency = 0.5
+Tab.BorderColor3 = Color3.fromRGB(45, 45, 45)
+Tab.BorderSizePixel = 1
+Tab.ScaleType = Enum.ScaleType.Slice
+Tab.Parent = Holder
+Tab.BackgroundTransparency = 0
