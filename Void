@@ -43,10 +43,34 @@ Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Title.BorderSizePixel = 0
 Title.Text = "Void.lol"
 Title.TextSize = 13
+Title.TextXAlignment = Enum.TextXAlignment.Left
 Title.BackgroundTransparency = 1
 Title.TextColor3 = Color3.new(255, 255, 255)
 Title.Font = Enum.Font.Arcade
 Title.Parent = Background
+
+--[[
+
+
+i dont know how to make icon
+
+i dont make ilbs bro
+
+]]
+
+local Icon = Instance.new("TextLabel")
+Icon.Size = UDim2.new(0, 28, 0, 15)
+Icon.Position = UDim2.new(0, 1, 0, 1)
+Icon.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Icon.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Icon.BorderSizePixel = 0
+Icon.Text = "V"
+Icon.TextSize = 18
+Icon.TextXAlignment = Enum.TextXAlignment.Center
+Icon.BackgroundTransparency = 1
+Icon.TextColor3 = Color3.new(255, 255, 255)
+Icon.Font = Enum.Font.GothamBold
+Icon.Parent = Background
 
 local Tab = Instance.new("TextButton")
 Tab.Size = UDim2.new(0, 70, 0, 70)
@@ -56,6 +80,7 @@ Tab.BorderColor3 = Color3.fromRGB(30, 30, 30)
 Tab.BorderSizePixel = 1
 Tab.Text = "Combat"
 Tab.TextSize = 10
+Tab.TextYAlignment = Enum.TextYAlignment.Bottom
 Tab.BackgroundTransparency = 0 
 Tab.TextColor3 = Color3.new(255, 255, 255)
 Tab.Font = Enum.Font.Arcade
@@ -69,6 +94,7 @@ Tab.BorderColor3 = Color3.fromRGB(30, 30, 30)
 Tab.BorderSizePixel = 1
 Tab.Text = "Rage"
 Tab.TextSize = 10
+Tab.TextYAlignment = Enum.TextYAlignment.Bottom
 Tab.BackgroundTransparency = 0 
 Tab.TextColor3 = Color3.new(255, 255, 255)
 Tab.Font = Enum.Font.Arcade
@@ -82,6 +108,7 @@ Tab.BorderColor3 = Color3.fromRGB(30, 30, 30)
 Tab.BorderSizePixel = 1
 Tab.Text = "Visuals"
 Tab.TextSize = 10
+Tab.TextYAlignment = Enum.TextYAlignment.Bottom
 Tab.BackgroundTransparency = 0 
 Tab.TextColor3 = Color3.new(255, 255, 255)
 Tab.Font = Enum.Font.Arcade
@@ -95,6 +122,7 @@ Tab.BorderColor3 = Color3.fromRGB(30, 30, 30)
 Tab.BorderSizePixel = 1
 Tab.Text = "Settings"
 Tab.TextSize = 10
+Tab.TextYAlignment = Enum.TextYAlignment.Bottom
 Tab.BackgroundTransparency = 0 
 Tab.TextColor3 = Color3.new(255, 255, 255)
 Tab.Font = Enum.Font.Arcade
