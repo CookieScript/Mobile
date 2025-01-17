@@ -1,0 +1,102 @@
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.CoreGui
+
+
+
+
+
+
+local Background = Instance.new("Frame")
+Background.Size = UDim2.new(0, 500, 0, 400)
+Background.Position = UDim2.new(0, 10, 0, 0)
+Background.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+Background.BorderColor3 = Color3.fromRGB(30, 30, 30)
+Background.BorderSizePixel = 1
+Background.Active = true
+Background.BackgroundTransparency = 0 
+Background.Draggable = true
+Background.Parent = gui
+
+
+
+local TabHolder = Instance.new("Frame")
+TabHolder.Size = UDim2.new(0, 80, 0, 379)
+TabHolder.Position = UDim2.new(0, 3, 0, 18)
+TabHolder.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+TabHolder.BorderColor3 = Color3.fromRGB(30, 30, 30)
+TabHolder.BorderSizePixel = 1
+TabHolder.Active = true
+TabHolder.BackgroundTransparency = 0 
+TabHolder.Parent = Background
+
+local UIListLayout = Instance.new("UIListLayout")
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 6)
+UIListLayout.Parent = TabHolder
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(0, 300, 0, 15)
+Title.Position = UDim2.new(0, 30, 0, 1)
+Title.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Title.BorderSizePixel = 0
+Title.Text = "Void.lol"
+Title.TextSize = 13
+Title.BackgroundTransparency = 1
+Title.TextColor3 = Color3.new(255, 255, 255)
+Title.Font = Enum.Font.Arcade
+Title.Parent = Background
+
+local Tab = Instance.new("TextButton")
+Tab.Size = UDim2.new(0, 70, 0, 70)
+Tab.Position = UDim2.new(0, 0, 0, 0)
+Tab.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+Tab.BorderColor3 = Color3.fromRGB(30, 30, 30)
+Tab.BorderSizePixel = 1
+Tab.Text = "Combat"
+Tab.TextSize = 10
+Tab.BackgroundTransparency = 0 
+Tab.TextColor3 = Color3.new(255, 255, 255)
+Tab.Font = Enum.Font.Arcade
+Tab.Parent = TabHolder
+
+local Tab = Instance.new("TextButton")
+Tab.Size = UDim2.new(0, 70, 0, 70)
+Tab.Position = UDim2.new(0, 0, 0, 0)
+Tab.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+Tab.BorderColor3 = Color3.fromRGB(30, 30, 30)
+Tab.BorderSizePixel = 1
+Tab.Text = "Rage"
+Tab.TextSize = 10
+Tab.BackgroundTransparency = 0 
+Tab.TextColor3 = Color3.new(255, 255, 255)
+Tab.Font = Enum.Font.Arcade
+Tab.Parent = TabHolder
+
+local Tab = Instance.new("TextButton")
+Tab.Size = UDim2.new(0, 70, 0, 70)
+Tab.Position = UDim2.new(0, 0, 0, 0)
+Tab.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+Tab.BorderColor3 = Color3.fromRGB(30, 30, 30)
+Tab.BorderSizePixel = 1
+Tab.Text = "Visuals"
+Tab.TextSize = 10
+Tab.BackgroundTransparency = 0 
+Tab.TextColor3 = Color3.new(255, 255, 255)
+Tab.Font = Enum.Font.Arcade
+Tab.Parent = TabHolder
+
+local Tab = Instance.new("TextButton")
+Tab.Size = UDim2.new(0, 70, 0, 70)
+Tab.Position = UDim2.new(0, 0, 0, 0)
+Tab.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+Tab.BorderColor3 = Color3.fromRGB(30, 30, 30)
+Tab.BorderSizePixel = 1
+Tab.Text = "Settings"
+Tab.TextSize = 10
+Tab.BackgroundTransparency = 0 
+Tab.TextColor3 = Color3.new(255, 255, 255)
+Tab.Font = Enum.Font.Arcade
+Tab.Parent = TabHolder
+
