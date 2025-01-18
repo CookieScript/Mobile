@@ -4061,6 +4061,10 @@ do
 		["LocalPlayer"] = Window:Page({Name = "LocalPlayer", Icon = "rbxassetid://6034281935"});
 		["Settings"] = Window:Page({Name = "Settings", Icon = "rbxassetid://6031280882"});
 	} 
+
+        do
+            Pages["Players"]:PlayerList(Properties)
+        end
 	 
 	do -- Aiming
 		do
