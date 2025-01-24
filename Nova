@@ -1,0 +1,121 @@
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.CoreGui
+
+
+
+
+
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 620, 0, 550)
+Frame.Position = UDim2.new(0, 30, 0, -30)
+Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 1
+Frame.Active = true
+Frame.BackgroundTransparency = 0 
+Frame.Draggable = true
+Frame.Parent = gui
+
+local Holder = Instance.new("Frame")
+Holder.Size = UDim2.new(0, 80, 0, 403)
+Holder.Position = UDim2.new(0, 3, 0, 25)
+Holder.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Holder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Holder.BorderSizePixel = 1
+Holder.Active = true
+Holder.BackgroundTransparency = 0 
+Holder.Parent = Frame
+
+local Line = Instance.new("Frame")
+Line.Size = UDim2.new(0, 1, 0, 528)
+Line.Position = UDim2.new(0, 85, 0, 20)
+Line.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Line.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Line.BorderSizePixel = 1
+Line.Active = true
+Line.BackgroundTransparency = 0 
+Line.Parent = Frame
+
+local Line = Instance.new("Frame")
+Line.Size = UDim2.new(0, 619, 0, 1)
+Line.Position = UDim2.new(0, 1, 0, 20)
+Line.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Line.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Line.BorderSizePixel = 1
+Line.Active = true
+Line.BackgroundTransparency = 0 
+Line.Parent = Frame
+
+local UIListLayout = Instance.new("UIListLayout")
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 5)
+UIListLayout.Parent = Holder
+
+
+local Tab = Instance.new("ImageButton")
+Tab.Size = UDim2.new(0, 76, 0, 76)
+Tab.Position = UDim2.new(0, 0, 0, 0)
+Tab.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Tab.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tab.Image = "rbxassetid://134820707156642"
+Tab.BorderColor3 = Color3.fromRGB(45, 45, 45)
+Tab.BorderSizePixel = 1
+Tab.ImageTransparency = 0
+Tab.ScaleType = Enum.ScaleType.Slice
+Tab.Parent = Holder
+Tab.BackgroundTransparency = 0
+
+local Tab = Instance.new("ImageButton")
+Tab.Size = UDim2.new(0, 76, 0, 76)
+Tab.Position = UDim2.new(0, 0, 0, 0)
+Tab.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Tab.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tab.Image = "rbxassetid://134820707156642"
+Tab.BorderColor3 = Color3.fromRGB(45, 45, 45)
+Tab.BorderSizePixel = 1
+Tab.ImageTransparency = 0
+Tab.ScaleType = Enum.ScaleType.Slice
+Tab.Parent = Holder
+Tab.BackgroundTransparency = 0
+
+local Tab = Instance.new("ImageButton")
+Tab.Size = UDim2.new(0, 76, 0, 76)
+Tab.Position = UDim2.new(0, 0, 0, 0)
+Tab.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Tab.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tab.Image = "rbxassetid://134820707156642"
+Tab.BorderColor3 = Color3.fromRGB(45, 45, 45)
+Tab.BorderSizePixel = 1
+Tab.ImageTransparency = 0
+Tab.ScaleType = Enum.ScaleType.Slice
+Tab.Parent = Holder
+Tab.BackgroundTransparency = 0
+
+local Tab = Instance.new("ImageButton")
+Tab.Size = UDim2.new(0, 76, 0, 76)
+Tab.Position = UDim2.new(0, 0, 0, 0)
+Tab.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Tab.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tab.Image = "rbxassetid://134820707156642"
+Tab.BorderColor3 = Color3.fromRGB(45, 45, 45)
+Tab.BorderSizePixel = 1
+Tab.ImageTransparency = 0
+Tab.ScaleType = Enum.ScaleType.Slice
+Tab.Parent = Holder
+Tab.BackgroundTransparency = 0
+
+local Tab = Instance.new("ImageButton")
+Tab.Size = UDim2.new(0, 76, 0, 76)
+Tab.Position = UDim2.new(0, 0, 0, 0)
+Tab.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Tab.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tab.Image = "rbxassetid://134820707156642"
+Tab.BorderColor3 = Color3.fromRGB(45, 45, 45)
+Tab.BorderSizePixel = 1
+Tab.ImageTransparency = 0
+Tab.ScaleType = Enum.ScaleType.Slice
+Tab.Parent = Holder
+Tab.BackgroundTransparency = 0
+
