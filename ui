@@ -1,0 +1,369 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuarmorIsGay5/automatic-spork/refs/heads/main/Library.txt",true))()
+
+local Window = Library:Window({Name = string.format("Name"), Amount = 5})
+
+local Watermark = Library:Watermark({Name = string.format("WaterMark")})
+
+Library:ChangeAccent(Color3.fromRGB(255, 255, 255))
+
+
+Library:Notification("Notification hello", 10, Color3.fromRGB(255, 255, 255));
+
+
+
+
+local Indicator = Library:Indicator({Name = "New Indicator"})
+-- Indicator Options
+local TextIndicator = Indicator:NewValue({Name = "New Text", Value = "value here"})
+local BarIndicator = Indicator:NewBar({Name = "New Bar", Value = 10, Min = 0, Max = 100})
+--
+local Tab = Window:Page({Name = "tab", Weapons = true})
+local Tab1 = Window:Page({Name = "tab", Weapons = true})
+Window:Page({Name = "tab"})
+local Settings = Window:Page({Name = "Settings"})
+--
+local Page = Tab:Weapon({Icon = "rbxassetid://78117064682304"})
+local Page1 = Tab:Weapon({Icon = "rbxassetid://120304994615919"})
+
+local Page2 = Tab:Weapon({Icon = "rbxassetid://77469221937135"})
+local Page3 = Tab:Weapon({Icon = "rbxassetid://128385756502234"})
+
+--[[ Player List
+
+Page6:PlayerList(Properties)
+
+]]
+
+--[[ http://www.roblox.com/asset/?id=17677463033
+
+Ak47 : rbxassetid://88836741434398
+
+REV : rbxassetid://106397886212631
+
+SG : 118698023926650
+
+Snipah : 104037274406938
+
+138737595020251
+
+113531571097970
+
+minigun : 10468797656
+
+Rpg : 17167744841
+
+Ak-47 : 78117064682304
+
+Revolver : 120304994615919
+
+Automatic 77469221937135
+
+Sniper : 128385756502234
+
+eye : 114736089502081
+
+Skull : 17134553802
+
+]]
+
+--[[
+
+for the buttons
+
+White And Black
+
+
+Unlocked : 112072218800027
+
+Locked : 
+
+Red and Black
+
+
+Unlocked :
+
+Locked :
+
+Blue and Black
+
+
+Unlocked :
+
+Locked :
+
+Green and Black
+
+
+Unlocked :
+
+Locked :
+
+Purple and Black
+
+
+Unlocked :
+
+Locked :
+
+Yellow and Black
+
+
+Unlocked :
+
+Locked :
+
+Orange and Black
+
+
+Unlocked :
+
+Locked :
+
+]]
+
+
+-- Sections
+local Section = Page:Section({Name = "Target Aim", Side = "Left"})
+
+Section:Toggle({
+    Name = "Enabled",
+    Callback = function(a)
+
+    end
+})
+
+Section:Keybind({
+    Name = "Key",
+    Flag = "Key",
+    UseKey = true,
+    Default = Enum.KeyCode.End,
+    Callback = function(State)
+        print(State)
+    end
+})
+
+Section:Divider({Name = "Prediction"})
+
+Section:Textbox({
+    Name = "Prediction",
+    Default = "0",
+    Callback = function(a)
+        
+    end
+})
+
+Section:List({
+    Name = "Hitpart",
+    Options = {
+        "Head", "HumanoidRootPart", "UpperTorso", "LowerTorso", 
+        "LeftUpperArm", "LeftLowerArm", "LeftHand", 
+        "RightUpperArm", "RightLowerArm", "RightHand", 
+        "LeftUpperLeg", "LeftLowerLeg", "LeftFoot", 
+        "RightUpperLeg", "RightLowerLeg", "RightFoot"
+    },
+    Default = "HumanoidRootPart",
+    Callback = function(a)
+        
+    end
+})
+
+Section:Button({
+    Name = "Load Button",
+    Callback = function()
+        
+    end
+})
+
+Section:Slider({
+    Name = 'Button size',
+    Default = 70,
+    Min = 50,
+    Max = 300,
+    Decimals = 0.1,
+    Callback = function(a)
+        
+    end
+})
+
+Section:Colorpicker({
+    Name = "Color",
+    Flag = "Color",
+    Default = Color3.fromRGB(255, 255, 255),
+    Callback = function(State)
+        print(State)
+    end
+})
+
+Section:Toggle({
+    Name = "Name",
+    Callback = function(a)
+
+    end
+}):Colorpicker({
+    Name = "Color",
+    Flag = "Color",
+    Default = Color3.fromRGB(255, 255, 255),
+    Callback = function(a)
+        
+    end
+})
+
+Section:Toggle({
+    Name = "Name",
+    Callback = function(a)
+
+    end
+}):Keybind({
+    Name = "Key",
+    Flag = "Key",
+    UseKey = true,
+    Default = Enum.KeyCode.End,
+    Callback = function(State)
+        print(State)
+    end
+})
+
+--
+do -- Settings
+    local CFG = Settings:Section({Name = "Config", Zindex = 2})
+    --
+    local ConfigList = CFG:List({Name = "Config", Flag = "SettingConfigurationList", Options = {}})
+    CFG:Textbox({Flag = "SettingsConfigurationName", Name = "Config Name"})
+    --
+    local CurrentList = {}
+    local function UpdateConfigList()
+        local List = {}
+        for idx, file in ipairs(listfiles("Ezzkid/Configs")) do
+            local FileName = file:gsub("Ezzkid/Configs\\", ""):gsub(".cfg", "")
+            List[#List + 1] = FileName
+        end
+
+        local IsNew = #List ~= #CurrentList
+        if not IsNew then
+            for idx, file in ipairs(List) do
+                if file ~= CurrentList[idx] then
+                    IsNew = true
+                    break
+                end
+            end
+        end
+
+        if IsNew then
+            CurrentList = List
+            ConfigList:Refresh(CurrentList)
+        end
+    end
+    --
+    CFG:Button(
+        {
+            Name = "Create",
+            Callback = function()
+                local Success, Error =
+                    pcall(
+                    function()
+                        local ConfigName = Flags.SettingsConfigurationName
+                        if ConfigName == "" or isfile("Ezzkid/Configs/" .. ConfigName .. ".cfg") then
+                            return
+                        end
+                        writefile("Ezzkid/Configs/" .. ConfigName .. ".cfg", "")
+                        UpdateConfigList()
+                    end
+                )
+            end
+        }
+    ):Button(
+        {
+            Name = "Save",
+            Callback = function()
+                local Success, Error =
+                    pcall(
+                    function()
+                        local SelectedConfig = Flags.SettingConfigurationList
+                        if SelectedConfig then
+                            writefile("Ezzkid/Configs/" .. SelectedConfig .. ".cfg", Library:GetConfig())
+                        end
+                    end
+                )
+            end
+        }
+    )
+    CFG:Button(
+        {
+            Name = "Load",
+            Callback = function()
+                local Success, Error =
+                    pcall(
+                    function()
+                        local SelectedConfig = Flags.SettingConfigurationList
+                        if SelectedConfig then
+                            Library:LoadConfig(readfile("Ezzkid/Configs/" .. SelectedConfig .. ".cfg"))
+                        end
+                    end
+                )
+            end
+        }
+    ):Button(
+        {
+            Name = "Delete",
+            Callback = function()
+                local SelectedConfig = Flags.SettingConfigurationList
+                if SelectedConfig then
+                    delfile("Ezzkid/Configs/" .. SelectedConfig .. ".cfg")
+                end
+                UpdateConfigList()
+            end
+        }
+    )
+    CFG:Button(
+        {
+            Name = "Refresh",
+            Callback = function()
+                UpdateConfigList()
+            end
+        }
+    )
+    --
+    CFG:Keybind(
+        {
+            Name = "Menu Key",
+            Flag = "MenuKey",
+            UseKey = true,
+            Default = Enum.KeyCode.End,
+            Callback = function(State)
+                Library.UIKey = State
+            end
+        }
+    )
+    CFG:Colorpicker(
+        {
+            Name = "Menu Accent",
+            Flag = "MenuAccent",
+            Default = Library.Accent,
+            Callback = function(State)
+                Library:ChangeAccent(State)
+            end
+        }
+    )
+    CFG:Toggle(
+        {
+            Name = "Show Watermark",
+            Flag = "Watermark",
+            Callback = function(State)
+                Watermark:SetVisible(State)
+            end
+        }
+    )
+    CFG:Textbox(
+    {
+        Flag = "WatermarkText",
+        Name = "Watermark Text",
+        State = string.format("WaterMark"),
+        Callback = function(State)
+            Watermark:UpdateText(State)
+        end
+    }
+)
+
+
+
+end
