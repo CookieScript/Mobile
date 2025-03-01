@@ -1,13 +1,4 @@
-      State = string.format("WaterMark"),
-        Callback = function(State)
-            Watermark:UpdateText(State)
-        end
-    }
-)
-
-
-
-endlocal Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuarmorIsGay5/automatic-spork/refs/heads/main/Library.txt",true))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuarmorIsGay5/automatic-spork/refs/heads/main/Library.txt",true))()
 
 local Window = Library:Window({Name = string.format("Name"), Amount = 5})
 
