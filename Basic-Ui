@@ -1,0 +1,33 @@
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.CoreGui
+
+
+
+
+
+
+local Background = Instance.new("Frame")
+Background.Size = UDim2.new(0, 280, 0, 180)
+Background.Position = UDim2.new(0, 60, 0, 30)
+Background.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Background.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Background.BorderSizePixel = 0
+Background.Active = true
+Background.BackgroundTransparency = 0 
+Background.Draggable = true
+Background.Parent = gui
+
+
+local function AddLine(SizeX, SizeY, PosX, PosY, Color, Parent)
+    local Line = Instance.new("Frame")
+    Line.Size = UDim2.new(0, SizeX, 0, SizeY)
+    Line.Position = UDim2.new(0, PosX, 0, PosY)
+    Line.BackgroundColor3 = Color
+    Line.BorderSizePixel = 1
+    Line.Parent = Parent
+end
+
+AddLine(280, 1, 0, 0, Color3.fromRGB(255, 255, 255), Background)
+AddLine(280, 1, 0, 180, Color3.fromRGB(255, 255, 255), Background)
+AddLine(1, 180, 0, 0, Color3.fromRGB(255, 255, 255), Background)
+AddLine(1, 180, 280, 0, Color3.fromRGB(255, 255, 255), Background)
