@@ -888,35 +888,24 @@ local Passed, Statement = pcall(function()
 					Parent = Holder_Outline_Frame
 				})
 				--
-				do -- // Functions
-					function Content:Set(state)
-						Content.State = state
-						--
-						Holder_Outline_Frame.BackgroundColor3 = Content.State and Content.Window.Accent or Color3.fromRGB(77, 77, 77)
-						--
-						Content.Callback(Content:Get())
-					end
-					--
-					function Content:Get()
-						return Content.State
-					end
-				end
-				--
-				do -- // Connections
-					utility:CreateConnection(Content_Holder_Button.MouseButton1Click, function(Input)
-						Content:Set(not Content:Get())
-					end)
-					--
-					utility:CreateConnection(Content_Holder_Button.MouseEnter, function(Input)
-						Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(180, 180, 180))
-					end)
-					--
-					utility:CreateConnection(Content_Holder_Button.MouseLeave, function(Input)
-						Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(140, 140, 140))
-					end)
-				end
-				--
-				Content:Set(Content.State)
+				-- // Functions
+function Content:Set(state)
+    Content.State = state
+    Holder_Outline_Frame.BackgroundColor3 = Content.State and Content.Window.Accent or Color3.fromRGB(77, 77, 77)
+    Content.Callback(Content:Get())
+end
+
+function Content:Get()
+    return Content.State
+end
+
+utility:CreateConnection(Content_Holder_Button.MouseButton1Down, function(Input)
+    Content:Set(not Content:Get())
+    Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(180, 180, 180))
+    Frame_Slider_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(180, 180, 180))
+end)
+
+Content:Set(Content.State)
 			end
 			--
 			return Content
@@ -1089,65 +1078,52 @@ local Passed, Statement = pcall(function()
 					RenderTime = 0.15
 				})
 				--
-				do -- // Functions
-					function Content:Set(state)
-						Content.State = math.clamp(math.round(state * Content.Decimals) / Content.Decimals, Content.Min, Content.Max)
-						--
-						Frame_Slider_Title.Text = "<b>" .. Content.State .. Content.Ending .. "</b>"
-						Outline_Frame_Slider.Size = UDim2.new((1 - ((Content.Max - Content.State) / (Content.Max - Content.Min))), 0, 1, 0)
-						--
-						Content.Callback(Content:Get())
-					end
-					--
-					function Content:Refresh()
-						local Mouse = utility:MouseLocation()
-						--
-						Content:Set(math.clamp(math.floor((Content.Min + (Content.Max - Content.Min) * math.clamp(Mouse.X - Outline_Frame_Slider.AbsolutePosition.X, 0, Holder_Outline_Frame.AbsoluteSize.X) / Holder_Outline_Frame.AbsoluteSize.X) * Content.Decimals) / Content.Decimals, Content.Min, Content.Max))
-					end
-					--
-					function Content:Get()
-						return Content.State
-					end
-				end
-				--
-				do -- // Connections
-					utility:CreateConnection(Content_Holder_Button.MouseButton1Down, function(Input)
-						Content:Refresh()
-						--
-						Content.Holding = true
-                        --
-                        Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(215, 215, 215))
-                        Frame_Slider_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(215, 215, 215))
-					end)
-                    --
-					utility:CreateConnection(Content_Holder_Button.MouseEnter, function(Input)
-						Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(215, 215, 215))
-                        Frame_Slider_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(215, 215, 215))
-					end)
-					--
-					utility:CreateConnection(Content_Holder_Button.MouseLeave, function(Input)
-						Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Content.Holding and Color3.fromRGB(215, 215, 215) or Color3.fromRGB(175, 175, 175))
-                        Frame_Slider_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Content.Holding and Color3.fromRGB(215, 215, 215) or Color3.fromRGB(175, 175, 175))
-					end)
-					--
-					utility:CreateConnection(uis.InputChanged, function(Input)
-						if Content.Holding then
-							Content:Refresh()
-						end
-					end)
-					--
-					utility:CreateConnection(uis.InputEnded, function(Input)
-						if Content.Holding and Input.UserInputType == Enum.UserInputType.MouseButton1 then
-							Content.Holding = false
-                            --
-                            Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(175, 175, 175))
-                        	Frame_Slider_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(175, 175, 175))
-						end
-					end)
-				end
-				--
-				Content:Set(Content.State)
-			end
+				-- Functions
+function Content:Set(state)
+    Content.State = math.clamp(math.round(state * Content.Decimals) / Content.Decimals, Content.Min, Content.Max)
+    Outline_Frame_Slider.Size = UDim2.new((1 - ((Content.Max - Content.State) / (Content.Max - Content.Min))), 0, 1, 0)
+end
+
+function Content:Refresh(Input)
+    local position = Input.Position.X
+    local relativePosition = math.clamp(position - Outline_Frame_Slider.AbsolutePosition.X, 0, Holder_Outline_Frame.AbsoluteSize.X)
+    local newState = math.clamp(Content.Min + (Content.Max - Content.Min) * relativePosition / Holder_Outline_Frame.AbsoluteSize.X, Content.Min, Content.Max)
+    Content:Set(newState)
+end
+
+function Content:Get()
+    return Content.State
+end
+
+-- Connections
+utility:CreateConnection(Content_Holder_Button.InputBegan, function(Input, GameProcessed)
+    if not GameProcessed then
+        if Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1 then
+            Content:Refresh(Input)
+            Content.Holding = true
+            Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(215, 215, 215))
+            Frame_Slider_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(215, 215, 215))
+        end
+    end
+end)
+
+utility:CreateConnection(Content_Holder_Button.InputChanged, function(Input)
+    if Content.Holding then
+        if Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseMovement then
+            Content:Refresh(Input)
+        end
+    end
+end)
+
+utility:CreateConnection(Content_Holder_Button.InputEnded, function(Input)
+    if Content.Holding and (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) then
+        Content.Holding = false
+        Frame_Slider_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(175, 175, 175))
+    end
+end)
+
+Content:Set(Content.State)
+end
 			--
 			return Content
 		end
@@ -2225,176 +2201,159 @@ local Passed, Statement = pcall(function()
 				})
 				--
 				do -- // Functions
-					function Content:Set(state)
-						Content.State = state
-						--
-						Holder_Outline_Frame.BackgroundColor3 = Content.State
-						--
-						Content.Callback(Content:Get())
-					end
-					--
-					function Content:Get()
-						return Content.State
-					end
-					--
-					function Content:Open()
-						Content.Section:CloseContent()
-						--
-						local Connections = {}
-						--
-						local InputCheck
-						--
-						local Content_Open_Holder = utility:RenderObject("Frame", {
-							BackgroundColor3 = Color3.fromRGB(0, 0, 0),
-							BackgroundTransparency = 1,
-							BorderColor3 = Color3.fromRGB(0, 0, 0),
-							BorderSizePixel = 0,
-							Parent = Content.Section.Extra,
-							Position = UDim2.new(0, Content_Holder_Outline.AbsolutePosition.X - Content.Section.Extra.AbsolutePosition.X, 0, Content_Holder_Outline.AbsolutePosition.Y - Content.Section.Extra.AbsolutePosition.Y + 10),
-							Size = UDim2.new(0, 180, 0, 175),
-							ZIndex = 6
-						})
-						-- //
-						local Open_Holder_Button = utility:RenderObject("TextButton", {
-							BackgroundColor3 = Color3.fromRGB(0, 0, 0),
-							BackgroundTransparency = 1,
-							BorderColor3 = Color3.fromRGB(0, 0, 0),
-							BorderSizePixel = 0,
-							Parent = Content_Open_Holder,
-							Position = UDim2.new(0, -1, 0, -1),
-							Size = UDim2.new(1, 2, 1, 2),
-							Text = ""
-						})
-						-- //
-						local Open_Holder_Outline = utility:RenderObject("Frame", {
-							BackgroundColor3 = Color3.fromRGB(60, 60, 60),
-							BackgroundTransparency = 0,
-							BorderColor3 = Color3.fromRGB(12, 12, 12),
-							BorderMode = "Inset",
-							BorderSizePixel = 1,
-							Parent = Content_Open_Holder,
-							Position = UDim2.new(0, 0, 0, 0),
-							Size = UDim2.new(1, 0, 1, 0),
-							ZIndex = 6
-						})
-						-- //
-						local Open_Outline_Frame = utility:RenderObject("Frame", {
-							BackgroundColor3 = Color3.fromRGB(40, 40, 40),
-							BackgroundTransparency = 0,
-							BorderColor3 = Color3.fromRGB(0, 0, 0),
-							BorderSizePixel = 0,
-							Parent = Open_Holder_Outline,
-							Position = UDim2.new(0, 1, 0, 1),
-							Size = UDim2.new(1, -2, 1, -2),
-							ZIndex = 6
-						})
-						-- //
-						local ValSat_Picker_Outline = utility:RenderObject("Frame", {
-							BackgroundColor3 = Color3.fromRGB(12, 12, 12),
-							BackgroundTransparency = 0,
-							BorderColor3 = Color3.fromRGB(0, 0, 0),
-							BorderSizePixel = 0,
-							Parent = Open_Outline_Frame,
-							Position = UDim2.new(0, 2, 0, 2),
-							Size = UDim2.new(0, 152, 0, 152),
-							ZIndex = 6
-						})
-						--
-						local Hue_Picker_Outline = utility:RenderObject("Frame", {
-							BackgroundColor3 = Color3.fromRGB(12, 12, 12),
-							BackgroundTransparency = 0,
-							BorderColor3 = Color3.fromRGB(0, 0, 0),
-							BorderSizePixel = 0,
-							Parent = Open_Outline_Frame,
-							Position = UDim2.new(1, -19, 0, 2),
-							Size = UDim2.new(0, 17, 0, 152),
-							ZIndex = 6
-						})
-						--
-						local Transparency_Picker_Outline = utility:RenderObject("Frame", {
-							BackgroundColor3 = Color3.fromRGB(12, 12, 12),
-							BackgroundTransparency = 0,
-							BorderColor3 = Color3.fromRGB(0, 0, 0),
-							BorderSizePixel = 0,
-							Parent = Open_Outline_Frame,
-							Position = UDim2.new(0, 2, 1, -14),
-							Size = UDim2.new(0, 152, 0, 12),
-							ZIndex = 6
-						})
-						-- //
-						local ValSat_Picker_Color = utility:RenderObject("Frame", {
-							BackgroundColor3 = Color3.fromRGB(255, 12, 12),
-							BackgroundTransparency = 0,
-							BorderColor3 = Color3.fromRGB(0, 0, 0),
-							BorderSizePixel = 0,
-							Parent = ValSat_Picker_Outline,
-							Position = UDim2.new(0, 1, 0, 1),
-							Size = UDim2.new(1, -2, 1, -2),
-							ZIndex = 6
-						})
-						--
-						do -- // Functions
-							function Content.Content:Close()
-								Content.Content.Open = false
-								--
-								for Index, Value in pairs(Connections) do
-									Value:Disconnect()
-								end
-								--
-								InputCheck:Disconnect()
-								--
-								Content_Open_Holder:Remove()
-								--
-								function Content.Content:Refresh() end
-								--
-								InputCheck = nil
-								Connections = nil
-							end
-							--
-							function Content.Content:Refresh(state)
-							end
-						end
-						--
-						Content.Content.Open = true
-						Content.Section.Content = Content.Content
-						--
-						do -- // Connections
-							InputCheck = utility:CreateConnection(uis.InputBegan, function(Input)
-								if Content.Content.Open and Input.UserInputType == Enum.UserInputType.MouseButton1 then
-									local Mouse = utility:MouseLocation()
-									--
-									if not (Mouse.X > Content_Open_Holder.AbsolutePosition.X and Mouse.Y > (Content_Open_Holder.AbsolutePosition.Y + 36) and Mouse.X < (Content_Open_Holder.AbsolutePosition.X + Content_Open_Holder.AbsoluteSize.X) and Mouse.Y < (Content_Open_Holder.AbsolutePosition.Y + Content_Open_Holder.AbsoluteSize.Y + 36)) then
-										if not (Mouse.X > Content_Holder.AbsolutePosition.X and Mouse.Y > (Content_Holder.AbsolutePosition.Y) and Mouse.X < (Content_Holder.AbsolutePosition.X + Content_Holder.AbsoluteSize.X) and Mouse.Y < (Content_Holder.AbsolutePosition.Y + Content_Holder.AbsoluteSize.Y)) then
-											if Content.Content.Open then
-												Content.Section:CloseContent()
-											end
-										end
-									end
-								end
-							end)
-						end
-					end
-				end
-				--
-				do -- // Connections
-					utility:CreateConnection(Content_Holder_Button.MouseButton1Click, function(Input)
-						if Content.Content.Open then
-							Content.Section:CloseContent()
-						else
-							Content:Open()
-						end
-					end)
-					--
-					utility:CreateConnection(Content_Holder_Button.MouseEnter, function(Input)
-						Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(180, 180, 180))
-					end)
-					--
-					utility:CreateConnection(Content_Holder_Button.MouseLeave, function(Input)
-						Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(140, 140, 140))
-					end)
-				end
-				--
-				Content:Set(Content.State)
+    function Content:Set(state)
+        Content.State = state
+        Holder_Outline_Frame.BackgroundColor3 = Content.State
+        Content.Callback(Content:Get())
+    end
+
+    function Content:Get()
+        return Content.State
+    end
+
+    function Content:Open()
+        Content.Section:CloseContent()
+
+        local Connections = {}
+        local InputCheck
+
+        local Content_Open_Holder = utility:RenderObject("Frame", {
+            BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+            BackgroundTransparency = 1,
+            BorderColor3 = Color3.fromRGB(0, 0, 0),
+            BorderSizePixel = 0,
+            Parent = Content.Section.Extra,
+            Position = UDim2.new(0, Content_Holder_Outline.AbsolutePosition.X - Content.Section.Extra.AbsolutePosition.X, 0, Content_Holder_Outline.AbsolutePosition.Y - Content.Section.Extra.AbsolutePosition.Y + 10),
+            Size = UDim2.new(0, 180, 0, 175),
+            ZIndex = 6
+        })
+
+        local Open_Holder_Button = utility:RenderObject("TextButton", {
+            BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+            BackgroundTransparency = 1,
+            BorderColor3 = Color3.fromRGB(0, 0, 0),
+            BorderSizePixel = 0,
+            Parent = Content_Open_Holder,
+            Position = UDim2.new(0, -1, 0, -1),
+            Size = UDim2.new(1, 2, 1, 2),
+            Text = ""
+        })
+
+        local Open_Holder_Outline = utility:RenderObject("Frame", {
+            BackgroundColor3 = Color3.fromRGB(60, 60, 60),
+            BackgroundTransparency = 0,
+            BorderColor3 = Color3.fromRGB(12, 12, 12),
+            BorderMode = "Inset",
+            BorderSizePixel = 1,
+            Parent = Content_Open_Holder,
+            Position = UDim2.new(0, 0, 0, 0),
+            Size = UDim2.new(1, 0, 1, 0),
+            ZIndex = 6
+        })
+
+        local Open_Outline_Frame = utility:RenderObject("Frame", {
+            BackgroundColor3 = Color3.fromRGB(40, 40, 40),
+            BackgroundTransparency = 0,
+            BorderColor3 = Color3.fromRGB(0, 0, 0),
+            BorderSizePixel = 0,
+            Parent = Open_Holder_Outline,
+            Position = UDim2.new(0, 1, 0, 1),
+            Size = UDim2.new(1, -2, 1, -2),
+            ZIndex = 6
+        })
+
+        local ValSat_Picker_Outline = utility:RenderObject("Frame", {
+            BackgroundColor3 = Color3.fromRGB(12, 12, 12),
+            BackgroundTransparency = 0,
+            BorderColor3 = Color3.fromRGB(0, 0, 0),
+            BorderSizePixel = 0,
+            Parent = Open_Outline_Frame,
+            Position = UDim2.new(0, 2, 0, 2),
+            Size = UDim2.new(0, 152, 0, 152),
+            ZIndex = 6
+        })
+
+        local Hue_Picker_Outline = utility:RenderObject("Frame", {
+            BackgroundColor3 = Color3.fromRGB(12, 12, 12),
+            BackgroundTransparency = 0,
+            BorderColor3 = Color3.fromRGB(0, 0, 0),
+            BorderSizePixel = 0,
+            Parent = Open_Outline_Frame,
+            Position = UDim2.new(1, -19, 0, 2),
+            Size = UDim2.new(0, 17, 0, 152),
+            ZIndex = 6
+        })
+
+        local Transparency_Picker_Outline = utility:RenderObject("Frame", {
+            BackgroundColor3 = Color3.fromRGB(12, 12, 12),
+            BackgroundTransparency = 0,
+            BorderColor3 = Color3.fromRGB(0, 0, 0),
+            BorderSizePixel = 0,
+            Parent = Open_Outline_Frame,
+            Position = UDim2.new(0, 2, 1, -14),
+            Size = UDim2.new(0, 152, 0, 12),
+            ZIndex = 6
+        })
+
+        local ValSat_Picker_Color = utility:RenderObject("Frame", {
+            BackgroundColor3 = Color3.fromRGB(255, 12, 12),
+            BackgroundTransparency = 0,
+            BorderColor3 = Color3.fromRGB(0, 0, 0),
+            BorderSizePixel = 0,
+            Parent = ValSat_Picker_Outline,
+            Position = UDim2.new(0, 1, 0, 1),
+            Size = UDim2.new(1, -2, 1, -2),
+            ZIndex = 6
+        })
+
+        function Content.Content:Close()
+            Content.Content.Open = false
+            for Index, Value in pairs(Connections) do
+                Value:Disconnect()
+            end
+            InputCheck:Disconnect()
+            Content_Open_Holder:Remove()
+            InputCheck = nil
+            Connections = nil
+        end
+
+        function Content.Content:Refresh(state)
+        end
+
+        Content.Content.Open = true
+        Content.Section.Content = Content.Content
+
+        InputCheck = utility:CreateConnection(uis.InputBegan, function(Input)
+            if Content.Content.Open then
+                if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+                    local Mouse = utility:MouseLocation()
+
+                    if not (Mouse.X > Content_Open_Holder.AbsolutePosition.X and Mouse.Y > (Content_Open_Holder.AbsolutePosition.Y + 36) and Mouse.X < (Content_Open_Holder.AbsolutePosition.X + Content_Open_Holder.AbsoluteSize.X) and Mouse.Y < (Content_Open_Holder.AbsolutePosition.Y + Content_Open_Holder.AbsoluteSize.Y + 36)) then
+                        if not (Mouse.X > Content_Holder.AbsolutePosition.X and Mouse.Y > (Content_Holder.AbsolutePosition.Y) and Mouse.X < (Content_Holder.AbsolutePosition.X + Content_Holder.AbsoluteSize.X) and Mouse.Y < (Content_Holder.AbsolutePosition.Y + Content_Holder.AbsoluteSize.Y)) then
+                            Content.Section:CloseContent()
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end
+
+do -- // Connections
+    if not Content.Content then
+        Content.Content = {}
+    end
+
+    utility:CreateConnection(Content_Holder_Button.MouseButton1Down, function()
+        if Content.Content.Open then
+            Content.Section:CloseContent()
+        else
+            Content:Open()
+        end
+    end)
+end
+
+Content:Set(Content.State)
 			end
 			--
 			return Content
