@@ -199,6 +199,7 @@ local ThemeManager = {} do
 		return out
 	end
 
+        local ThemeManager = {}
 	function ThemeManager:SetLibrary(lib)
 		self.Library = lib
 	end
