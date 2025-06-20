@@ -1,0 +1,105 @@
+local KeybindFrame = Instance.new("Frame")
+KeybindFrame.Size = UDim2.new(0, 180, 0, 30)
+KeybindFrame.Position = UDim2.new(0, 10, 0, 0)
+KeybindFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+KeybindFrame.BorderSizePixel = 0
+KeybindFrame.Active = true
+KeybindFrame.Draggable = true
+keybindFrame .Visible = false
+KeybindFrame.Parent = Diddy
+
+local KeybindTitle = Instance.new("TextLabel")
+KeybindTitle.Size = UDim2.new(1, 0, 0, 20)
+KeybindTitle.Position = UDim2.new(0, 0, 0, 8)
+KeybindTitle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+KeybindTitle.BorderSizePixel = 0
+KeybindTitle.Text = "Keybind"
+KeybindTitle.TextSize = 28
+KeybindTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+KeybindTitle.BackgroundTransparency = 1
+KeybindTitle.Font = Enum.Font.Gotham
+KeybindTitle.Parent = KeybindFrame
+
+local KeyList = Instance.new("Frame")
+KeyList.Size = UDim2.new(1, 0, 1, 20)
+KeyList.Position = UDim2.new(0, 0, 0, 30)
+KeyList.BackgroundTransparency = 1
+KeyList.BorderSizePixel = 0
+KeyList.Parent = KeybindFrame
+
+local Layout = Instance.new("UIListLayout")
+Layout.SortOrder = Enum.SortOrder.LayoutOrder
+Layout.Padding = UDim.new(0, 0)
+Layout.Parent = KeyList
+
+local UserInputService = game:GetService("UserInputService")
+
+local allKeybinds = {}
+
+function createKeyBind(data)
+	local ToggleState = false
+	local key = data.Key:upper()
+	local text = data.Text
+	local callback = data.Callback
+	local CanUseRealBind = data.CanUseRealBind
+
+	local name = data.Name
+	local colorOn = Color3.fromRGB(104, 154, 189)
+	local colorOff = Color3.fromRGB(255, 255, 255)
+
+	local button = Instance.new("TextButton")
+	_G[name] = button
+	button.Name = name
+	button.Size = UDim2.new(1, 0, 0, 25)
+	button.BackgroundTransparency = 1
+	button.BorderSizePixel = 0
+	button.Text = "[" .. key .. "] " .. text .. " (Toggle)"
+	button.TextSize = 18
+	button.TextColor3 = colorOff
+	button.Font = Enum.Font.Gotham
+	button.Parent = KeyList
+
+	local function Toggle()
+		ToggleState = not ToggleState
+		button.TextColor3 = ToggleState and colorOn or colorOff
+		callback(ToggleState)
+	end
+
+	button.MouseButton1Click:Connect(Toggle)
+
+	table.insert(allKeybinds, {
+		Key = key,
+		CanUse = CanUseRealBind,
+		Toggle = Toggle
+	})
+end
+
+UserInputService.InputBegan:Connect(function(input, gpe)
+	if gpe then return end
+	if input.UserInputType == Enum.UserInputType.Keyboard then
+		local key = input.KeyCode.Name:upper()
+		for _, bind in ipairs(allKeybinds) do
+			if bind.CanUse and bind.Key == key then
+				bind.Toggle()
+			end
+		end
+	end
+end)
+
+
+--[[
+
+this was given to me by someone
+
+
+createKeyBind({
+	Name = 'Da',
+	Text = 'Fly',
+	Key = 'F',
+	CanUseRealBind = false,
+	Callback = function(state)
+		print("Flying:", state)
+	end
+})
+
+]]
