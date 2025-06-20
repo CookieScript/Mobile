@@ -5,7 +5,7 @@ KeybindFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 KeybindFrame.BorderSizePixel = 0
 KeybindFrame.Active = true
 KeybindFrame.Draggable = true
-keybindFrame .Visible = false
+keybindFrame.Visible = false
 KeybindFrame.Parent = Diddy
 
 local KeybindTitle = Instance.new("TextLabel")
