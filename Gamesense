@@ -990,16 +990,6 @@ Content:Set(Content.State)
 						TextXAlignment = "Left"
 					})
 				end
-				--
-				local Content_Holder_Button = utility:RenderObject("TextButton", {
-					BackgroundColor3 = Color3.fromRGB(0, 0, 0),
-					BackgroundTransparency = 1,
-					BorderColor3 = Color3.fromRGB(0, 0, 0),
-					BorderSizePixel = 0,
-					Parent = Content_Holder,
-					Size = UDim2.new(1, 0, 1, 0),
-					Text = ""
-				})
 				-- //
 				local Holder_Outline_Frame = utility:RenderObject("Frame", {
 					BackgroundColor3 = Color3.fromRGB(71, 71, 71),
@@ -1078,6 +1068,16 @@ Content:Set(Content.State)
 					RenderTime = 0.15
 				})
 				--
+                                local Content_Holder_Button = utility:RenderObject("TextButton", {
+					BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+					BackgroundTransparency = 1,
+					BorderColor3 = Color3.fromRGB(0, 0, 0),
+					BorderSizePixel = 0,
+					Parent = Content_Holder,
+					Size = UDim2.new(1, 0, 1, 0),
+					Text = ""
+				})
+                                --
 				-- Functions
 function Content:Set(state)
     Content.State = math.clamp(math.round(state * Content.Decimals) / Content.Decimals, Content.Min, Content.Max)
