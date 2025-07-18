@@ -1080,8 +1080,13 @@ Content:Set(Content.State)
                                 --
 				-- Functions
 function Content:Set(state)
-    Content.State = math.clamp(math.round(state * Content.Decimals) / Content.Decimals, Content.Min, Content.Max)
+    local clamped = math.clamp(math.round(state * Content.Decimals) / Content.Decimals, Content.Min, Content.Max)
+    if clamped == Content.State then return end
+    Content.State = clamped
     Outline_Frame_Slider.Size = UDim2.new((1 - ((Content.Max - Content.State) / (Content.Max - Content.Min))), 0, 1, 0)
+    if Content.Callback then
+        Content.Callback(Content.State)
+    end
 end
 
 function Content:Refresh(Input)
