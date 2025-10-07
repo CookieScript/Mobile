@@ -1353,14 +1353,18 @@ end
 			NewPage.Visible = false
 			NewPage.Parent = Weapon.Page.Window.Elements.Holder
 
-			local Left = Instance.new("Frame")
-			Left.Name = "Left"
-			Left.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Left.BackgroundTransparency = 1
-			Left.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Left.BorderSizePixel = 0
-			Left.Size = UDim2.new(0.5, -4, 1, 0)
-			Left.ZIndex = 2
+			local Left = Instance.new("ScrollingFrame")
+            Left.Name = "Left"
+            Left.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Left.BackgroundTransparency = 1
+            Left.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            Left.BorderSizePixel = 0
+            Left.Size = UDim2.new(0.5, -4, 1, 0)
+            Left.ZIndex = 2
+            Left.CanvasSize = UDim2.new(0, 0, 0, 0)
+            Left.ScrollBarThickness = 0
+            Left.ScrollBarImageTransparency = 1
+            Left.AutomaticCanvasSize = Enum.AutomaticSize.Y
 
 			local UIListLayout = Instance.new("UIListLayout")
 			UIListLayout.Name = "UIListLayout"
@@ -1370,14 +1374,19 @@ end
 
 			Left.Parent = NewPage
 
-			local Right = Instance.new("Frame")
-			Right.Name = "Right"
-			Right.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Right.BackgroundTransparency = 1
-			Right.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Right.BorderSizePixel = 0
-			Right.Position = UDim2.new(0.5, 4, 0, 0)
-			Right.Size = UDim2.new(0.5, -4, 1, 0)
+			local Right = Instance.new("ScrollingFrame")
+            Right.Name = "Right"
+            Right.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Right.BackgroundTransparency = 1
+            Right.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            Right.BorderSizePixel = 0
+            Right.Position = UDim2.new(0.5, 4, 0, 0)
+            Right.Size = UDim2.new(0.5, -4, 1, 0)
+            Right.ZIndex = 2
+            Right.CanvasSize = UDim2.new(0, 0, 0, 0)
+            Right.ScrollBarThickness = 0
+            Right.ScrollBarImageTransparency = 1
+            Right.AutomaticCanvasSize = Enum.AutomaticSize.Y
 
 			local UIListLayout1 = Instance.new("UIListLayout")
 			UIListLayout1.Name = "UIListLayout"
