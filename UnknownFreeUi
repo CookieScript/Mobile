@@ -1094,7 +1094,7 @@ do
 			local Left = Instance.new("Frame")
 			Left.Name = "Left"
 			Left.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Left.BackgroundTransparency = 1
+			Left.BackgroundTransparency = 0
 			Left.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			Left.BorderSizePixel = 0
 			Left.Size = UDim2.new(0.5, -4, 1, 0)
@@ -1111,7 +1111,7 @@ do
 			local Right = Instance.new("Frame")
 			Right.Name = "Right"
 			Right.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Right.BackgroundTransparency = 1
+			Right.BackgroundTransparency = 0
 			Right.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			Right.BorderSizePixel = 0
 			Right.Position = UDim2.new(0.5, 4, 0, 0)
