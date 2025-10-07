@@ -1099,6 +1099,7 @@ do
             Left.BorderSizePixel = 0
             Left.Size = UDim2.new(0.5, -4, 1, 0)
             Left.ZIndex = 2
+            Left.Active = true
             Left.CanvasSize = UDim2.new(0, 0, 0, 0)
             Left.ScrollBarThickness = 0
             Left.ScrollBarImageTransparency = 1
@@ -1121,6 +1122,7 @@ do
             Right.Position = UDim2.new(0.5, 4, 0, 0)
             Right.Size = UDim2.new(0.5, -4, 1, 0)
             Right.ZIndex = 2
+            Right.Active = true
             Right.CanvasSize = UDim2.new(0, 0, 0, 0)
             Right.ScrollBarThickness = 0
             Right.ScrollBarImageTransparency = 1
@@ -1370,6 +1372,7 @@ end
             Left.BorderSizePixel = 0
             Left.Size = UDim2.new(0.5, -4, 1, 0)
             Left.ZIndex = 2
+            Left.Active = true
             Left.CanvasSize = UDim2.new(0, 0, 0, 0)
             Left.ScrollBarThickness = 0
             Left.ScrollBarImageTransparency = 1
@@ -1392,6 +1395,7 @@ end
             Right.Position = UDim2.new(0.5, 4, 0, 0)
             Right.Size = UDim2.new(0.5, -4, 1, 0)
             Right.ZIndex = 2
+            Right.Active = true
             Right.CanvasSize = UDim2.new(0, 0, 0, 0)
             Right.ScrollBarThickness = 0
             Right.ScrollBarImageTransparency = 1
