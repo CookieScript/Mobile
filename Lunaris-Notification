@@ -47,6 +47,8 @@ do
         NotificationMessage.TextSize = 18
         NotificationMessage.TextXAlignment = Enum.TextXAlignment.Left
         NotificationMessage.TextColor3 = TextColor
+        NotificationMessage.TextWrapped = true
+        NotificationMessage.AutomaticSize = Enum.AutomaticSize.X
         NotificationMessage.Font = Enum.Font.GothamBold
         NotificationMessage.ZIndex = 2
         NotificationMessage.Parent = MainNotificationInner
