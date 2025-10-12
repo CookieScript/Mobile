@@ -49,7 +49,6 @@ do
         NotificationMessage.TextSize = 15
         NotificationMessage.TextXAlignment = Enum.TextXAlignment.Left
         NotificationMessage.TextColor3 = TextColor
-        NotificationMessage.TextWrapped = true
         NotificationMessage.AutomaticSize = Enum.AutomaticSize.X
         NotificationMessage.Font = Enum.Font.GothamBold
         NotificationMessage.ZIndex = 2
@@ -113,12 +112,12 @@ do
         MainNotificationInner.Position = UDim2.new(0.5, 0, 0.6 + (offset / 500), 0)
         table.insert(Library.Notification.Active, MainNotificationInner)
 
-       local textSize = TextService:GetTextSize(NotificationMessage.Text, NotificationMessage.TextSize, NotificationMessage.Font, Vector2.new(1000, 20))
-       local finalWidth = math.clamp(textSize.X + 40, 10, 800)
+        local textSize = TextService:GetTextSize(NotificationMessage.Text, NotificationMessage.TextSize, NotificationMessage.Font, Vector2.new(1000, 20))
+        local finalWidth = math.clamp(textSize.X + 40, 10, 800)
 
-       MainNotificationInner:TweenSize(UDim2.new(0, finalWidth, 0.08, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.25, true)
+        MainNotificationInner:TweenSize(UDim2.new(0, finalWidth, 0.08, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.25, true)
 
-       task.spawn(function()
+        task.spawn(function()
             task.wait(Time)
             MainNotificationInner:TweenSize(UDim2.new(0, 0, 0.08, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.25, true)
             task.wait(0.25)
