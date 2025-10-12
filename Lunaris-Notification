@@ -44,7 +44,7 @@ do
         NotificationMessage.Position = UDim2.new(0, 28, 0.1, 0)
         NotificationMessage.BackgroundTransparency = 1
         NotificationMessage.Text = Message
-        NotificationMessage.TextSize = 18
+        NotificationMessage.TextSize = 15
         NotificationMessage.TextXAlignment = Enum.TextXAlignment.Left
         NotificationMessage.TextColor3 = TextColor
         NotificationMessage.TextWrapped = true
