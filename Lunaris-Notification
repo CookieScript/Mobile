@@ -1,0 +1,130 @@
+local Library = {}
+
+do
+    Library = {
+        Notification = {
+            Images = {
+                ["Success"] = "rbxassetid://122842703742343",
+                ["Failed"] = "rbxassetid://96260917665176",
+            },
+            Active = {}
+        },
+    }
+
+    function Library:CreateLunarisNotification(settings)
+        local Status = settings.Status or "Success"
+        local Message = settings.Message or "Notification"
+        local Time = settings.Time or 5
+        local TextColor = settings.Color or Color3.fromRGB(255, 255, 255)
+
+        local gui = Instance.new("ScreenGui")
+        gui.Name = "LunarisNotification"
+        gui.Parent = game.CoreGui
+
+        local MainNotificationInner = Instance.new("Frame")
+        MainNotificationInner.Size = UDim2.new(0, 0, 0.08, 0)
+        MainNotificationInner.AutomaticSize = Enum.AutomaticSize.X
+        MainNotificationInner.Position = UDim2.new(0.5, 0, 0.6, 0)
+        MainNotificationInner.AnchorPoint = Vector2.new(0.5, 0)
+        MainNotificationInner.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+        MainNotificationInner.BorderSizePixel = 0
+        MainNotificationInner.Parent = gui
+        MainNotificationInner.ZIndex = 1
+
+        local NotificationStatus = Instance.new("ImageLabel")
+        NotificationStatus.Size = UDim2.new(0, 20, 0, 20)
+        NotificationStatus.Position = UDim2.new(0, 3, 0.1, 0)
+        NotificationStatus.BackgroundTransparency = 1
+        NotificationStatus.Image = Library.Notification.Images[Status] or Library.Notification.Images["Success"]
+        NotificationStatus.ImageColor3 = (Status == "Success") and Color3.fromRGB(155, 255, 155) or Color3.fromRGB(255, 155, 155)
+        NotificationStatus.Parent = MainNotificationInner
+
+        local NotificationMessage = Instance.new("TextLabel")
+        NotificationMessage.Size = UDim2.new(0, 0, 0, 20)
+        NotificationMessage.Position = UDim2.new(0, 28, 0.1, 0)
+        NotificationMessage.BackgroundTransparency = 1
+        NotificationMessage.Text = Message
+        NotificationMessage.TextSize = 18
+        NotificationMessage.TextXAlignment = Enum.TextXAlignment.Left
+        NotificationMessage.TextColor3 = TextColor
+        NotificationMessage.Font = Enum.Font.GothamBold
+        NotificationMessage.ZIndex = 2
+        NotificationMessage.Parent = MainNotificationInner
+
+        local Holder = Instance.new("Frame")
+        Holder.Name = "shadowHolder"
+        Holder.BackgroundTransparency = 1
+        Holder.Position = UDim2.new(0, -3, 0, -5)
+        Holder.Size = UDim2.new(1, 6, 1, 6)
+        Holder.ZIndex = 0
+        Holder.Parent = MainNotificationInner
+
+        local Shadow = Instance.new("ImageLabel")
+        Shadow.Name = "umbraShadow"
+        Shadow.Image = "rbxassetid://1316045217"
+        Shadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Shadow.ImageTransparency = 0.86
+        Shadow.ScaleType = Enum.ScaleType.Slice
+        Shadow.SliceCenter = Rect.new(10, 10, 118, 118)
+        Shadow.AnchorPoint = Vector2.new(0.5, 0.5)
+        Shadow.BackgroundTransparency = 1
+        Shadow.Position = UDim2.new(0.5, 0, 0.5, 2)
+        Shadow.Size = UDim2.new(1, 4, 1, 4)
+        Shadow.ZIndex = 0
+        Shadow.Parent = Holder
+
+        local Shadow1 = Instance.new("ImageLabel")
+        Shadow1.Name = "penumbraShadow"
+        Shadow1.Image = "rbxassetid://1316045217"
+        Shadow1.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Shadow1.ImageTransparency = 0.88
+        Shadow1.ScaleType = Enum.ScaleType.Slice
+        Shadow1.SliceCenter = Rect.new(10, 10, 118, 118)
+        Shadow1.AnchorPoint = Vector2.new(0.5, 0.5)
+        Shadow1.BackgroundTransparency = 1
+        Shadow1.Position = UDim2.new(0.5, 0, 0.5, 2)
+        Shadow1.Size = UDim2.new(1, 4, 1, 4)
+        Shadow1.ZIndex = 0
+        Shadow1.Parent = Holder
+
+        local Shadow2 = Instance.new("ImageLabel")
+        Shadow2.Name = "ambientShadow"
+        Shadow2.Image = "rbxassetid://1316045217"
+        Shadow2.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Shadow2.ImageTransparency = 0.49
+        Shadow2.ScaleType = Enum.ScaleType.Slice
+        Shadow2.SliceCenter = Rect.new(10, 10, 118, 118)
+        Shadow2.AnchorPoint = Vector2.new(0.5, 0.5)
+        Shadow2.BackgroundTransparency = 1
+        Shadow2.Position = UDim2.new(0.5, 0, 0.5, 2)
+        Shadow2.Size = UDim2.new(1, 4, 1, 4)
+        Shadow2.ZIndex = 0
+        Shadow2.Parent = Holder
+
+        local NotificationCorner = Instance.new("UICorner")
+        NotificationCorner.CornerRadius = UDim.new(0, 5)
+        NotificationCorner.Parent = MainNotificationInner
+
+        local offset = #Library.Notification.Active * 45
+        MainNotificationInner.Position = UDim2.new(0.5, 0, 0.6 + (offset / 500), 0)
+        table.insert(Library.Notification.Active, MainNotificationInner)
+
+        MainNotificationInner:TweenSize(UDim2.new(0, 260, 0.08, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.25, true)
+
+        task.spawn(function()
+            task.wait(Time)
+            MainNotificationInner:TweenSize(UDim2.new(0, 0, 0.08, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.25, true)
+            task.wait(0.25)
+            for i, notif in ipairs(Library.Notification.Active) do
+                if notif == MainNotificationInner then
+                    table.remove(Library.Notification.Active, i)
+                    break
+                end
+            end
+            for i, notif in ipairs(Library.Notification.Active) do
+                notif:TweenPosition(UDim2.new(0.5, 0, 0.6 + ((i - 1) * 45 / 500), 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.25, true)
+            end
+            gui:Destroy()
+        end)
+    end
+end
