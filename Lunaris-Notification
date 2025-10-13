@@ -24,7 +24,7 @@ do
         gui.Parent = game.CoreGui
 
         local MainNotificationInner = Instance.new("Frame")
-        MainNotificationInner.Size = UDim2.new(0, 0, 0.08, 0)
+        MainNotificationInner.Size = UDim2.new(0, 0, 0, 24)
         MainNotificationInner.AutomaticSize = Enum.AutomaticSize.X
         MainNotificationInner.Position = UDim2.new(0.5, 0, 0.6, 0)
         MainNotificationInner.AnchorPoint = Vector2.new(0.5, 0)
@@ -35,7 +35,7 @@ do
 
         local NotificationStatus = Instance.new("ImageLabel")
         NotificationStatus.Size = UDim2.new(0, 20, 0, 20)
-        NotificationStatus.Position = UDim2.new(0, 3, 0.1, 0)
+        NotificationStatus.Position = UDim2.new(0, 3, 0, 2)
         NotificationStatus.BackgroundTransparency = 1
         NotificationStatus.Image = Library.Notification.Images[Status] or Library.Notification.Images["Success"]
         NotificationStatus.ImageColor3 = (Status == "Success") and Color3.fromRGB(155, 255, 155) or Color3.fromRGB(255, 155, 155)
@@ -43,7 +43,7 @@ do
 
         local NotificationMessage = Instance.new("TextLabel")
         NotificationMessage.Size = UDim2.new(0, 0, 0, 20)
-        NotificationMessage.Position = UDim2.new(0, 28, 0.1, 0)
+        NotificationMessage.Position = UDim2.new(0, 28, 0, 2)
         NotificationMessage.BackgroundTransparency = 1
         NotificationMessage.Text = Message
         NotificationMessage.TextSize = 15
