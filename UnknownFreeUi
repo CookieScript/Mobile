@@ -678,6 +678,56 @@ do
 		NotifContainer.ZIndex = 99999999
 		notification.Container = NotifContainer
 
+        local Holder = Instance.new("Frame")
+        Holder.Name = "shadowHolder"
+        Holder.BackgroundTransparency = 1
+        Holder.Position = UDim2.new(0, -3, 0, -5)
+        Holder.Size = UDim2.new(1, 6, 1, 6)
+        Holder.ZIndex = 0
+        Holder.Parent = NotifContainer
+
+        local Shadow = Instance.new("ImageLabel")
+        Shadow.Name = "umbraShadow"
+        Shadow.Image = "rbxassetid://1316045217"
+        Shadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Shadow.ImageTransparency = 0.86
+        Shadow.ScaleType = Enum.ScaleType.Slice
+        Shadow.SliceCenter = Rect.new(10, 10, 118, 118)
+        Shadow.AnchorPoint = Vector2.new(0.5, 0.5)
+        Shadow.BackgroundTransparency = 1
+        Shadow.Position = UDim2.new(0.5, 0, 0.5, 2)
+        Shadow.Size = UDim2.new(1, 4, 1, 4)
+        Shadow.ZIndex = 0
+        Shadow.Parent = Holder
+
+        local Shadow1 = Instance.new("ImageLabel")
+        Shadow1.Name = "penumbraShadow"
+        Shadow1.Image = "rbxassetid://1316045217"
+        Shadow1.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Shadow1.ImageTransparency = 0.88
+        Shadow1.ScaleType = Enum.ScaleType.Slice
+        Shadow1.SliceCenter = Rect.new(10, 10, 118, 118)
+        Shadow1.AnchorPoint = Vector2.new(0.5, 0.5)
+        Shadow1.BackgroundTransparency = 1
+        Shadow1.Position = UDim2.new(0.5, 0, 0.5, 2)
+        Shadow1.Size = UDim2.new(1, 4, 1, 4)
+        Shadow1.ZIndex = 0
+        Shadow1.Parent = Holder
+
+        local Shadow2 = Instance.new("ImageLabel")
+        Shadow2.Name = "ambientShadow"
+        Shadow2.Image = "rbxassetid://1316045217"
+        Shadow2.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Shadow2.ImageTransparency = 0.49
+        Shadow2.ScaleType = Enum.ScaleType.Slice
+        Shadow2.SliceCenter = Rect.new(10, 10, 118, 118)
+        Shadow2.AnchorPoint = Vector2.new(0.5, 0.5)
+        Shadow2.BackgroundTransparency = 1
+        Shadow2.Position = UDim2.new(0.5, 0, 0.5, 2)
+        Shadow2.Size = UDim2.new(1, 4, 1, 4)
+        Shadow2.ZIndex = 0
+        Shadow2.Parent = Holder
+
 		local Outline = Instance.new("Frame")
 		Outline.Name = "Outline"
 		Outline.AutomaticSize = Enum.AutomaticSize.X
@@ -810,6 +860,56 @@ do
 			AccentOutline.ZIndex = 2
 			AccentOutline.Text = ""
 			AccentOutline.AutoButtonColor = false
+
+            local Holder = Instance.new("Frame")
+            Holder.Name = "shadowHolder"
+            Holder.BackgroundTransparency = 1
+            Holder.Position = UDim2.new(0, -3, 0, -5)
+            Holder.Size = UDim2.new(1, 6, 1, 6)
+            Holder.ZIndex = 0
+            Holder.Parent = AccentOutline
+
+            local Shadow = Instance.new("ImageLabel")
+            Shadow.Name = "umbraShadow"
+            Shadow.Image = "rbxassetid://1316045217"
+            Shadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+            Shadow.ImageTransparency = 0.86
+            Shadow.ScaleType = Enum.ScaleType.Slice
+            Shadow.SliceCenter = Rect.new(10, 10, 118, 118)
+            Shadow.AnchorPoint = Vector2.new(0.5, 0.5)
+            Shadow.BackgroundTransparency = 1
+            Shadow.Position = UDim2.new(0.5, 0, 0.5, 2)
+            Shadow.Size = UDim2.new(1, 4, 1, 4)
+            Shadow.ZIndex = 0
+            Shadow.Parent = Holder
+
+            local Shadow1 = Instance.new("ImageLabel")
+            Shadow1.Name = "penumbraShadow"
+            Shadow1.Image = "rbxassetid://1316045217"
+            Shadow1.ImageColor3 = Color3.fromRGB(0, 0, 0)
+            Shadow1.ImageTransparency = 0.88
+            Shadow1.ScaleType = Enum.ScaleType.Slice
+            Shadow1.SliceCenter = Rect.new(10, 10, 118, 118)
+            Shadow1.AnchorPoint = Vector2.new(0.5, 0.5)
+            Shadow1.BackgroundTransparency = 1
+            Shadow1.Position = UDim2.new(0.5, 0, 0.5, 2)
+            Shadow1.Size = UDim2.new(1, 4, 1, 4)
+            Shadow1.ZIndex = 0
+            Shadow1.Parent = Holder
+
+            local Shadow2 = Instance.new("ImageLabel")
+            Shadow2.Name = "ambientShadow"
+            Shadow2.Image = "rbxassetid://1316045217"
+            Shadow2.ImageColor3 = Color3.fromRGB(0, 0, 0)
+            Shadow2.ImageTransparency = 0.49
+            Shadow2.ScaleType = Enum.ScaleType.Slice
+            Shadow2.SliceCenter = Rect.new(10, 10, 118, 118)
+            Shadow2.AnchorPoint = Vector2.new(0.5, 0.5)
+            Shadow2.BackgroundTransparency = 1
+            Shadow2.Position = UDim2.new(0.5, 0, 0.5, 2)
+            Shadow2.Size = UDim2.new(1, 4, 1, 4)
+            Shadow2.ZIndex = 0
+            Shadow2.Parent = Holder
 
 			local Inline = Instance.new("Frame")
 			Inline.Name = "Inline"
@@ -4188,6 +4288,56 @@ end
 			Outline.Visible = false
 			Outline.Text = ""
 			Outline.AutoButtonColor = false
+
+            local Holder = Instance.new("Frame")
+            Holder.Name = "shadowHolder"
+            Holder.BackgroundTransparency = 1
+            Holder.Position = UDim2.new(0, -3, 0, -5)
+            Holder.Size = UDim2.new(1, 6, 1, 6)
+            Holder.ZIndex = 0
+            Holder.Parent = Outline
+
+            local Shadow = Instance.new("ImageLabel")
+            Shadow.Name = "umbraShadow"
+            Shadow.Image = "rbxassetid://1316045217"
+            Shadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+            Shadow.ImageTransparency = 0.86
+            Shadow.ScaleType = Enum.ScaleType.Slice
+            Shadow.SliceCenter = Rect.new(10, 10, 118, 118)
+            Shadow.AnchorPoint = Vector2.new(0.5, 0.5)
+            Shadow.BackgroundTransparency = 1
+            Shadow.Position = UDim2.new(0.5, 0, 0.5, 2)
+            Shadow.Size = UDim2.new(1, 4, 1, 4)
+            Shadow.ZIndex = 0
+            Shadow.Parent = Holder
+
+            local Shadow1 = Instance.new("ImageLabel")
+            Shadow1.Name = "penumbraShadow"
+            Shadow1.Image = "rbxassetid://1316045217"
+            Shadow1.ImageColor3 = Color3.fromRGB(0, 0, 0)
+            Shadow1.ImageTransparency = 0.88
+            Shadow1.ScaleType = Enum.ScaleType.Slice
+            Shadow1.SliceCenter = Rect.new(10, 10, 118, 118)
+            Shadow1.AnchorPoint = Vector2.new(0.5, 0.5)
+            Shadow1.BackgroundTransparency = 1
+            Shadow1.Position = UDim2.new(0.5, 0, 0.5, 2)
+            Shadow1.Size = UDim2.new(1, 4, 1, 4)
+            Shadow1.ZIndex = 0
+            Shadow1.Parent = Holder
+
+            local Shadow2 = Instance.new("ImageLabel")
+            Shadow2.Name = "ambientShadow"
+            Shadow2.Image = "rbxassetid://1316045217"
+            Shadow2.ImageColor3 = Color3.fromRGB(0, 0, 0)
+            Shadow2.ImageTransparency = 0.49
+            Shadow2.ScaleType = Enum.ScaleType.Slice
+            Shadow2.SliceCenter = Rect.new(10, 10, 118, 118)
+            Shadow2.AnchorPoint = Vector2.new(0.5, 0.5)
+            Shadow2.BackgroundTransparency = 1
+            Shadow2.Position = UDim2.new(0.5, 0, 0.5, 2)
+            Shadow2.Size = UDim2.new(1, 4, 1, 4)
+            Shadow2.ZIndex = 0
+            Shadow2.Parent = Holder
 
 			local Inline = Instance.new("Frame")
 			Inline.Name = "Inline"
