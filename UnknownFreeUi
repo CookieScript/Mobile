@@ -481,11 +481,6 @@ do
 
 			ColorInline.Parent = ColorWindow
 
-            local UIGradient = Instance.new("UIGradient")
-            UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, ColorWindow), ColorSequenceKeypoint.new(1, Psalms:GetVeryDarkerColor(ColorWindow))}
-            UIGradient.Rotation = 90
-            UIGradient.Parent = NewColor
-
 			-- // Connections
 			local mouseover = false
 			local hue, sat, val = default:ToHSV()
