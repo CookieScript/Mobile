@@ -4,6 +4,7 @@ do
 	Psalms = {
 		Open = true;
 		Accent = Color3.fromRGB(85, 170, 255);
+        VeryDarkerAccent = Color3.fromRGB(85, 170, 255);
 		PageAmount = 0;
 		Pages = {};
 		Sections = {};
@@ -86,6 +87,11 @@ do
 	local TweenService = game:GetService("TweenService");
 
 	do
+        function Psalms:GetVeryDarkerColor(Color)
+            local H, S, V = Color3.toHSV(Color)
+            return Color3.fromHSV(H, S, V / 3)
+        end
+        --
 		function Psalms:Connection(Signal, Callback)
 			local Con = Signal:Connect(Callback)
 			return Con
@@ -253,6 +259,7 @@ do
 		--
 		function Psalms:ChangeAccent(Color)
 			Psalms.Accent = Color
+            Psalms.VeryDarkerAccent = Psalms:GetVeryDarkerColor(Color)
 
 			for obj, theme in next, Psalms.ThemeObjects do
 				if theme:IsA("Frame") or theme:IsA("TextButton") then
