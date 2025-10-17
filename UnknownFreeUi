@@ -89,7 +89,7 @@ do
 	do
         function Psalms:GetVeryDarkerColor(Color)
             local H, S, V = Color3.toHSV(Color)
-            return Color3.fromHSV(H, S, V / 3)
+            return Color3.fromHSV(H, S, V / 1.8)
         end
         --
 		function Psalms:Connection(Signal, Callback)
