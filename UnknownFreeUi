@@ -1674,7 +1674,7 @@ end
 
             local UIGradient = Instance.new("UIGradient")
             UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Psalms.Accent), ColorSequenceKeypoint.new(1, Psalms.VeryDarkerAccent)}
-            UIGradient.Rotation = -90
+            UIGradient.Rotation = 90
             UIGradient.Parent = Accent
 
 			Inline.Parent = Outline
@@ -2197,7 +2197,7 @@ end
 
             local UIGradient = Instance.new("UIGradient")
             UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Psalms.Accent), ColorSequenceKeypoint.new(1, Psalms.VeryDarkerAccent)}
-            UIGradient.Rotation = -90
+            UIGradient.Rotation = 90
             UIGradient.Parent = Accent
 
 			local Value = Instance.new("TextLabel")
