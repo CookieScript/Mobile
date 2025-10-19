@@ -113,7 +113,7 @@ do
         table.insert(Library.Notification.Active, MainNotificationInner)
 
         local textSize = TextService:GetTextSize(NotificationMessage.Text, NotificationMessage.TextSize, NotificationMessage.Font, Vector2.new(1000, 20))
-        local finalWidth = math.clamp(textSize.X + 40, 10, 800)
+        local finalWidth = math.clamp(textSize.X + 20, 10, 800)
 
         MainNotificationInner:TweenSize(UDim2.new(0, finalWidth, 0, 24), Enum.EasingDirection.Out, Enum.EasingStyle.Sine, 0.4, true)
 
