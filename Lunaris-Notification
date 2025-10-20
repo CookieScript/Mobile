@@ -11,8 +11,6 @@ do
         },
     }
 
-    local TextService = game:GetService("TextService")
-
     function Library:CreateLunarisNotification(settings)
         local Status = settings.Status or "Success"
         local Message = settings.Message or "Notification"
@@ -35,7 +33,7 @@ do
 
         local NotificationStatus = Instance.new("ImageLabel")
         NotificationStatus.Size = UDim2.new(0, 20, 0, 20)
-        NotificationStatus.Position = UDim2.new(0, 3, 0, 2)
+        NotificationStatus.Position = UDim2.new(0, 3, 0.1, 0)
         NotificationStatus.BackgroundTransparency = 1
         NotificationStatus.Image = Library.Notification.Images[Status] or Library.Notification.Images["Success"]
         NotificationStatus.ImageColor3 = (Status == "Success") and Color3.fromRGB(155, 255, 155) or Color3.fromRGB(255, 155, 155)
@@ -43,12 +41,13 @@ do
 
         local NotificationMessage = Instance.new("TextLabel")
         NotificationMessage.Size = UDim2.new(0, 0, 0, 20)
-        NotificationMessage.Position = UDim2.new(0, 28, 0, 2)
+        NotificationMessage.Position = UDim2.new(0, 28, 0.1, 0)
         NotificationMessage.BackgroundTransparency = 1
         NotificationMessage.Text = Message
         NotificationMessage.TextSize = 15
         NotificationMessage.TextXAlignment = Enum.TextXAlignment.Left
         NotificationMessage.TextColor3 = TextColor
+        NotificationMessage.TextWrapped = true
         NotificationMessage.AutomaticSize = Enum.AutomaticSize.X
         NotificationMessage.Font = Enum.Font.GothamBold
         NotificationMessage.ZIndex = 2
@@ -112,16 +111,14 @@ do
         MainNotificationInner.Position = UDim2.new(0.5, 0, 0.6 + (offset / 500), 0)
         table.insert(Library.Notification.Active, MainNotificationInner)
 
-        local textSize = TextService:GetTextSize(NotificationMessage.Text, NotificationMessage.TextSize, NotificationMessage.Font, Vector2.new(1000, 20))
-        local finalWidth = math.clamp(textSize.X, 10, 800)
+       local textSize = NotificationMessage.TextBounds
+       local finalWidth = math.clamp(textSize.X + 40, 10, 800)
 
-        MainNotificationInner:TweenSize(UDim2.new(0, finalWidth, 0, 24), Enum.EasingDirection.Out, Enum.EasingStyle.Sine, 0.4, true)
+       MainNotificationInner:TweenSize(UDim2.new(0, finalWidth, 0, 24), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.25, true)
 
-        task.spawn(function()
+       task.spawn(function()
             task.wait(Time)
-            NotificationMessage:Destroy()
-            NotificationStatus:Destroy()
-            MainNotificationInner:TweenSize(UDim2.new(0, 0, 0, 24), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.8, true)
+            MainNotificationInner:TweenSize(UDim2.new(0, 0, 0, 24), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.25, true)
             task.wait(0.25)
             for i, notif in ipairs(Library.Notification.Active) do
                 if notif == MainNotificationInner then
