@@ -368,11 +368,6 @@ do
 			Color.Position = UDim2.new(0, 6, 0, 6)
 			Color.Size = UDim2.new(1, -30, 1, -30)
 
-            local UIGradient = Instance.new("UIGradient")
-            UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, default), ColorSequenceKeypoint.new(1, Psalms:GetVeryDarkerColor(default))}
-            UIGradient.Rotation = -90
-            UIGradient.Parent = Color
-
 			local Sat = Instance.new("ImageLabel")
 			Sat.Name = "Sat"
 			Sat.Image = "http://www.roblox.com/asset/?id=14684562507"
