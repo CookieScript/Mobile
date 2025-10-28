@@ -6,6 +6,7 @@ do
             Images = {
                 ["Success"] = "rbxassetid://122842703742343",
                 ["Failed"] = "rbxassetid://96260917665176",
+                ["Info"] = "rbxassetid://100098274347190",
             },
             Active = {}
         },
@@ -36,7 +37,7 @@ do
         NotificationStatus.Position = UDim2.new(0, 3, 0.1, 0)
         NotificationStatus.BackgroundTransparency = 1
         NotificationStatus.Image = Library.Notification.Images[Status] or Library.Notification.Images["Success"]
-        NotificationStatus.ImageColor3 = (Status == "Success") and Color3.fromRGB(155, 255, 155) or Color3.fromRGB(255, 155, 155)
+        NotificationStatus.ImageColor3 = (Status == "Success" and Color3.fromRGB(155, 255, 155)) or (Status == "Failed" and Color3.fromRGB(255, 155, 155)) or (Status == "Info" and Color3.fromRGB(155, 155, 155)) or Color3.fromRGB(255, 255, 255)
         NotificationStatus.Parent = MainNotificationInner
 
         local NotificationMessage = Instance.new("TextLabel")
@@ -111,12 +112,12 @@ do
         MainNotificationInner.Position = UDim2.new(0.5, 0, 0.6 + (offset / 500), 0)
         table.insert(Library.Notification.Active, MainNotificationInner)
 
-       local textSize = NotificationMessage.TextBounds
-       local finalWidth = math.clamp(textSize.X + 40, 10, 800)
+        local textSize = NotificationMessage.TextBounds
+        local finalWidth = math.clamp(textSize.X + 40, 10, 800)
 
-       MainNotificationInner:TweenSize(UDim2.new(0, finalWidth, 0, 24), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.25, true)
+        MainNotificationInner:TweenSize(UDim2.new(0, finalWidth, 0, 24), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.25, true)
 
-       task.spawn(function()
+        task.spawn(function()
             task.wait(Time)
             MainNotificationInner:TweenSize(UDim2.new(0, 0, 0, 24), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.25, true)
             task.wait(0.25)
