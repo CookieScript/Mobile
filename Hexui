@@ -1,4 +1,4 @@
--- Modified lol so it supports mobile
+-- Modified by someone btw
 local InputService = game:GetService('UserInputService');
 local TextService = game:GetService('TextService');
 local CoreGui = game:GetService('CoreGui');
@@ -190,7 +190,7 @@ function Library:MakeDraggable(Instance, Cutoff)
 				return;
 			end;
 
-			while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or InputService.TouchEnabled do
+			while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
 				Instance.Position = UDim2.new(
 					0,
 					Mouse.X - ObjPos.X + (Instance.Size.X.Offset * Instance.AnchorPoint.X),
@@ -695,7 +695,7 @@ do
 
         SatVibMap.InputBegan:Connect(function(Input)
             if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-                while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or InputService.TouchEnabled do
+                while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
                     local MinX = SatVibMap.AbsolutePosition.X;
                     local MaxX = MinX + SatVibMap.AbsoluteSize.X;
                     local MouseX = math.clamp(Mouse.X, MinX, MaxX);
@@ -717,7 +717,7 @@ do
 
         HueSelectorInner.InputBegan:Connect(function(Input)
             if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-                while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or InputService.TouchEnabled do
+                while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
                     local MinY = HueSelectorInner.AbsolutePosition.Y;
                     local MaxY = MinY + HueSelectorInner.AbsoluteSize.Y;
                     local MouseY = math.clamp(Mouse.Y, MinY, MaxY);
@@ -947,7 +947,7 @@ do
 				local Key = KeyPicker.Value;
 
 				if Key == 'MB1' or Key == 'MB2' then
-					return Key == 'MB1' and InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or InputService.TouchEnabled
+					return Key == 'MB1' and InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1)
 						or Key == 'MB2' and InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2);
 				else
 					return InputService:IsKeyDown(Enum.KeyCode[KeyPicker.Value]);
@@ -1883,7 +1883,7 @@ function Funcs:AddSlider(Idx, Info)
             local gPos = Fill.Size.X.Offset
             local Diff = mPos - (Fill.AbsolutePosition.X + gPos)
 
-            while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or InputService.TouchEnabled do
+            while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
                 local nMPos = Mouse.X
                 local nX = math.clamp(gPos + (nMPos - mPos) + Diff, 0, Slider.MaxSize)
                 local nValue = Slider:GetValueFromXOffset(nX)
