@@ -2175,7 +2175,7 @@ do
 
             if SubSlider.SliderText then
                 SubSlider.SliderText.Parent = SubSlider.SliderOuter
-                SubSlider.SliderText.Position = UDim2.new(0, 0, 0, -16)
+                SubSlider.SliderText.Position = UDim2.new(0, 0, 0, -13)
                 SubSlider.SliderText.ZIndex = 10
             end
 
