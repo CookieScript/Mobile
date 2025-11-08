@@ -162,30 +162,42 @@ function Library:CreateLabel(Properties, IsHud)
 end;
 
 function Library:MakeDraggable(Instance, Cutoff)
-    Instance.Active = true;
+    Instance.Active = true
+
+    local dragging = false
+    local dragStart, startPos
 
     Instance.InputBegan:Connect(function(Input)
         if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) then
             local ObjPos = Vector2.new(
                 Mouse.X - Instance.AbsolutePosition.X,
                 Mouse.Y - Instance.AbsolutePosition.Y
-            );
+            )
 
             if ObjPos.Y > (Cutoff or 40) then
-                return;
-            end;
+                return
+            end
 
-            while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or Input.UserInputType == Enum.UserInputType.Touch do
-                Instance.Position = UDim2.new(
-                    0,
-                    Mouse.X - ObjPos.X + (Instance.Size.X.Offset * Instance.AnchorPoint.X),
-                    0,
-                    Mouse.Y - ObjPos.Y + (Instance.Size.Y.Offset * Instance.AnchorPoint.Y)
-                );
+            dragging = true
+            dragStart = Input.Position
+            startPos = Instance.Position
+        end
+    end)
 
-                RenderStepped:Wait();
-            end;
-        end;
+    Instance.InputEnded:Connect(function(Input)
+        if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) then
+            dragging = false
+        end
+    end)
+
+    InputService.InputChanged:Connect(function(Input)
+        if dragging and (Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch) then
+            local delta = Input.Position - dragStart
+            Instance.Position = UDim2.new(
+                startPos.X.Scale, startPos.X.Offset + delta.X,
+                startPos.Y.Scale, startPos.Y.Offset + delta.Y
+            )
+        end
     end)
 end;
 
