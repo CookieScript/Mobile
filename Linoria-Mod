@@ -2146,7 +2146,7 @@ do
 
         Slider.SliderOuter = SliderOuter;
         Slider.Groupbox = Groupbox;
-        SubSlider.DisplayLabel = SliderText;
+        SubSlider.NameLabel = SliderText;
         function Slider:AddSlider(Idx2, Info2)
             local SubSlider = Groupbox:AddSlider(Idx2, Info2)
             Slider.SliderOuter.Size = UDim2.new(0, math.floor((Slider.SliderOuter.AbsoluteSize.X / 2) - (5/2)), 0, Slider.SliderOuter.AbsoluteSize.Y)
@@ -2165,10 +2165,10 @@ do
                 SubSlider.MaxSize = SubSlider.SliderOuter.AbsoluteSize.X
             end)
 
-            if SubSlider.DisplayLabel then
-                SubSlider.DisplayLabel.Parent = SubSlider.SliderOuter
-                SubSlider.DisplayLabel.Position = UDim2.new(0, 0, 0, -18)
-                SubSlider.DisplayLabel.ZIndex = 10
+            if SubSlider.NameLabel then
+                SubSlider.NameLabel.Parent = SubSlider.SliderOuter
+                SubSlider.NameLabel.Position = UDim2.new(0, 0, 0, -18)
+                SubSlider.NameLabel.ZIndex = 10
             end
 
             return SubSlider
