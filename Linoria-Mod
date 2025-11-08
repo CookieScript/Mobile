@@ -1973,6 +1973,20 @@ do
         local Container = Groupbox.Container;
         local SliderText
 
+        if not Info.Compact then
+            Library:CreateLabel({
+                Size = UDim2.new(1, 0, 0, 10);
+                TextSize = 14;
+                Text = Info.Text;
+                TextXAlignment = Enum.TextXAlignment.Left;
+                TextYAlignment = Enum.TextYAlignment.Bottom;
+                ZIndex = 5;
+                Parent = Container;
+            });
+
+            Groupbox:AddBlank(3);
+        end
+
         local SliderOuter = Library:Create('Frame', {
             BackgroundColor3 = Color3.new(0, 0, 0);
             BorderColor3 = Color3.new(0, 0, 0);
@@ -1980,19 +1994,6 @@ do
             ZIndex = 5;
             Parent = Container;
         });
-
-        if not Info.Compact then
-            SliderText = Library:CreateLabel({
-                Size = UDim2.new(1, 0, 0, 10);
-                Position = UDim2.new(0, 0, 0, 0);
-                TextSize = 14;
-                Text = Info.Text;
-                TextXAlignment = Enum.TextXAlignment.Left;
-                TextYAlignment = Enum.TextYAlignment.Bottom;
-                ZIndex = 5;
-                Parent = SliderOuter;
-            });
-        end
 
         Library:AddToRegistry(SliderOuter, {
             BorderColor3 = 'Black';
@@ -2164,9 +2165,9 @@ do
                 SubSlider.MaxSize = SubSlider.SliderOuter.AbsoluteSize.X
             end)
 
-            if SubSlider.SliderText then
+            if not Info.Compact and SubSlider.SliderText then
                 SubSlider.SliderText.Parent = SubSlider.SliderOuter
-                SubSlider.SliderText.Position = UDim2.new(0, 0, 0, 0)
+                SubSlider.SliderText.Position = UDim2.new(0, 0, 0, -13)
                 SubSlider.SliderText.ZIndex = 10
             end
 
