@@ -1342,16 +1342,12 @@ do
         local Groupbox = self;
         local Container = Groupbox.Container;
 
-        local BlankFrame = Library:Create('Frame', {
+        Library:Create('Frame', {
             BackgroundTransparency = 1;
             Size = UDim2.new(1, 0, 0, Size);
             ZIndex = 1;
             Parent = Container;
         });
-
-        function BlankFrame:Size(NewSize)
-            self.Size = UDim2.new(1, 0, 0, NewSize);
-        end;
     end;
 
     function Funcs:AddLabel(Text, DoesWrap)
@@ -1976,7 +1972,6 @@ do
         local Groupbox = self;
         local Container = Groupbox.Container;
         local SliderText
-        local SliderBlank
 
         if not Info.Compact then
             SliderText = Library:CreateLabel({
@@ -1989,7 +1984,7 @@ do
                 Parent = Container;
             });
 
-            SliderBlank = Groupbox:AddBlank(3);
+            Groupbox:AddBlank(3);
         end
 
         local SliderOuter = Library:Create('Frame', {
@@ -2152,7 +2147,6 @@ do
         Slider.SliderOuter = SliderOuter;
         Slider.Groupbox = Groupbox;
         Slider.SliderText = SliderText;
-        Slider.SliderBlank = SliderBlank;
         function Slider:AddSlider(Idx2, Info2)
             local SubSlider = Groupbox:AddSlider(Idx2, Info2)
             Slider.SliderOuter.Size = UDim2.new(0, math.floor((Slider.SliderOuter.AbsoluteSize.X / 2) - (5/2)), 0, Slider.SliderOuter.AbsoluteSize.Y)
@@ -2169,10 +2163,6 @@ do
 
             task.defer(function()
                 SubSlider.MaxSize = SubSlider.SliderOuter.AbsoluteSize.X
-            end)
-
-            task.defer(function()
-                SubSlider.SliderBlank:Size(0);
             end)
 
             if SubSlider.SliderText then
