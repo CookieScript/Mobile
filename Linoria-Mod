@@ -1349,11 +1349,7 @@ do
             Parent = Container;
         });
 
-        function BlankFrame:Resize(NewSize)
-            self.Size = UDim2.new(1, 0, 0, NewSize)
-        end;
-
-        return BlankFrame
+        BlankFrame.Size = UDim2.new(1, 0, 0, Size);
     end;
 
     function Funcs:AddLabel(Text, DoesWrap)
@@ -2174,7 +2170,7 @@ do
             end)
 
             task.defer(function()
-                SubSlider.SliderBlank:Resize(0)
+                SubSlider.SliderBlank.Size = UDim2.new(1, 0, 0, 0);
             end)
 
             if SubSlider.SliderText then
