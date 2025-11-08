@@ -1352,6 +1352,8 @@ do
         function BlankFrame:Resize(NewSize)
             self.Size = UDim2.new(1, 0, 0, NewSize);
         end;
+
+        return BlankFrame
     end;
 
     function Funcs:AddLabel(Text, DoesWrap)
