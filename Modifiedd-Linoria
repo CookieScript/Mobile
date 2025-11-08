@@ -2123,31 +2123,36 @@ do
             Library:SafeCallback(Slider.Changed, Slider.Value);
         end;
 
-        SliderInner.InputBegan:Connect(function(Input)
-            if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) and not Library:MouseIsOverOpenedFrame() then
-                local mPos = Mouse.X;
-                local gPos = Fill.Size.X.Offset;
-                local Diff = mPos - (Fill.AbsolutePosition.X + gPos);
+        SliderInner.InputBegan:Connect(function(Input);
+            if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) and not Library:MouseIsOverOpenedFrame() then;
+                local startPos = Mouse.X;
+                local startOffset = Fill.Size.X.Offset;
+                local diff = startPos - (Fill.AbsolutePosition.X + startOffset);
 
-                while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or Input.UserInputType == Enum.UserInputType.Touch do
-                    local nMPos = Mouse.X;
-                    local nX = math.clamp(gPos + (nMPos - mPos) + Diff, 0, Slider.MaxSize);
+                local dragConnection;
+                dragConnection = RenderStepped:Connect(function();
+                local currentPos = Mouse.X;
+                local newX = math.clamp(startOffset + (currentPos - startPos) + diff, 0, Slider.MaxSize);
 
-                    local nValue = Slider:GetValueFromXOffset(nX);
-                    local OldValue = Slider.Value;
-                    Slider.Value = nValue;
+                local newValue = Slider:GetValueFromXOffset(newX);
+                local oldValue = Slider.Value;
+                Slider.Value = newValue;
+                Slider:Display();
 
-                    Slider:Display();
-
-                    if nValue ~= OldValue then
-                        Library:SafeCallback(Slider.Callback, Slider.Value);
-                        Library:SafeCallback(Slider.Changed, Slider.Value);
-                    end;
-
-                    RenderStepped:Wait();
+                if newValue ~= oldValue then;
+                    Library:SafeCallback(Slider.Callback, Slider.Value);
+                    Library:SafeCallback(Slider.Changed, Slider.Value);
                 end;
+            end);
 
-                Library:AttemptSave();
+            local inputEnded;
+            inputEnded = Input.Ended:Connect(function(endInput);
+                if endInput.UserInputType == Enum.UserInputType.MouseButton1 or endInput.UserInputType == Enum.UserInputType.Touch then;
+                    dragConnection:Disconnect();
+                        inputEnded:Disconnect();
+                        Library:AttemptSave();
+                    end;
+                end);
             end;
         end);
 
