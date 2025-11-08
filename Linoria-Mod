@@ -1971,9 +1971,10 @@ do
 
         local Groupbox = self;
         local Container = Groupbox.Container;
+        local SliderText
 
         if not Info.Compact then
-            Library:CreateLabel({
+            SliderText = Library:CreateLabel({
                 Size = UDim2.new(1, 0, 0, 10);
                 TextSize = 14;
                 Text = Info.Text;
@@ -2145,6 +2146,7 @@ do
 
         Slider.SliderOuter = SliderOuter;
         Slider.Groupbox = Groupbox;
+        SubSlider.DisplayLabel = SliderText;
         function Slider:AddSlider(Idx2, Info2)
             local SubSlider = Groupbox:AddSlider(Idx2, Info2)
             Slider.SliderOuter.Size = UDim2.new(0, math.floor((Slider.SliderOuter.AbsoluteSize.X / 2) - (5/2)), 0, Slider.SliderOuter.AbsoluteSize.Y)
