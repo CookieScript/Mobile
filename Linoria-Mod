@@ -2148,10 +2148,25 @@ do
         function Slider:AddSlider(Idx2, Info2)
             local SubSlider = Groupbox:AddSlider(Idx2, Info2)
             Slider.SliderOuter.Size = UDim2.new(0, math.floor((Slider.SliderOuter.AbsoluteSize.X / 2) - (5/2)), 0, Slider.SliderOuter.AbsoluteSize.Y)
+
+            task.defer(function()
+                Slider.MaxSize = Slider.SliderOuter.AbsoluteSize.X
+            end)
+
             if SubSlider.SliderOuter then
                 SubSlider.SliderOuter.Position = UDim2.new(1, 5, 0, 0)
                 SubSlider.SliderOuter.Size = UDim2.fromOffset(Slider.SliderOuter.AbsoluteSize.X, Slider.SliderOuter.AbsoluteSize.Y)
                 SubSlider.SliderOuter.Parent = Slider.SliderOuter
+            end
+
+            task.defer(function()
+                SubSlider.MaxSize = SubSlider.SliderOuter.AbsoluteSize.X
+            end)
+
+            if SubSlider.DisplayLabel then
+                SubSlider.DisplayLabel.Parent = SubSlider.SliderOuter
+                SubSlider.DisplayLabel.Position = UDim2.new(0, 0, 0, -18)
+                SubSlider.DisplayLabel.ZIndex = 10
             end
 
             return SubSlider
