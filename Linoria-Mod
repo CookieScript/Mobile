@@ -1348,6 +1348,12 @@ do
             ZIndex = 1;
             Parent = Container;
         });
+
+        function BlankFrame:Resize(NewSize)
+            self.Size = UDim2.new(1, 0, 0, NewSize);
+        end;
+
+        return BlankFrame
     end;
 
     function Funcs:AddLabel(Text, DoesWrap)
@@ -1972,6 +1978,7 @@ do
         local Groupbox = self;
         local Container = Groupbox.Container;
         local SliderText
+        local SliderBlank
 
         if not Info.Compact then
             SliderText = Library:CreateLabel({
@@ -1984,7 +1991,7 @@ do
                 Parent = Container;
             });
 
-            Groupbox:AddBlank(3);
+            SliderBlank = Groupbox:AddBlank(3);
         end
 
         local SliderOuter = Library:Create('Frame', {
@@ -2147,6 +2154,7 @@ do
         Slider.SliderOuter = SliderOuter;
         Slider.Groupbox = Groupbox;
         Slider.SliderText = SliderText;
+        Slider.SliderBlank = SliderBlank;
         function Slider:AddSlider(Idx2, Info2)
             local SubSlider = Groupbox:AddSlider(Idx2, Info2)
             Slider.SliderOuter.Size = UDim2.new(0, math.floor((Slider.SliderOuter.AbsoluteSize.X / 2) - (5/2)), 0, Slider.SliderOuter.AbsoluteSize.Y)
@@ -2165,9 +2173,13 @@ do
                 SubSlider.MaxSize = SubSlider.SliderOuter.AbsoluteSize.X
             end)
 
+            task.defer(function()
+                SubSlider.SliderBlank:Resize(0)
+            end)
+
             if SubSlider.SliderText then
                 SubSlider.SliderText.Parent = SubSlider.SliderOuter
-                SubSlider.SliderText.Position = UDim2.new(0, 0, 0, -18)
+                SubSlider.SliderText.Position = UDim2.new(0, 0, 0, -16)
                 SubSlider.SliderText.ZIndex = 10
             end
 
