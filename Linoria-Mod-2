@@ -3005,7 +3005,7 @@ function Library:CreateWindow(...)
     });
 
     local WindowSizer = Instance.new("UIScale")
-    WindowSizer.Parent = WindowFrame
+    WindowSizer.Parent = Outer
     WindowSizer.Scale = type(Config.WindowSize) == "number" and Config.WindowSize or 1
 
     Library:MakeDraggable(Outer, 25);
