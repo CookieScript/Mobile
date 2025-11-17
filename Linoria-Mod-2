@@ -39,6 +39,8 @@ local Library = {
     Black = Color3.new(0, 0, 0);
     Font = Enum.Font.Code,
 
+    UiSize = 1,
+
     OpenedFrames = {};
     DependencyBoxes = {};
 
@@ -2980,6 +2982,7 @@ function Library:CreateWindow(...)
 
     if typeof(Config.Position) ~= 'UDim2' then Config.Position = UDim2.fromOffset(175, 50) end
     if typeof(Config.Size) ~= 'UDim2' then Config.Size = UDim2.fromOffset(550, 600) end
+    if type(Config.WindowSize) == "number" then Library.UiSize = Config.WindowSize end
 
     if Config.Center then
         Config.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -3001,7 +3004,15 @@ function Library:CreateWindow(...)
         Parent = ScreenGui;
     });
 
+    local WindowSizer = Instance.new("UIScale")
+    WindowSizer.Parent = WindowFrame
+    WindowSizer.Scale = type(Config.WindowSize) == "number" and Config.WindowSize or 1
+
     Library:MakeDraggable(Outer, 25);
+
+    function Window:SetWindowSize(Size)
+        WindowSizer.Scale = Size;
+    end;
 
     local Inner = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor;
