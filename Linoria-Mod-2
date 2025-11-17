@@ -3101,6 +3101,10 @@ function Library:CreateWindow(...)
         WindowLabel.Text = Title;
     end;
 
+    function Window:ReturnWindowSize()
+        return Outer.AbsoluteSize;
+    end;
+
     function Window:AddTab(Name)
         local Tab = {
             Groupboxes = {};
