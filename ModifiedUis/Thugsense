@@ -1799,7 +1799,7 @@ local Library do
         end)
 
         Library:Connect(UserInputService.InputChanged, function(Input)
-            if Input.UserInputType == Enum.UserInputType.MouseMovement then
+            if Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch then
                 if SlidingPalette then
                     Colorpicker:SlidePalette(Input)
                 end
@@ -1815,7 +1815,7 @@ local Library do
         end)
 
         Library:Connect(UserInputService.InputBegan, function(Input)
-            if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                 if Library:IsMouseOverFrame(Items["ColorpickerWindow"]) then
                     return
                 end
@@ -3925,13 +3925,13 @@ local Library do
         end)
 
         Items["RealSlider"]:Connect("InputEnded", function(Input)
-            if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                 Slider.Sliding = false
             end
         end)
 
         Library:Connect(UserInputService.InputChanged, function(Input)
-            if Input.UserInputType == Enum.UserInputType.MouseMovement and Slider.Sliding then
+            if Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch and Slider.Sliding then
                 local MousePos = UserInputService:GetMouseLocation()
 
                 local SizeX = (MousePos.X - Items["RealSlider"].Instance.AbsolutePosition.X) / Items["RealSlider"].Instance.AbsoluteSize.X
