@@ -1257,10 +1257,12 @@ do
 
                     if Input.UserInputType == Enum.UserInputType.Keyboard then
                         Key = Input.KeyCode.Name;
-                    -- elseif Input.UserInputType == Enum.UserInputType.MouseButton1 then
-                    --    Key = 'MB1';
-                    -- elseif Input.UserInputType == Enum.UserInputType.MouseButton2 then
-                    --    Key = 'MB2';
+                    elseif not game:GetService("UserInputService").TouchEnabled then
+                        if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+                            Key = 'MB1';
+                        elseif Input.UserInputType == Enum.UserInputType.MouseButton2 then
+                            Key = 'MB2';
+                        end
                     end;
 
                     Break = true;
@@ -2428,7 +2430,7 @@ do
                 end;
 
                 ButtonLabel.InputBegan:Connect(function(Input)
-                    if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                         local Try = not Selected;
 
                         if Dropdown:GetActiveValues() == 1 and (not Try) and (not Info.AllowNull) then
