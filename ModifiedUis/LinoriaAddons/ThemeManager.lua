@@ -1,4 +1,17 @@
 local httpService = game:GetService('HttpService')
+
+function CreateGroupBox(option)
+    local names = type(option.Name) == "table" and option.Name or { option.Name }
+    local TabBox = option.side == "left" and option.TabGroup:AddLeftTabbox() or option.TabGroup:AddRightTabbox()
+
+    local results = {}
+    for i = 1, #names do
+        results[i] = TabBox:AddTab(names[i])
+    end
+
+    return table.unpack(results)
+end
+
 local ThemeManager = {} do
 	ThemeManager.Folder = 'LinoriaLibSettings'
 	-- if not isfolder(ThemeManager.Folder) then makefolder(ThemeManager.Folder) end
@@ -230,7 +243,7 @@ local ThemeManager = {} do
 
 	function ThemeManager:CreateGroupBox(tab)
 		assert(self.Library, 'Must set ThemeManager.Library first!')
-		return tab:AddLeftGroupbox('Themes')
+		return CreateGroupBox({TabGroup = tab, side = "left", Name = "Themes"})
 	end
 
 	function ThemeManager:ApplyToTab(tab)
