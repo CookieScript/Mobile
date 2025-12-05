@@ -1,5 +1,17 @@
 local httpService = game:GetService('HttpService')
 
+function CreateGroupBox(option)
+    local names = type(option.Name) == "table" and option.Name or { option.Name }
+    local TabBox = option.side == "left" and option.TabGroup:AddLeftTabbox() or option.TabGroup:AddRightTabbox()
+
+    local results = {}
+    for i = 1, #names do
+        results[i] = TabBox:AddTab(names[i])
+    end
+
+    return table.unpack(results)
+end
+
 local SaveManager = {} do
 	SaveManager.Folder = 'LinoriaLibSettings'
 	SaveManager.Ignore = {}
@@ -201,7 +213,7 @@ local SaveManager = {} do
 	function SaveManager:BuildConfigSection(tab)
 		assert(self.Library, 'Must set SaveManager.Library')
 
-		local section = tab:AddRightGroupbox('Configuration')
+		local section = CreateGroupBox({TabGroup = tab, side = "right", Name = "Configuration"})
 
 		section:AddInput('SaveManager_ConfigName',    { Text = 'Config name' })
 		section:AddDropdown('SaveManager_ConfigList', { Text = 'Config list', Values = self:RefreshConfigList(), AllowNull = true })
