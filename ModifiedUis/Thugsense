@@ -573,7 +573,7 @@ local Library do
             end)
 
             Library:Connect(UserInputService.InputChanged, function(Input)
-                if (Input.UserInputType == Enum.UserInputType.MouseMovement Input.UserInputType == Enum.UserInputType.Touch) and Resizing then
+                if (Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch) and Resizing then
 					ResizeMax = Maximum or Gui.Parent.AbsoluteSize - Gui.AbsoluteSize
 
 					Delta = Start + UDim2New(0, Input.Position.X, 0, Input.Position.Y)
