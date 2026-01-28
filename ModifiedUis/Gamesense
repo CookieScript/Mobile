@@ -901,11 +901,11 @@ local Passed, Statement = pcall(function()
 				end
 				--
 				do -- // Connections
-					utility:CreateConnection(Content_Holder_Button.MouseButton1Click, function(Input)
+					utility:CreateConnection(Content_Holder_Button.InputBegan, function(input)
                         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-						    Content:Set(not Content:Get())
+                            Content:Set(not Content:Get())
                         end
-					end)
+                    end)
 					--
 					utility:CreateConnection(Content_Holder_Button.MouseEnter, function(Input)
 						Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(180, 180, 180))
