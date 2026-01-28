@@ -902,7 +902,9 @@ local Passed, Statement = pcall(function()
 				--
 				do -- // Connections
 					utility:CreateConnection(Content_Holder_Button.MouseButton1Click, function(Input)
-						Content:Set(not Content:Get())
+                        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+						    Content:Set(not Content:Get())
+                        end
 					end)
 					--
 					utility:CreateConnection(Content_Holder_Button.MouseEnter, function(Input)
@@ -1135,7 +1137,7 @@ local Passed, Statement = pcall(function()
 					end)
 					--
 					utility:CreateConnection(uis.InputEnded, function(Input)
-						if Content.Holding and (Input.UserInputType == Enum.UserInputType.MouseButton1 and Input.UserInputType == Enum.UserInputType.Touch) then
+						if Content.Holding and (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) then
 							Content.Holding = false
                             --
                             Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(175, 175, 175))
@@ -1492,7 +1494,7 @@ local Passed, Statement = pcall(function()
 							task.wait()
 							--
 							InputCheck = utility:CreateConnection(uis.InputBegan, function(Input)
-								if Content.Content.Open and (Input.UserInputType == Enum.UserInputType.MouseButton1 and Input.UserInputType == Enum.UserInputType.Touch) then
+								if Content.Content.Open and (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) then
 									local Mouse = utility:MouseLocation()
 									--
 									if not (Mouse.X > Content_Open_Holder.AbsolutePosition.X  and Mouse.Y > (Content_Open_Holder.AbsolutePosition.Y + 36) and Mouse.X < (Content_Open_Holder.AbsolutePosition.X + Content_Open_Holder.AbsoluteSize.X) and Mouse.Y < (Content_Open_Holder.AbsolutePosition.Y + Content_Open_Holder.AbsoluteSize.Y + 36)) then
@@ -1889,7 +1891,7 @@ local Passed, Statement = pcall(function()
 							task.wait()
 							--
 							InputCheck = utility:CreateConnection(uis.InputBegan, function(Input)
-								if Content.Content.Open and (Input.UserInputType == Enum.UserInputType.MouseButton1 and Input.UserInputType == Enum.UserInputType.Touch) then
+								if Content.Content.Open and (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) then
 									local Mouse = utility:MouseLocation()
 									--
 									if not (Mouse.X > Content_Open_Holder.AbsolutePosition.X and Mouse.Y > (Content_Open_Holder.AbsolutePosition.Y + 36) and Mouse.X < (Content_Open_Holder.AbsolutePosition.X + Content_Open_Holder.AbsoluteSize.X) and Mouse.Y < (Content_Open_Holder.AbsolutePosition.Y + Content_Open_Holder.AbsoluteSize.Y + 36)) then
@@ -2358,7 +2360,7 @@ local Passed, Statement = pcall(function()
 						--
 						do -- // Connections
 							InputCheck = utility:CreateConnection(uis.InputBegan, function(Input)
-								if Content.Content.Open and (Input.UserInputType == Enum.UserInputType.MouseButton1 and Input.UserInputType == Enum.UserInputType.Touch) then
+								if Content.Content.Open and (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) then
 									local Mouse = utility:MouseLocation()
 									--
 									if not (Mouse.X > Content_Open_Holder.AbsolutePosition.X and Mouse.Y > (Content_Open_Holder.AbsolutePosition.Y + 36) and Mouse.X < (Content_Open_Holder.AbsolutePosition.X + Content_Open_Holder.AbsoluteSize.X) and Mouse.Y < (Content_Open_Holder.AbsolutePosition.Y + Content_Open_Holder.AbsoluteSize.Y + 36)) then
