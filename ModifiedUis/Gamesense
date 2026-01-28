@@ -2333,7 +2333,7 @@ local Passed, Statement = pcall(function()
 								--
 								InputCheck:Disconnect()
 								--
-								Content_Open_Holder:Remove()
+								Content_Open_Holder:Destroy()
 								--
 								function Content.Content:Refresh() end
 								--
@@ -2350,13 +2350,15 @@ local Passed, Statement = pcall(function()
 						--
 						do -- // Connections
 							InputCheck = utility:CreateConnection(uis.InputBegan, function(Input)
-								if Content.Content.Open and Input.UserInputType == Enum.UserInputType.MouseButton1 then
+								if Content.Content.Open and (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) then
 									local Mouse = utility:MouseLocation()
 									--
 									if not (Mouse.X > Content_Open_Holder.AbsolutePosition.X and Mouse.Y > (Content_Open_Holder.AbsolutePosition.Y + 36) and Mouse.X < (Content_Open_Holder.AbsolutePosition.X + Content_Open_Holder.AbsoluteSize.X) and Mouse.Y < (Content_Open_Holder.AbsolutePosition.Y + Content_Open_Holder.AbsoluteSize.Y + 36)) then
 										if not (Mouse.X > Content_Holder.AbsolutePosition.X and Mouse.Y > (Content_Holder.AbsolutePosition.Y) and Mouse.X < (Content_Holder.AbsolutePosition.X + Content_Holder.AbsoluteSize.X) and Mouse.Y < (Content_Holder.AbsolutePosition.Y + Content_Holder.AbsoluteSize.Y)) then
 											if Content.Content.Open then
-												Content.Section:CloseContent()
+												if Content.Section.Content and Content.Section.Content ~= Content.Content then
+                                                    Content.Section:CloseContent()
+                                                end
 											end
 										end
 									end
@@ -2369,7 +2371,9 @@ local Passed, Statement = pcall(function()
 				do -- // Connections
 					utility:CreateConnection(Content_Holder_Button.MouseButton1Click, function(Input)
 						if Content.Content.Open then
-							Content.Section:CloseContent()
+							if Content.Section.Content and Content.Section.Content ~= Content.Content then
+                                Content.Section:CloseContent()
+                            end
 						else
 							Content:Open()
 						end
