@@ -1,4 +1,4 @@
-local Library = loadstring(game:HttpGet("")()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/CookieScript/Mobile/refs/heads/main/ModifiedUis/Gamesense")()
 
 local Window = Library:New({
     Name = "Example Tab",
