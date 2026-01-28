@@ -2350,7 +2350,7 @@ local Passed, Statement = pcall(function()
 						--
 						do -- // Connections
 							InputCheck = utility:CreateConnection(uis.InputBegan, function(Input)
-								if Content.Content.Open and Input.UserInputType == Enum.UserInputType.MouseButton1 then
+								if Content.Content.Open and (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) then
 									local Mouse = utility:MouseLocation()
 									--
 									if not (Mouse.X > Content_Open_Holder.AbsolutePosition.X and Mouse.Y > (Content_Open_Holder.AbsolutePosition.Y + 36) and Mouse.X < (Content_Open_Holder.AbsolutePosition.X + Content_Open_Holder.AbsoluteSize.X) and Mouse.Y < (Content_Open_Holder.AbsolutePosition.Y + Content_Open_Holder.AbsoluteSize.Y + 36)) then
@@ -2367,7 +2367,7 @@ local Passed, Statement = pcall(function()
 				end
 				--
 				do -- // Connections
-					utility:CreateConnection(Content_Holder_Button.MouseButton1Down, function(Input)
+					utility:CreateConnection(Content_Holder_Button.MouseButton1Click, function(Input)
 						if Content.Content.Open then
 							Content.Section:CloseContent()
 						else
