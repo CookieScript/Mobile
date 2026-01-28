@@ -2367,7 +2367,7 @@ local Passed, Statement = pcall(function()
 				end
 				--
 				do -- // Connections
-					utility:CreateConnection(Content_Holder_Button.MouseButton1Click, function(Input)
+					utility:CreateConnection(Content_Holder_Button.MouseButton1Down, function(Input)
 						if Content.Content.Open then
 							Content.Section:CloseContent()
 						else
