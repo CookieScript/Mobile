@@ -2324,61 +2324,62 @@ local Passed, Statement = pcall(function()
 						})
 						--
 						do -- // Functions
-                           function Content.Content:Close()
-                               Content.Content.Open = false
-                               --
-                               for Index, Value in pairs(Connections) do
-                                   Value:Disconnect()
-                               end
-                               --
-                               if InputCheck then
-                                   InputCheck:Disconnect()
-                                   InputCheck = nil
-                               end
-                               --
-                               Content_Open_Holder:Remove()
-                               --
-                               function Content.Content:Refresh()
-                               end
-                               --
-                               Connections = nil
-                           end
-                           --
-                           function Content.Content:Refresh(state)
-                    end
-                end
-                --
-                Content.Content.Open = true
-                Content.Section.Content = Content.Content
-                --
-                do -- // Connections
-                    InputCheck = utility:CreateConnection(uis.InputBegan, function(Input)
-                        if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-                            Content.Section:CloseContent()
-                        end
-                    end)
-                end
-                --
-                do -- // Connections
-                    utility:CreateConnection(Content_Holder_Button.MouseButton1Down, function(Input)
-                        if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-                            Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(180, 180, 180))
-                            if Content.Content.Open then
-                                Content.Section:CloseContent()
-                            else
-                                Content:Open()
+                            function Content.Content:Close()
+                                Content.Content.Open = false
+                                --
+                                for Index, Value in pairs(Connections) do
+                                    Value:Disconnect()
+                                end
+                                --
+                                if InputCheck then
+                                    InputCheck:Disconnect()
+                                    InputCheck = nil
+                                end
+                                --
+                                Content_Open_Holder:Remove()
+                                --
+                                function Content.Content:Refresh()
+                                end
+                                --
+                                Connections = nil
+                            end
+                            --
+                            function Content.Content:Refresh(state)
                             end
                         end
-                    end)
-                    --
-                    utility:CreateConnection(Content_Holder_Button.InputEnded, function(Input)
-                        if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-                            Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(140, 140, 140))
+                        --
+                        Content.Content.Open = true
+                        Content.Section.Content = Content.Content
+                        --
+                        do -- // Connections
+                            InputCheck = utility:CreateConnection(uis.InputBegan, function(Input)
+                                if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+                                    Content.Section:CloseContent()
+                                end
+                            end)
                         end
-                    end)
+                        --
+                        do -- // Connections
+                            utility:CreateConnection(Content_Holder_Button.MouseButton1Down, function(Input)
+                                if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+                                    Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(180, 180, 180))
+                                    if Content.Content.Open then
+                                        Content.Section:CloseContent()
+                                    else
+                                        Content:Open()
+                                    end
+                                end
+                            end)
+                            --
+                            utility:CreateConnection(Content_Holder_Button.InputEnded, function(Input)
+                                if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+                                    Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(140, 140, 140))
+                            end
+                        end)
+                    end
+                    --
+                    Content:Set(Content.State)
                 end
-                --
-                Content:Set(Content.State)
 			end
 			--
 			return Content
