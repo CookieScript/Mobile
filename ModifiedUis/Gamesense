@@ -888,32 +888,22 @@ local Passed, Statement = pcall(function()
 				--
 				do -- // Functions
 					function Content:Set(state)
-						Content.State = state
-						--
-						Holder_Outline_Frame.BackgroundColor3 = Content.State and Content.Window.Accent or Color3.fromRGB(77, 77, 77)
-						--
-						Content.Callback(Content:Get())
-					end
-					--
-					function Content:Get()
-						return Content.State
-					end
+                        Content.State = state
+                        Holder_Outline_Frame.BackgroundColor3 = Content.State and Content.Window.Accent or Color3.fromRGB(77, 77, 77)
+                        Content.Callback(Content:Get())
+                    end
+
+                    function Content:Get()
+                        return Content.State
+                    end
 				end
 				--
 				do -- // Connections
-					utility:CreateConnection(Content_Holder_Button.InputBegan, function(input)
-                        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-                            Content:Set(not Content:Get())
-                        end
+					utility:CreateConnection(Content_Holder_Button.MouseButton1Down, function(Input)
+                        Content:Set(not Content:Get())
+                        Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(180, 180, 180))
+                        Frame_Slider_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(180, 180, 180))
                     end)
-					--
-					utility:CreateConnection(Content_Holder_Button.MouseEnter, function(Input)
-						Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(180, 180, 180))
-					end)
-					--
-					utility:CreateConnection(Content_Holder_Button.MouseLeave, function(Input)
-						Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(140, 140, 140))
-					end)
 				end
 				--
 				Content:Set(Content.State)
