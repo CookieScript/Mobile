@@ -2374,11 +2374,12 @@ local Passed, Statement = pcall(function()
                             utility:CreateConnection(Content_Holder_Button.InputEnded, function(Input)
                                 if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                                     Outline_Frame_Gradient.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(140, 140, 140))
-                            end
-                        end)
+                                end
+                            end)
+                        end
+                        --
+                        Content:Set(Content.State)
                     end
-                    --
-                    Content:Set(Content.State)
                 end
 			end
 			--
