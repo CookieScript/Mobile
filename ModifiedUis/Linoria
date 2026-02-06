@@ -3120,6 +3120,7 @@ function Library:CreateWindow(...)
             Position = UDim2.new(0, 8 - 1, 0, 8 - 1);
             Size = UDim2.new(0.5, -12 + 2, 0, 507 + 2);
             CanvasSize = UDim2.new(0, 0, 0, 0);
+            LeftSide.AutomaticCanvasSize = Enum.AutomaticSize.Y;
             BottomImage = '';
             TopImage = '';
             ScrollBarThickness = 0;
@@ -3133,6 +3134,7 @@ function Library:CreateWindow(...)
             Position = UDim2.new(0.5, 4 + 1, 0, 8 - 1);
             Size = UDim2.new(0.5, -12 + 2, 0, 507 + 2);
             CanvasSize = UDim2.new(0, 0, 0, 0);
+            RightSide.AutomaticCanvasSize = Enum.AutomaticSize.Y;
             BottomImage = '';
             TopImage = '';
             ScrollBarThickness = 0;
@@ -3155,12 +3157,6 @@ function Library:CreateWindow(...)
             HorizontalAlignment = Enum.HorizontalAlignment.Center;
             Parent = RightSide;
         });
-
-        for _, Side in next, { LeftSide, RightSide } do
-            Side:WaitForChild('UIListLayout'):GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
-                Side.CanvasSize = UDim2.fromOffset(0, Side.UIListLayout.AbsoluteContentSize.Y);
-            end);
-        end;
 
         function Tab:ShowTab()
             for _, Tab in next, Window.Tabs do
