@@ -1858,8 +1858,8 @@ do
         });
 
         local ToggleLabel = Library:CreateLabel({
-            Size = UDim2.new(0, 216, 1, 0);
             Position = UDim2.new(1, 6, 0, 0);
+            ToggleLabel.Size = UDim2.new(0, Container.AbsoluteSize.X - (ToggleLabel.AbsolutePosition.X - Container.AbsolutePosition.X), 1, 0)
             TextSize = 14;
             Text = Info.Text;
             TextXAlignment = Enum.TextXAlignment.Left;
@@ -2141,6 +2141,7 @@ do
             end;
         end);
 
+        Slider.MaxSize = SliderInner.AbsoluteSize.X
         Slider:Display();
         Groupbox:AddBlank(Info.BlankSize or 6);
         Groupbox:Resize();
@@ -3140,7 +3141,7 @@ function Library:CreateWindow(...)
             Parent = TabFrame;
         });
 
-        local LeftLayout = Library:Create('UIListLayout', {
+        Library:Create('UIListLayout', {
             Padding = UDim.new(0, 8);
             FillDirection = Enum.FillDirection.Vertical;
             SortOrder = Enum.SortOrder.LayoutOrder;
@@ -3148,7 +3149,7 @@ function Library:CreateWindow(...)
             Parent = LeftSide;
         });
 
-        local RightLayout = Library:Create('UIListLayout', {
+        Library:Create('UIListLayout', {
             Padding = UDim.new(0, 8);
             FillDirection = Enum.FillDirection.Vertical;
             SortOrder = Enum.SortOrder.LayoutOrder;
@@ -3156,13 +3157,11 @@ function Library:CreateWindow(...)
             Parent = RightSide;
         });
 
-        LeftLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-            LeftSide.CanvasSize = UDim2.new(0, 0, 0, LeftLayout.AbsoluteContentSize.Y + 4)
-        end)
-
-        RightLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-            RightSide.CanvasSize = UDim2.new(0, 0, 0, RightLayout.AbsoluteContentSize.Y + 4)
-        end)
+        for _, Side in next, { LeftSide, RightSide } do
+            Side:WaitForChild('UIListLayout'):GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
+                Side.CanvasSize = UDim2.fromOffset(0, Side.UIListLayout.AbsoluteContentSize.Y);
+            end);
+        end;
 
         function Tab:ShowTab()
             for _, Tab in next, Window.Tabs do
