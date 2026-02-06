@@ -3120,7 +3120,6 @@ function Library:CreateWindow(...)
             Position = UDim2.new(0, 8 - 1, 0, 8 - 1);
             Size = UDim2.new(0.5, -12 + 2, 0, 507 + 2);
             CanvasSize = UDim2.new(0, 0, 0, 0);
-            LeftSide.AutomaticCanvasSize = Enum.AutomaticSize.Y;
             BottomImage = '';
             TopImage = '';
             ScrollBarThickness = 0;
@@ -3134,7 +3133,6 @@ function Library:CreateWindow(...)
             Position = UDim2.new(0.5, 4 + 1, 0, 8 - 1);
             Size = UDim2.new(0.5, -12 + 2, 0, 507 + 2);
             CanvasSize = UDim2.new(0, 0, 0, 0);
-            RightSide.AutomaticCanvasSize = Enum.AutomaticSize.Y;
             BottomImage = '';
             TopImage = '';
             ScrollBarThickness = 0;
@@ -3142,7 +3140,7 @@ function Library:CreateWindow(...)
             Parent = TabFrame;
         });
 
-        Library:Create('UIListLayout', {
+        local LeftLayout = Library:Create('UIListLayout', {
             Padding = UDim.new(0, 8);
             FillDirection = Enum.FillDirection.Vertical;
             SortOrder = Enum.SortOrder.LayoutOrder;
@@ -3150,13 +3148,21 @@ function Library:CreateWindow(...)
             Parent = LeftSide;
         });
 
-        Library:Create('UIListLayout', {
+        local RightLayout = Library:Create('UIListLayout', {
             Padding = UDim.new(0, 8);
             FillDirection = Enum.FillDirection.Vertical;
             SortOrder = Enum.SortOrder.LayoutOrder;
             HorizontalAlignment = Enum.HorizontalAlignment.Center;
             Parent = RightSide;
         });
+
+        LeftLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+            LeftSide.CanvasSize = UDim2.new(0, 0, 0, LeftLayout.AbsoluteContentSize.Y + 4)
+        end)
+
+        RightLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+            RightSide.CanvasSize = UDim2.new(0, 0, 0, RightLayout.AbsoluteContentSize.Y + 4)
+        end)
 
         function Tab:ShowTab()
             for _, Tab in next, Window.Tabs do
