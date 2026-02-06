@@ -1867,7 +1867,7 @@ do
             Parent = ToggleInner;
         });
 
-        ToggleLabel.Size = UDim2.new(1, Container.AbsoluteSize.X -35, 1, 0)
+        ToggleLabel.Size = UDim2.new(1, Container.AbsoluteSize.X -33, 1, 0)
 
         Library:Create('UIListLayout', {
             Padding = UDim.new(0, 4);
