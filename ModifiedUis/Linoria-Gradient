@@ -442,6 +442,12 @@ do
             Parent = ToggleLabel;
         });
 
+        local Gradient = Library:Create('UIGradient', {
+            Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 80, 80))};
+            Rotation = 90;
+            Parent = DisplayFrame;
+        });
+
         -- Transparency image taken from https://github.com/matas3535/SplixPrivateDrawingLibrary/blob/main/Library.lua cus i'm lazy
         local CheckerFrame = Library:Create('ImageLabel', {
             BorderSizePixel = 0;
@@ -487,6 +493,12 @@ do
             Size = UDim2.new(1, 0, 0, 2);
             ZIndex = 17;
             Parent = PickerFrameInner;
+        });
+
+        local Gradient = Library:Create('UIGradient', {
+            Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 80, 80))};
+            Rotation = 90;
+            Parent = Highlight;
         });
 
         local SatVibMapOuter = Library:Create('Frame', {
@@ -2040,6 +2052,12 @@ do
             Size = UDim2.new(0, 0, 1, 0);
             ZIndex = 7;
             Parent = SliderInner;
+        });
+
+        local Gradient = Library:Create('UIGradient', {
+            Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 80, 80))};
+            Rotation = 90;
+            Parent = Fill;
         });
 
         Library:AddToRegistry(Fill, {
