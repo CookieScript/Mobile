@@ -2152,6 +2152,12 @@ do
             end;
         end);
 
+        Slider:Display();
+        if not Info.__IsChained and not Slider.IsChained then
+            Groupbox:AddBlank(Info.BlankSize or 6)
+        end
+        Groupbox:Resize();
+
         function Slider:AddSlider(Idx2, Info2)
             Info2 = Info2 or {}
             Info2.__IsChained = true
@@ -2171,7 +2177,7 @@ do
             for i, s in ipairs(self.ChainedRow) do
                 s.SliderOuter.Size = UDim2.new(0, widthPerSlider, 0, s.SliderOuter.AbsoluteSize.Y)
                 s.SliderOuter.Position = UDim2.new(0, (i-1) * (widthPerSlider + 5), 0, 0)
-                s.SliderOuter.Parent = self.SliderOuter
+                s.SliderOuter.Parent = self.SliderOuter.Parent
             end
 
             for _, s in ipairs(self.ChainedRow) do
@@ -2185,12 +2191,6 @@ do
             Slider.IsChained = true
             return SubSlider
         end
-
-        Slider:Display();
-        if not Info.__IsChained and not Slider.IsChained then
-            Groupbox:AddBlank(Info.BlankSize or 6)
-        end
-        Groupbox:Resize();
 
         Options[Idx] = Slider;
 
