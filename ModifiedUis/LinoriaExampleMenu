@@ -3,7 +3,7 @@
 
 local repo = 'https://raw.githubusercontent.com/CookieScript/Mobile/refs/heads/main/'
 
-local Library = loadstring(game:HttpGet(repo .. 'Library-mod'))()
+local Library = loadstring(game:HttpGet(repo .. 'Linoria-mod'))()
 local ThemeManager = loadstring(game:HttpGet(repo .. 'LinoriaAddons/ThemeManager.lua'))()
 local SaveManager = loadstring(game:HttpGet(repo .. 'LinoriaAddons/SaveManager.lua'))()
 
