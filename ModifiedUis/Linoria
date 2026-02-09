@@ -3160,29 +3160,35 @@ function Library:CreateWindow(...)
         });
 
         if InputService.TouchEnabled then
-            LeftSide:GetPropertyChangedSignal('CanvasPosition'):Connect(function()
-                Library.CanDrag = false
+            local function AddScroll(frame)
+                local dragging = false
+                local dragStart
+                local startCanvasPos
 
-                local ChangeTick = tick()
-                SidesValues.Left = ChangeTick
-                task.wait(0.15)
+                frame.InputBegan:Connect(function(input)
+                    if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+                        dragging = true
+                        dragStart = input.Position
+                        startCanvasPos = frame.CanvasPosition
 
-                if SidesValues.Left == ChangeTick then
-                    Library.CanDrag = true
-                end
-            end)
+                        input.Changed:Connect(function()
+                            if input.UserInputState == Enum.UserInputState.End then
+                                dragging = false
+                            end
+                        end)
+                    end
+                end)
 
-            RightSide:GetPropertyChangedSignal('CanvasPosition'):Connect(function()
-                Library.CanDrag = false
+                frame.InputChanged:Connect(function(input)
+                    if dragging and (input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseMovement) then
+                        local delta = input.Position - dragStart
+                        frame.CanvasPosition = Vector2.new(startCanvasPos.X - delta.X, startCanvasPos.Y - delta.Y)
+                    end
+                end)
+            end
 
-                local ChangeTick = tick()
-                SidesValues.Right = ChangeTick
-                task.wait(0.15)
-        
-                if SidesValues.Right == ChangeTick then
-                    Library.CanDrag = true
-                end
-            end)
+            AddScroll(LeftSide)
+            AddScroll(RightSide)
         end
 
         for _, Side in next, { LeftSide, RightSide } do
