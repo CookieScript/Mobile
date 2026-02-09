@@ -2066,6 +2066,7 @@ do
         Slider.SliderOuter = SliderOuter;
         Slider.Groupbox = Groupbox;
         Slider.SliderText = SliderText;
+        Slider.MaxSize = SliderInner.AbsoluteSize.X - 1
 
         function Slider:UpdateColors()
             Fill.BackgroundColor3 = Library.AccentColor;
@@ -2157,25 +2158,34 @@ do
             Info2.__NoBlank = true
 
             local SubSlider = Groupbox:AddSlider(Idx2, Info2)
-            Slider.SliderOuter.Size = UDim2.new(0, math.floor((Slider.SliderOuter.AbsoluteSize.X / 2) - 2.5), 0, Slider.SliderOuter.AbsoluteSize.Y)
 
-            if SubSlider.SliderOuter then
-                SubSlider.SliderOuter.Position = UDim2.new(1, 5, 0, 0)
-                SubSlider.SliderOuter.Size = UDim2.fromOffset(Slider.SliderOuter.AbsoluteSize.X, Slider.SliderOuter.AbsoluteSize.Y)
-                SubSlider.SliderOuter.Parent = Slider.SliderOuter
+            if not self.ChainedRow then
+                self.ChainedRow = {self}
+            end
+            table.insert(self.ChainedRow, SubSlider)
+
+            local total = #self.ChainedRow
+            local parentWidth = Slider.SliderOuter.AbsoluteSize.X
+            local widthPerSlider = math.floor((parentWidth / total) - ((total-1) * 5 / total))
+
+            for i, s in ipairs(self.ChainedRow) do
+                s.SliderOuter.Size = UDim2.new(0, widthPerSlider, 0, s.SliderOuter.AbsoluteSize.Y)
+                s.SliderOuter.Position = UDim2.new(0, (i-1) * (widthPerSlider + 5), 0, 0)
+                s.SliderOuter.Parent = self.SliderOuter
             end
 
-            if not Info.Compact and SubSlider.SliderText then
-                SubSlider.SliderText.Parent = SubSlider.SliderOuter
-                SubSlider.SliderText.Position = UDim2.new(0, 0, 0, -13)
-                SubSlider.SliderText.ZIndex = 10
+            for _, s in ipairs(self.ChainedRow) do
+                if not Info.Compact and s.SliderText then
+                    s.SliderText.Parent = s.SliderOuter
+                    s.SliderText.Position = UDim2.new(0, 0, 0, -13)
+                    s.SliderText.ZIndex = 10
+                end
             end
 
             Slider.IsChained = true
             return SubSlider
         end
 
-        Slider.MaxSize = SliderInner.AbsoluteSize.X - 1
         Slider:Display();
         if not Info.__IsChained and not Slider.IsChained then
             Groupbox:AddBlank(Info.BlankSize or 6)
