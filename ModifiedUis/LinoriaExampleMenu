@@ -4,8 +4,8 @@
 local repo = 'https://raw.githubusercontent.com/CookieScript/Mobile/refs/heads/main/'
 
 local Library = loadstring(game:HttpGet(repo .. 'Library-Mod'))()
-local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
-local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
+local ThemeManager = loadstring(game:HttpGet(repo .. 'LinoriaAddons/ThemeManager.lua'))()
+local SaveManager = loadstring(game:HttpGet(repo .. 'LinoriaAddons/SaveManager.lua'))()
 
 Library.NotifySide = "Left" -- Changes the side of the notifications globaly (Left, Right) (Default value = Left)
 
