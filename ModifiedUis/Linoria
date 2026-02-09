@@ -2937,7 +2937,7 @@ function Library:Notify(Text, Time)
 
         pcall(NotifyOuter.TweenSize, NotifyOuter, UDim2.new(0, 0, 0, YSize), 'Out', Library.Notification.Out, Library.Notification.Lerp, true);
 
-        wait(0.4);
+        wait(Library.Notification.Lerp);
 
         NotifyOuter:Destroy();
     end);
