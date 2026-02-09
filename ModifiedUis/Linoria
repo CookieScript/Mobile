@@ -3121,7 +3121,7 @@ function Library:CreateWindow(...)
             BackgroundTransparency = 1;
             BorderSizePixel = 0;
             Position = UDim2.new(0, 8 - 1, 0, 8 - 1);
-            Size = UDim2.new(0.5, -12 + 2, 1, 0);
+            Size = UDim2.new(0.5, -12 + 2, 1, -5);
             CanvasSize = UDim2.new(0, 0, 0, 0);
             BottomImage = '';
             TopImage = '';
@@ -3134,7 +3134,7 @@ function Library:CreateWindow(...)
             BackgroundTransparency = 1;
             BorderSizePixel = 0;
             Position = UDim2.new(0.5, 4 + 1, 0, 8 - 1);
-            Size = UDim2.new(0.5, -12 + 2, 1, 0);
+            Size = UDim2.new(0.5, -12 + 2, 1, -5);
             CanvasSize = UDim2.new(0, 0, 0, 0);
             BottomImage = '';
             TopImage = '';
@@ -3158,38 +3158,6 @@ function Library:CreateWindow(...)
             HorizontalAlignment = Enum.HorizontalAlignment.Center;
             Parent = RightSide;
         });
-
-        if InputService.TouchEnabled then
-            local function AddScroll(frame)
-                local dragging = false
-                local dragStart
-                local startCanvasPos
-
-                frame.InputBegan:Connect(function(input)
-                    if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
-                        dragging = true
-                        dragStart = input.Position
-                        startCanvasPos = frame.CanvasPosition
-
-                        input.Changed:Connect(function()
-                            if input.UserInputState == Enum.UserInputState.End then
-                                dragging = false
-                            end
-                        end)
-                    end
-                end)
-
-                frame.InputChanged:Connect(function(input)
-                    if dragging and (input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseMovement) then
-                        local delta = input.Position - dragStart
-                        frame.CanvasPosition = Vector2.new(startCanvasPos.X - delta.X, startCanvasPos.Y - delta.Y)
-                    end
-                end)
-            end
-
-            AddScroll(LeftSide)
-            AddScroll(RightSide)
-        end
 
         for _, Side in next, { LeftSide, RightSide } do
             Side:WaitForChild('UIListLayout'):GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
