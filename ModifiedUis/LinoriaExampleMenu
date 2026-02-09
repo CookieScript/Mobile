@@ -1,7 +1,7 @@
 -- New example script written by wally and me obv
 -- no
 
-local repo = 'https://raw.githubusercontent.com/CookieScript/Mobile/refs/heads/main/'
+local repo = 'https://raw.githubusercontent.com/CookieScript/Mobile/refs/heads/main/ModifiedUis/'
 
 local Library = loadstring(game:HttpGet(repo .. 'Linoria-mod'))()
 local ThemeManager = loadstring(game:HttpGet(repo .. 'LinoriaAddons/ThemeManager.lua'))()
