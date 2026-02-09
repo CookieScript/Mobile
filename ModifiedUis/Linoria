@@ -3159,6 +3159,32 @@ function Library:CreateWindow(...)
             Parent = RightSide;
         });
 
+        if InputService.TouchEnabled then
+            LeftSide:GetPropertyChangedSignal('CanvasPosition'):Connect(function()
+                Library.CanDrag = false
+
+                local ChangeTick = tick()
+                SidesValues.Left = ChangeTick
+                task.wait(0.15)
+
+                if SidesValues.Left == ChangeTick then
+                    Library.CanDrag = true
+                end
+            end)
+
+            RightSide:GetPropertyChangedSignal('CanvasPosition'):Connect(function()
+                Library.CanDrag = false
+
+                local ChangeTick = tick()
+                SidesValues.Right = ChangeTick
+                task.wait(0.15)
+        
+                if SidesValues.Right == ChangeTick then
+                    Library.CanDrag = true
+                end
+            end)
+        end
+
         for _, Side in next, { LeftSide, RightSide } do
             Side:WaitForChild('UIListLayout'):GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
                 Side.CanvasSize = UDim2.fromOffset(0, Side.UIListLayout.AbsoluteContentSize.Y);
