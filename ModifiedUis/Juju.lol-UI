@@ -1,3 +1,140 @@
+--[[
+If It Doesn't Work Fix It Yourself
+]]
+
+local utility = {
+	connections = {},
+	is_dragging_blocked = false
+}
+
+do
+	local newInstance = Instance.new
+	local keybindBlacklist = {
+		Enum.KeyCode.Escape,
+		Enum.KeyCode.Tilde,
+	}
+
+	utility.lerp = LPH_NO_VIRTUALIZE(function(initial, new, elapsed)
+        return initial + (new - initial) * elapsed
+    end)
+
+	utility.newConnection = function(signal, callback)
+		local connection = signal:Connect(callback)
+
+		utility.connections[#utility.connections+1] = connection
+
+		return connection
+	end
+
+	utility.copyTable = function(original)
+		local copy = {}
+		for _, v in pairs(original) do
+			if type(v) == "table" then
+				v = utility.copyTable(v)
+			end
+			copy[_] = v
+		end
+		return copy
+	end
+
+	utility.removeBrackets = function(string)
+		return lower(string):gsub('[%p%c%s]', '')
+	end
+
+	utility.round = LPH_NO_VIRTUALIZE(function(num, decimals)
+		local mult = 10^(decimals or 0)
+		return floor(num * mult + 0.5) / mult
+	end)
+
+	utility.find = LPH_NO_VIRTUALIZE(function(array, find)
+		for _, obj in array do
+			if find == obj then return  _ end
+		end
+	end)
+
+	utility.insert = LPH_NO_VIRTUALIZE(function(array, _)
+		local new = #array+1
+		array[new] = _
+		return new
+	end)
+
+	utility.isValidKey = function(keycode)
+		if utility.find(keybindBlacklist, keycode) then
+			return false
+		end
+		return true
+	end
+
+	utility.length = function(array)
+		local length = 0
+		for _, obj in array do length+=1 end
+		return length
+	end
+
+	utility.remove = function(array, _, z)
+		local pos = utility.find(array, _) or z
+
+		if not pos then
+			return end
+
+		for i = pos, #array - 1 do
+			array[i] = array[i + 1]
+		end
+		array[#array] = nil
+	end
+
+	utility.newDrawing = function(class, properties)
+		local object = Drawing.new(class)
+
+		for property, value in properties do
+			object[property] = value
+		end
+
+		return object
+	end
+
+	local createTween = tws.Create
+	utility.tween = LPH_NO_VIRTUALIZE(function(...)
+		createTween(tws, ...):Play()
+	end)
+
+	utility.setDraggable = LPH_NO_VIRTUALIZE(function(object)
+		local drag_connection = nil
+		local drag_stop_connection = nil
+	
+		utility.newConnection(object.InputBegan, function(input, gpe)
+			if gpe then
+				return end
+			
+			if (input["UserInputType"] == Enum.UserInputType.MouseButton1 or input["UserInputType"] == Enum.UserInputType.Touch) and not utility["is_dragging_blocked"] then
+				local window_start_x_position = object["Position"]["X"]["Scale"]
+				local window_start_y_position = object["Position"]["Y"]["Scale"]
+				local mouse_start_position = (getMouseLocation(uis)/camera["ViewportSize"])
+				local mouse_start_x_position = mouse_start_position["X"]
+				local mouse_start_y_position = mouse_start_position["Y"]
+	
+				drag_connection = utility.newConnection(mouse["Move"], function()
+					local mouse_position = (getMouseLocation(uis)/camera["ViewportSize"])
+					object["Position"] = UDim2.new(window_start_x_position - (mouse_start_x_position - mouse_position["X"]), 0, window_start_y_position - (mouse_start_y_position - mouse_position["Y"]), 0)
+				end)
+	
+				drag_stop_connection = utility.newConnection(uis.InputEnded, function(input, gpe)
+					if input["UserInputType"] == Enum.UserInputType.MouseButton1 or input["UserInputType"] == Enum.UserInputType.Touch then
+						drag_stop_connection:Disconnect()
+						drag_connection:Disconnect()
+					end
+				end)
+			end
+		end)
+	end)
+
+	utility.isInFrame = function(object, pos)
+		local abs_pos = object.AbsolutePosition
+		local abs_size = object.AbsoluteSize
+		local x = abs_pos.Y <= pos.Y and pos.Y <= abs_pos.Y + abs_size.Y
+		local y = abs_pos.X <= pos.X and pos.X <= abs_pos.X + abs_size.X
+
+		return (x and y)
 	end
 
 
