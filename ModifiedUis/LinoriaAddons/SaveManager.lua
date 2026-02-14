@@ -12,72 +12,49 @@ function CreateGroupBox(option)
     return table.unpack(results)
 end
 
+function safeValue(val)
+    if typeof(val) == "Color3" then
+        return val:ToHex()
+    elseif typeof(val) == "Vector3" then
+        return { x = val.X, y = val.Y, z = val.Z }
+    elseif typeof(val) == "EnumItem" then
+        return val.Name
+    elseif typeof(val) == "boolean" or typeof(val) == "number" or typeof(val) == "string" then
+        return val
+    else
+        return tostring(val)
+    end
+end
+
 local SaveManager = {} do
 	SaveManager.Folder = 'LinoriaLibSettings'
 	SaveManager.Ignore = {}
 	SaveManager.Parser = {
-		Toggle = {
-			Save = function(idx, object) 
-				return { type = 'Toggle', idx = idx, value = object.Value } 
-			end,
-			Load = function(idx, data)
-				if Toggles[idx] then 
-					Toggles[idx]:SetValue(data.value)
-				end
-			end,
-		},
-		Slider = {
-			Save = function(idx, object)
-				return { type = 'Slider', idx = idx, value = tostring(object.Value) }
-			end,
-			Load = function(idx, data)
-				if Options[idx] then 
-					Options[idx]:SetValue(data.value)
-				end
-			end,
-		},
-		Dropdown = {
-			Save = function(idx, object)
-				return { type = 'Dropdown', idx = idx, value = object.Value, mutli = object.Multi }
-			end,
-			Load = function(idx, data)
-				if Options[idx] then 
-					Options[idx]:SetValue(data.value)
-				end
-			end,
-		},
-		ColorPicker = {
-			Save = function(idx, object)
-				return { type = 'ColorPicker', idx = idx, value = object.Value:ToHex(), transparency = object.Transparency }
-			end,
-			Load = function(idx, data)
-				if Options[idx] then 
-					Options[idx]:SetValueRGB(Color3.fromHex(data.value), data.transparency)
-				end
-			end,
-		},
-		KeyPicker = {
-			Save = function(idx, object)
-				return { type = 'KeyPicker', idx = idx, mode = object.Mode, key = object.Value }
-			end,
-			Load = function(idx, data)
-				if Options[idx] then 
-					Options[idx]:SetValue({ data.key, data.mode })
-				end
-			end,
-		},
-
-		Input = {
-			Save = function(idx, object)
-				return { type = 'Input', idx = idx, text = object.Value }
-			end,
-			Load = function(idx, data)
-				if Options[idx] and type(data.text) == 'string' then
-					Options[idx]:SetValue(data.text)
-				end
-			end,
-		},
-	}
+        Toggle = {
+            Save = function(idx, obj) return { type = "Toggle", idx = idx, value = safeValue(obj.Value) } end,
+            Load = function(idx, data) if Toggles[idx] then Toggles[idx]:SetValue(data.value) end end,
+        },
+        Slider = {
+            Save = function(idx, obj) return { type = "Slider", idx = idx, value = safeValue(obj.Value) } end,
+            Load = function(idx, data) if Options[idx] then Options[idx]:SetValue(tonumber(data.value)) end end,
+        },
+        Dropdown = {
+            Save = function(idx, obj) return { type = "Dropdown", idx = idx, value = safeValue(obj.Value), multi = obj.Multi } end,
+            Load = function(idx, data) if Options[idx] then Options[idx]:SetValue(data.value) end end,
+        },
+        ColorPicker = {
+            Save = function(idx, obj) return { type = "ColorPicker", idx = idx, value = safeValue(obj.Value), transparency = obj.Transparency } end,
+            Load = function(idx, data) if Options[idx] then Options[idx]:SetValueRGB(Color3.fromHex(data.value), data.transparency) end end,
+        },
+        KeyPicker = {
+            Save = function(idx, obj) return { type = "KeyPicker", idx = idx, mode = obj.Mode, key = safeValue(obj.Value) } end,
+            Load = function(idx, data) if Options[idx] then Options[idx]:SetValue({ data.key, data.mode }) end end,
+        },
+        Input = {
+            Save = function(idx, obj) return { type = "Input", idx = idx, text = safeValue(obj.Value) } end,
+            Load = function(idx, data) if Options[idx] and type(data.text) == "string" then Options[idx]:SetValue(data.text) end end,
+        },
+    }
 
 	function SaveManager:SetIgnoreIndexes(list)
 		for _, key in next, list do
