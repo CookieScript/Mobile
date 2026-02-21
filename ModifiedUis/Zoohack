@@ -1,3 +1,5 @@
+local TweenService = game:GetService("TweenService")
+
 local Library = {};
 
 Library = {
@@ -115,7 +117,27 @@ Container.BackgroundColor3 = Library.Themes.MainColor
 Container.BorderSizePixel = 0
 Container.ScrollBarThickness = 0
 Container.Parent = Window
-Container.BackgroundTransparency = 0 
+Container.BackgroundTransparency = 0
+
+function setLibrary(open)
+    local currentSize = Container.Size
+    local targetY = open and Window.Size.Y.Offset or 0
+
+    local containerTweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Cubic, open and Enum.EasingDirection.Out or Enum.EasingDirection.In)
+    local containerTween = TweenService:Create(Container, containerTweenInfo, {Size = UDim2.new(currentSize.X.Scale, currentSize.X.Offset, 0, targetY - 5)})
+    containerTween:Play()
+
+    local blockerTweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Cubic, open and Enum.EasingDirection.Out or Enum.EasingDirection.In)
+    local blockerTween = TweenService:Create(Blocker, blockerTweenInfo, {Size = UDim2.new(1, 0, 0, targetY)})
+    blockerTween:Play()
+end
+
+
+local isOpen = true
+Arrow.MouseButton1Click:Connect(function()
+    isOpen = not isOpen
+    setLibrary(isOpen)
+end)
 
 Library:AddCorner({Rad = UDim.new(0, 5)}).Parent = Container
 
@@ -137,7 +159,7 @@ UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB
 UIGradient.Rotation = 90
 UIGradient.Parent = ToggleBackground
 
-Library:AddCorner({Rad = UDim.new(0, 8)}).Parent = ToggleBackground
+Library:AddCorner({Rad = UDim.new(0, 5)}).Parent = ToggleBackground
 
 local Toggle = Instance.new("TextButton")
 Toggle.Size = UDim2.new(1, -35, 1, 0)
@@ -151,3 +173,11 @@ Toggle.BackgroundTransparency = 1
 Toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
 Toggle.Font = Enum.Font.GothamBold
 Toggle.Parent = ToggleBackground
+
+Toggle.MouseButton1Click:Connect(function()
+    local isOn = ToggleBackground.BackgroundColor3 == Library.Themes.InactiveColor
+    local targetColor = isOn and Library.Themes.AccentColor or Library.Themes.InactiveColor
+    local tweenInfo = TweenInfo.new(isOn and 0.3 or 0.5, isOn and Enum.EasingStyle.Cubic or Enum.EasingStyle.Cubic, isOn and Enum.EasingDirection.Out or Enum.EasingDirection.In)
+    local tween = TweenService:Create(ToggleBackground, tweenInfo, {BackgroundColor3 = targetColor})
+    tween:Play()
+end)
