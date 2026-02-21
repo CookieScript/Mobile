@@ -1,0 +1,153 @@
+local Library = {};
+
+Library = {
+    Themes = {
+        MainColor = Color3.fromRGB(25, 25, 25);
+        AccentColor = Color3.fromRGB(255, 255, 255);
+        InactiveColor = Color3.fromRGB(30, 30, 30);
+    };
+};
+
+function Library:AddCorner(Idx)
+    assert(Idx ~= nil, "Invalid Argument")
+
+    local Settings = {
+        Radius = Idx.Radius or Idx.radius or Idx.Rad or Idx.rad or Idx.Roundness or Idx.roundness;
+    };
+
+    local Corner = Instance.new("UICorner")
+    Corner.CornerRadius = Settings.Radius or UDim.new(0, 5)
+
+    return Corner
+end
+
+local GuiButton = Instance.new("TextButton")
+GuiButton.Size = UDim2.new(0, 41, 0, 41)
+GuiButton.Position = UDim2.new(0, 230, 0, -45)
+GuiButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+GuiButton.BorderSizePixel = 0
+GuiButton.Text = "Open"
+GuiButton.TextSize = 15
+GuiButton.BackgroundTransparency = 0.15
+GuiButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+GuiButton.Font = Enum.Font.Gotham
+GuiButton.Parent = gui
+
+Library:AddCorner({Rad = UDim.new(1, 0)}).Parent = GuiButton
+
+local Main = Instance.new("ScrollingFrame")
+Main.Size = UDim2.new(1, 80, 1, 80)
+Main.CanvasSize = UDim2.new(0, 0, 3, 0)
+Main.Position = UDim2.new(0, -40, 0, -60)
+Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.ZIndex = -9e9
+Main.Parent = gui
+Main.ScrollBarThickness = 0
+Main.BackgroundTransparency = 1
+
+GuiButton.MouseButton1Click:Connect(function()
+    Main.Visible = not Main.Visible
+end)
+
+local Window = Instance.new("Frame")
+Window.Size = UDim2.new(0, 190, 0, 35)
+Window.Position = UDim2.new(0, 50, 0, 70)
+Window.BackgroundColor3 = Library.Themes.MainColor
+Window.BorderSizePixel = 0
+Window.Active = true
+Window.ZIndex = 5
+Window.BackgroundTransparency = 0
+Window.Parent = Main
+
+Library:AddCorner({Rad = UDim.new(0, 5)}).Parent = Window
+
+local UIGradient = Instance.new("UIGradient")
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))}
+UIGradient.Rotation = 90
+UIGradient.Parent = Window
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, -45, 0, 35)
+Title.Position = UDim2.new(0, 5, 0, 0)
+Title.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Title.BorderSizePixel = 0
+Title.Text = "Combat"
+Title.TextSize = 18
+Title.ZIndex = 6
+Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.BackgroundTransparency = 1
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Font = Enum.Font.GothamBold
+Title.Parent = Window
+
+local Arrow = Instance.new("TextButton")
+Arrow.Size = UDim2.new(0, 35, 0, 35)
+Arrow.Position = UDim2.new(1, -40, 0, 0)
+Arrow.BackgroundColor3 = Color3.fromRGB(90, 0, 0)
+Arrow.BorderSizePixel = 0
+Arrow.Text = "^"
+Arrow.ZIndex = 7
+Arrow.TextSize = 23
+Arrow.BackgroundTransparency = 1
+Arrow.TextColor3 = Color3.fromRGB(255, 255, 255)
+Arrow.Font = Enum.Font.GothamBold
+Arrow.Parent = Window
+
+local Blocker = Instance.new("Frame")
+Blocker.Size = UDim2.new(1, 0, 0, 10)
+Blocker.Position = UDim2.new(0, 0, 1, -5)
+Blocker.BackgroundColor3 = Library.Themes.MainColor
+Blocker.BorderSizePixel = 0
+Blocker.BackgroundTransparency = 0
+Blocker.Parent = Window
+
+local UIGradient = Instance.new("UIGradient")
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(150, 150, 150)), ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))}
+UIGradient.Rotation = 90
+UIGradient.Parent = Container
+
+local Container = Instance.new("ScrollingFrame")
+Container.Size = UDim2.new(1, 0, 0, 30)
+Container.CanvasSize = UDim2.new(0, 0, 0, 0)
+Container.Position = UDim2.new(0, 0, 1, 0)
+Container.BackgroundColor3 = Library.Themes.MainColor
+Container.BorderSizePixel = 0
+Container.ScrollBarThickness = 0
+Container.Parent = Window
+Container.BackgroundTransparency = 0 
+
+Library:AddCorner({Rad = UDim.new(0, 5)}).Parent = Container
+
+local UIGradient = Instance.new("UIGradient")
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))}
+UIGradient.Rotation = 90
+UIGradient.Parent = Container
+
+local ToggleBackground = Instance.new("Frame")
+ToggleBackground.Size = UDim2.new(1, 0, 0, 30)
+ToggleBackground.Position = UDim2.new(0, 0, 0, 0)
+ToggleBackground.BackgroundColor3 = Library.Themes.InactiveColor
+ToggleBackground.BorderSizePixel = 0
+ToggleBackground.BackgroundTransparency = 0
+ToggleBackground.Parent = Container
+
+local UIGradient = Instance.new("UIGradient")
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))}
+UIGradient.Rotation = 90
+UIGradient.Parent = ToggleBackground
+
+Library:AddCorner({Rad = UDim.new(0, 8)}).Parent = ToggleBackground
+
+local Toggle = Instance.new("TextButton")
+Toggle.Size = UDim2.new(1, -35, 1, 0)
+Toggle.Position = UDim2.new(0, 5, 0, 0)
+Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 00)
+Toggle.BorderSizePixel = 0
+Toggle.Text = "Aura"
+Toggle.TextSize = 20
+Toggle.TextXAlignment = Enum.TextXAlignment.Left
+Toggle.BackgroundTransparency = 1
+Toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+Toggle.Font = Enum.Font.GothamBold
+Toggle.Parent = ToggleBackground
