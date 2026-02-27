@@ -1,5 +1,9 @@
 local httpService = game:GetService('HttpService')
 
+--[[
+testing
+]]
+
 function CreateGroupBox(option)
     local names = type(option.Name) == "table" and option.Name or { option.Name }
     local TabBox = option.side == "left" and option.TabGroup:AddLeftTabbox() or option.TabGroup:AddRightTabbox()
@@ -101,25 +105,36 @@ local SaveManager = {} do
 			objects = {}
 		}
 
-		for idx, toggle in next, Toggles do
-			if self.Ignore[idx] then continue end
-
-			table.insert(data.objects, self.Parser[toggle.Type].Save(idx, toggle))
-		end
-
 		for idx, option in next, Options do
-			if not self.Parser[option.Type] then continue end
-			if self.Ignore[idx] then continue end
+		    if not self.Ignore[idx] and self.Parser[option.Type] then
+			    local success, saved = pcall(self.Parser[option.Type].Save, idx, option)
+			    if success and saved then
+				    table.insert(data.objects, saved)
+			    end
+		    end
+    	end
 
-			table.insert(data.objects, self.Parser[option.Type].Save(idx, option))
-		end	
+		for idx, toggle in next, Toggles do
+		    if not self.Ignore[idx] and self.Parser[toggle.Type] then
+			    local success, saved = pcall(self.Parser[toggle.Type].Save, idx, toggle)
+			    if success and saved then
+				    table.insert(data.objects, saved)
+			    end
+		    end
+	    end	
 
-		local success, encoded = pcall(httpService.JSONEncode, httpService, data)
-		if not success then
-			return false, 'failed to encode data'
+		local success, encoded = pcall(function() return httpService:JSONEncode(data) end)
+	    if not success or not encoded then
+		    return false, "failed to encode data"
+	    end
+
+	    if not isfolder(self.Folder .. '/settings') then
+		    makefolder(self.Folder .. '/settings')
 		end
-
-		writefile(fullPath, encoded)
+		
+		pcall(function()
+		    writefile(fullPath, encoded)
+    	end)
 		return true
 	end
 
