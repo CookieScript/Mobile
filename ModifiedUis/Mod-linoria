@@ -2174,6 +2174,7 @@ do
             };
 
             SliderOuter.Size = UDim2.new(0.5, -2, 0, 13)
+            Slider.MaxSize = SliderInner.AbsoluteSize.X - 1
 
             New.SliderOuter = Library:Create('Frame',{
                 BackgroundColor3 = Color3.new(0,0,0);
