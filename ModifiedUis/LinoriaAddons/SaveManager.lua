@@ -209,19 +209,19 @@ local SaveManager = {} do
 	end
 
 	function SaveManager:LoadAutoloadConfig()
-		local autoloadPath = self.Folder .. '/settings/autoload.txt'
-		if isfile(autoloadPath) then
-			local name = readfile(autoloadPath):gsub("%s+", "")
-			if name \~= "" then
-				local success, err = self:Load(name)
-				if success then
-					self.Library:Notify(string.format('Auto loaded config %q', name))
-				else
-					self.Library:Notify('Failed to load autoload config: ' .. err)
-				end
-			end
-		end
-	end
+        local autoloadPath = self.Folder .. '/settings/autoload.txt'
+        if isfile(autoloadPath) then
+            local name = readfile(autoloadPath):gsub("%s+", "")
+            if name ~= "" then -- i was typing to fast lmao
+                local success, err = self:Load(name)
+                if success then
+                    self.Library:Notify(string.format('Auto loaded config %q', name))
+                else
+                    self.Library:Notify('Failed to load autoload config: ' .. err)
+                end
+            end
+        end
+    end
 
 	function SaveManager:BuildConfigSection(tab)
 		assert(self.Library, 'Must set SaveManager.Library')
