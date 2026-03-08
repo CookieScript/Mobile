@@ -270,15 +270,17 @@ do
     function ThemeManager:OnColorChange(callbacks)
         assert(type(callbacks) == "table")
         self.ColorChangeCallbacks = callbacks
+    end
 
-        local fields = { "FontColor", "MainColor", "AccentColor", "BackgroundColor", "OutlineColor" }
-        for _, field in next, fields do
-            if Options[field] and Options[field].OnChanged then
-                Options[field]:OnChanged(function(value)
-                    if self.ColorChangeCallbacks[field] then
-                        self.ColorChangeCallbacks[field](value)
-                    end
-                end)
+    local OriginalUpdateTheme = ThemeManager.ThemeUpdate
+    ThemeManager.ThemeUpdate = function(self)
+        OriginalUpdateTheme(self)
+        if self.ColorChangeCallbacks then
+            local fields = { "FontColor", "MainColor", "AccentColor", "BackgroundColor", "OutlineColor" }
+            for _, field in next, fields do
+                if self.ColorChangeCallbacks[field] and Options[field] then
+                    self.ColorChangeCallbacks[field](Options[field].Value)
+                end
             end
         end
     end
