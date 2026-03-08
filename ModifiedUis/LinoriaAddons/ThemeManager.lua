@@ -1,5 +1,11 @@
 local httpService = game:GetService('HttpService')
 
+--[[
+i decided to modify this also
+so u can use OnColorChange for
+your ui
+]]
+
 function CreateGroupBox(option)
     local names = type(option.Name) == "table" and option.Name or { option.Name }
     local TabBox = option.side == "left" and option.TabGroup:AddLeftTabbox() or option.TabGroup:AddRightTabbox()
@@ -258,6 +264,43 @@ local ThemeManager = {} do
 	end
 
 	ThemeManager:BuildFolderTree()
+end
+
+do
+    local OriginalCreateThemeManager = ThemeManager.CreateThemeManager
+
+    function ThemeManager:OnColorChange(callbacks)
+        assert(type(callbacks) == "table")
+        self.ColorChangeCallbacks = callbacks
+
+        local function HookOption(optionName)
+            if Options[optionName] and Options[optionName].OnChanged then
+                Options[optionName]:OnChanged(function(value)
+                    if self.ColorChangeCallbacks and self.ColorChangeCallbacks[optionName] then
+                        self.ColorChangeCallbacks[optionName](value)
+                    end
+                end)
+            end
+        end
+
+        local fields = { "FontColor", "MainColor", "AccentColor", "BackgroundColor", "OutlineColor" }
+        for _, field in next, fields do
+            HookOption(field)
+        end
+    end
+
+    function ThemeManager:CreateThemeManager(groupbox)
+        OriginalCreateThemeManager(self, groupbox)
+        if self.ColorChangeCallbacks then
+            for k, v in pairs(self.ColorChangeCallbacks) do
+                if Options[k] and Options[k].OnChanged then
+                    Options[k]:OnChanged(function(value)
+                        v(value)
+                    end)
+                end
+            end
+        end
+    end
 end
 
 return ThemeManager
