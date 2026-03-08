@@ -262,13 +262,17 @@ local ThemeManager = {} do
 		assert(self.Library, 'Must set ThemeManager.Library first!')
 		self:CreateThemeManager(groupbox)
 	end
+	
+	ThemeManager:BuildFolderTree()
+end
 
+do
     function ThemeManager:OnColorChange(callbacks)
         assert(type(callbacks) == "table")
         self.ColorChangeCallbacks = callbacks
 
         local fields = { "FontColor", "MainColor", "AccentColor", "BackgroundColor", "OutlineColor" }
-        for _, field in ipairs(fields) do
+        for _, field in next, fields do
             if Options[field] and Options[field].OnChanged then
                 Options[field]:OnChanged(function(value)
                     if self.ColorChangeCallbacks[field] then
@@ -278,8 +282,6 @@ local ThemeManager = {} do
             end
         end
     end
-
-	ThemeManager:BuildFolderTree()
 end
 
 return ThemeManager
