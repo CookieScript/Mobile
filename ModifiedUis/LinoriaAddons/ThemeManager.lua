@@ -272,30 +272,20 @@ do
     function ThemeManager:OnColorChange(callbacks)
         assert(type(callbacks) == "table")
         self.ColorChangeCallbacks = callbacks
-
-        local function HookOption(optionName)
-            if Options[optionName] and Options[optionName].OnChanged then
-                Options[optionName]:OnChanged(function(value)
-                    if self.ColorChangeCallbacks and self.ColorChangeCallbacks[optionName] then
-                        self.ColorChangeCallbacks[optionName](value)
-                    end
-                end)
-            end
-        end
-
-        local fields = { "FontColor", "MainColor", "AccentColor", "BackgroundColor", "OutlineColor" }
-        for _, field in next, fields do
-            HookOption(field)
-        end
     end
 
-    function ThemeManager:CreateThemeManager(groupbox)
+    ThemeManager.CreateThemeManager = function(self, groupbox)
         OriginalCreateThemeManager(self, groupbox)
+
         if self.ColorChangeCallbacks then
-            for k, v in pairs(self.ColorChangeCallbacks) do
-                if Options[k] and Options[k].OnChanged then
-                    Options[k]:OnChanged(function(value)
-                        v(value)
+            local fields = { "FontColor", "MainColor", "AccentColor", "BackgroundColor", "OutlineColor" }
+            for _, field in next, fields do
+                if Options[field] and Options[field].OnChanged then
+                    Options[field]:OnChanged(function(value)
+                        self.Library[field] = value
+                        if self.ColorChangeCallbacks[field] then
+                            self.ColorChangeCallbacks[field](value)
+                        end
                     end)
                 end
             end
