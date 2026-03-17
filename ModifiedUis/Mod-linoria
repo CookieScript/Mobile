@@ -195,36 +195,6 @@ function Library:MakeDraggable(Instance, Cutoff)
     end)
 end;
 
-function Library:MakeResizable(Instance, MinSize)
-    Instance.Active = true;
-
-    Instance.InputBegan:Connect(function(Input)
-        if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-            local MousePos = Vector2.new(Mouse.X, Mouse.Y);
-            local AbsPos = Instance.AbsolutePosition;
-            local AbsSize = Instance.AbsoluteSize;
-            local Relative = MousePos - AbsPos;
-            if Relative.X >= (AbsSize.X - 20) and Relative.Y >= (AbsSize.Y - 20) then
-                local StartMouse = MousePos;
-                local StartSize = Instance.Size;
-                while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-                    local Delta = Vector2.new(Mouse.X, Mouse.Y) - StartMouse;
-                    local NewX = StartSize.X.Offset + Delta.X;
-                    local NewY = StartSize.Y.Offset + Delta.Y;
-                    if MinSize then
-                        local minX = MinSize.X and MinSize.X.Offset or MinSize
-                        local minY = MinSize.Y and MinSize.Y.Offset or MinSize
-                        NewX = math.max(NewX, minX)
-                        NewY = math.max(NewY, minY)
-                    end;
-                    Instance.Size = UDim2.new(StartSize.X.Scale, NewX, StartSize.Y.Scale, NewY);
-                    RenderStepped:Wait();
-                end;
-            end;
-        end;
-    end)
-end;
-
 function Library:AddToolTip(InfoStr, HoverInstance)
     local X, Y = Library:GetTextBounds(InfoStr, Library.Font, 14);
     local Tooltip = Library:Create('Frame', {
@@ -2369,7 +2339,7 @@ do
                 end
             end)
 
-            New.MaxSize = New.SliderInner.AbsoluteSize.X-1
+            New.MaxSize = New.SliderInner.AbsoluteSize.X-2
             New:Display()
 
             Options[Idx2] = New
@@ -3202,7 +3172,6 @@ function Library:CreateWindow(...)
     });
 
     Library:MakeDraggable(Outer, 25);
-    Library:MakeResizable(Outer, Config.Size)
 
     local Inner = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor;
