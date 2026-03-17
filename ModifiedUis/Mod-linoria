@@ -212,8 +212,10 @@ function Library:MakeResizable(Instance, MinSize)
                     local NewX = StartSize.X.Offset + Delta.X;
                     local NewY = StartSize.Y.Offset + Delta.Y;
                     if MinSize then
-                        NewX = math.max(NewX, MinSize.X.Offset or MinSize.Offset or MinSize);
-                        NewY = math.max(NewY, MinSize.Y.Offset or MinSize.Offset or MinSize);
+                        local minX = MinSize.X and MinSize.X.Offset or MinSize
+                        local minY = MinSize.Y and MinSize.Y.Offset or MinSize
+                        NewX = math.max(NewX, minX)
+                        NewY = math.max(NewY, minY)
                     end;
                     Instance.Size = UDim2.new(StartSize.X.Scale, NewX, StartSize.Y.Scale, NewY);
                     RenderStepped:Wait();
