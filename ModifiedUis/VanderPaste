@@ -3586,7 +3586,7 @@ function library:slider(properties)
 	end)
 
 	library:connection(uis.InputEnded, function(input)
-		if input.UserInputType == (Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			cfg.dragging = false
 		end
 	end)
