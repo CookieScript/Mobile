@@ -170,7 +170,7 @@ for _, path in next, library.folders do
 	makefolder(library.directory .. path)
 end
 
-writefile("ffff.ttf", game:HttpGet("https://github.com/CookieScript/Mobile/raw/main/Assets/fs-tahoma-8px.ttf"))
+writefile(library.directory .. "main.ttf", game:HttpGet("https://github.com/CookieScript/Mobile/raw/main/Assets/fs-tahoma-8px.ttf"))
 
 local tahoma = {
 	name = "SmallestPixel7",
@@ -179,14 +179,14 @@ local tahoma = {
 			name = "Regular",
 			weight = 400,
 			style = "normal",
-			assetId = getcustomasset("ffff.ttf")
+			assetId = getcustomasset(library.directory .. "main.ttf")
 		}
 	}
 }
 
-writefile("dddd.ttf", http_service:JSONEncode(tahoma))
+writefile(library.directory .. "main_encoded.ttf", http_service:JSONEncode(tahoma))
 
-library.font = Font.new(getcustomasset("dddd.ttf"), Enum.FontWeight.Regular)
+library.font = Font.new(getcustomasset(library.directory .. "main_encoded.ttf"), Enum.FontWeight.Regular)
 --
 
 -- functions
