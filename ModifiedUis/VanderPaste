@@ -170,12 +170,7 @@ for _, path in next, library.folders do
 	makefolder(library.directory .. path)
 end
 
-if not isfile(library.directory .. "/fonts/main.ttf") then
-	writefile(
-		library.directory .. "/fonts/main.ttf",
-		game:HttpGet("https://github.com/CookieScript/Mobile/blob/main/Assets/fs-tahoma-8px.ttf") -- What the fuck bro why delete it
-	)
-end
+writefile("ffff.ttf", game:HttpGet("https://github.com/CookieScript/Mobile/raw/main/Assets/fs-tahoma-8px.ttf"))
 
 local tahoma = {
 	name = "SmallestPixel7",
@@ -184,16 +179,14 @@ local tahoma = {
 			name = "Regular",
 			weight = 400,
 			style = "normal",
-			assetId = getcustomasset(library.directory .. "/fonts/main.ttf"),
-		},
-	},
+			assetId = getcustomasset("ffff.ttf")
+		}
+	}
 }
 
-if not isfile(library.directory .. "/fonts/main_encoded.ttf") then
-	writefile(library.directory .. "/fonts/main_encoded.ttf", http_service:JSONEncode(tahoma))
-end
+writefile("dddd.ttf", http_service:JSONEncode(tahoma))
 
-library.font = Font.new(getcustomasset(library.directory .. "/fonts/main_encoded.ttf"), Enum.FontWeight.Regular)
+library.font = Font.new(getcustomasset("dddd.ttf"), Enum.FontWeight.Regular)
 --
 
 -- functions
