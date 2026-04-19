@@ -1443,7 +1443,7 @@ do
             });
 
             local UIGradient = Library:Create('UIGradient', {
-                Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)) ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
+                Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
                 Rotation = 90;
                 Parent = Outer;
             });
@@ -1865,7 +1865,7 @@ do
         });
 
         local UIGradient = Library:Create('UIGradient', {
-            Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)) ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
+            Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
             Rotation = 90;
             Parent = ToggleInner;
         });
@@ -2043,7 +2043,7 @@ do
         });
 
         local UIGradient = Library:Create('UIGradient', {
-            Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)) ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
+            Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
             Rotation = 90;
             Parent = Fill;
         });
@@ -2246,7 +2246,7 @@ do
             });
 
             local UIGradient = Library:Create('UIGradient', {
-                Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)) ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
+                Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
                 Rotation = 90;
                 Parent = Fill;
             });
@@ -2939,7 +2939,7 @@ do
     });
 
     local UIGradient = Library:Create('UIGradient', {
-        Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)) ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
+        Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
         Rotation = 90;
         Parent = WatermarkInner;
     });
@@ -3023,7 +3023,7 @@ do
     });
 
     local UIGradient = Library:Create('UIGradient', {
-        Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)) ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
+        Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
         Rotation = 90;
         Parent = ColorFrame;
     });
@@ -3153,7 +3153,7 @@ function Library:Notify(Text, Time)
     });
 
     local UIGradient = Library:Create('UIGradient', {
-        Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)) ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
+        Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
         Rotation = 0;
         Parent = LeftColor;
     });
@@ -3226,7 +3226,7 @@ function Library:CreateWindow(...)
     });
 
     local UIGradient = Library:Create('UIGradient', {
-        Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)) ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
+        Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
         Rotation = 90;
         Parent = Inner;
     });
@@ -3472,7 +3472,7 @@ function Library:CreateWindow(...)
             });
 
             local UIGradient = Library:Create('UIGradient', {
-                Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)) ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
+                Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
                 Rotation = 90;
                 Parent = Highlight;
             });
@@ -3578,7 +3578,7 @@ function Library:CreateWindow(...)
             });
 
             local UIGradient = Library:Create('UIGradient', {
-                Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)) ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
+                Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 150, 150))};
                 Rotation = 90;
                 Parent = Highlight;
             });
