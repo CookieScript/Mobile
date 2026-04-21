@@ -2936,16 +2936,16 @@ do
     });
 
     local AccentLine = Library:Create('Frame', {
-        BorderColor3 = Library.AccentColor;
+        BackgroundColor3 = Library.AccentColor;
         BorderSizePixel = 0;
-        Position = UDim2.new(0, 1, 0, 1);
-        Size = UDim2.new(1, -2, 0, 2);
+        Position = UDim2.new(0, 0, 0, 0);
+        Size = UDim2.new(1, 0, 0, 2);
         ZIndex = 202;
         Parent = InnerFrame;
     });
 
     Library:AddToRegistry(AccentLine, {
-        BorderColor3 = 'AccentColor';
+        BackgroundColor3 = 'AccentColor';
     });
 
     local Gradient = Library:Create('UIGradient', {
@@ -3066,7 +3066,7 @@ end;
 
 function Library:SetWatermark(Text)
     local X, Y = Library:GetTextBounds(Text, Library.Font, 14);
-    Library.Watermark.Size = UDim2.new(0, X + 15 + 6, 0, (Y * 1.5) + 3);
+    Library.Watermark.Size = UDim2.new(0, X + 15 + 6, 0, (Y * 1.5) + 6);
     Library:SetWatermarkVisibility(true)
 
     Library.WatermarkText.Text = Text;
