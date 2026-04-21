@@ -3176,35 +3176,26 @@ function Library:CreateWindow(...)
         BackgroundColor3 = Color3.fromRGB(0, 0, 0);
         BorderColor3 = Color3.fromRGB(0, 0, 0);
         BorderSizePixel = 1;
-        Position = UDim2.new(0, -6, 0, -6);
-        Size = UDim2.new(1, 12, 1, 12),
+        Position = UDim2.new(0, -3, 0, -3);
+        Size = UDim2.new(1, 6, 1, 6),
         ZIndex = -1;
         Parent = Outer;
     });
 
     local BorderInner = Library:Create('Frame', {
         BackgroundColor3 = Color3.fromRGB(40, 40, 40);
-        BorderColor3 = Color3.fromRGB(60, 60, 60);
+        BorderColor3 = Color3.fromRGB(80, 80, 80);
         BorderSizePixel = 1;
         BorderMode = 'Inset';
         Size = UDim2.new(1, 0, 1, 0),
         Parent = BorderOuter;
     });
 
-    local BorderMain = Library:Create('Frame', {
-        BackgroundColor3 = Color3.fromRGB(40, 40, 40);
-        BorderColor3 = Color3.fromRGB(60, 60, 60);
-        BorderSizePixel = 1;
-        Position = UDim2.new(0, 3, 0, 3);
-        Size = UDim2.new(1, -6, 1, -6),
-        Parent = BorderInner;
-    });
-
     Library:MakeDraggable(Outer, 25);
 
     local Inner = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor;
-        BorderColor3 = Library.AccentColor;
+        BorderColor3 = Color3.fromRGB(80, 80, 80);
         BorderMode = Enum.BorderMode.Inset;
         Position = UDim2.new(0, 1, 0, 1);
         Size = UDim2.new(1, -2, 1, -2);
