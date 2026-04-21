@@ -2900,22 +2900,41 @@ do
     local WatermarkOuter = Library:Create('Frame', {
         BorderColor3 = Color3.new(0, 0, 0);
         Position = UDim2.new(0, 100, 0, -25);
-        Size = UDim2.new(0, 213, 0, 20);
+        Size = UDim2.new(0, 216, 0, 26);
         ZIndex = 200;
         Visible = false;
         Parent = ScreenGui;
     });
 
+    local BorderInner = Library:Create('Frame', {
+        BackgroundColor3 = Color3.fromRGB(40, 40, 40);
+        BorderColor3 = Color3.fromRGB(60, 60, 60);
+        BorderSizePixel = 1;
+        BorderMode = 'Inset';
+        ZIndex = 101;
+        Size = UDim2.new(1, 0, 1, 0),
+        Parent = KeybindOuter;
+    });
+
     local WatermarkInner = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor;
-        BorderColor3 = Library.AccentColor;
-        BorderMode = Enum.BorderMode.Inset;
-        Size = UDim2.new(1, 0, 1, 0);
+        BorderColor3 = Color3.fromRGB(60, 60, 60);
+        Position = UDim2.new(0, 3, 0, 3);
+        Size = UDim2.new(1, -6, 1, -6);
         ZIndex = 201;
         Parent = WatermarkOuter;
     });
 
-    Library:AddToRegistry(WatermarkInner, {
+    local AccentLine = Library:Create('Frame', {
+        BorderColor3 = Library.AccentColor;
+        BorderSizePixel = 0;
+        Position = UDim2.new(0, 1, 0, 1);
+        Size = UDim2.new(1, -2, 0, 2);
+        ZIndex = 201;
+        Parent = WatermarkInner;
+    });
+
+    Library:AddToRegistry(AccentLine, {
         BorderColor3 = 'AccentColor';
     });
 
@@ -2965,24 +2984,33 @@ do
         AnchorPoint = Vector2.new(0, 0.5);
         BorderColor3 = Color3.new(0, 0, 0);
         Position = UDim2.new(0, 10, 0.5, 0);
-        Size = UDim2.new(0, 210, 0, 20);
+        Size = UDim2.new(0, 213, 0, 23);
         Visible = false;
         ZIndex = 100;
         Parent = ScreenGui;
     });
 
+    local BorderInner = Library:Create('Frame', {
+        BackgroundColor3 = Color3.fromRGB(40, 40, 40);
+        BorderColor3 = Color3.fromRGB(60, 60, 60);
+        BorderSizePixel = 1;
+        BorderMode = 'Inset';
+        ZIndex = 101;
+        Size = UDim2.new(1, 0, 1, 0),
+        Parent = KeybindOuter;
+    });
+
     local KeybindInner = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor;
-        BorderColor3 = Library.OutlineColor;
-        BorderMode = Enum.BorderMode.Inset;
-        Size = UDim2.new(1, 0, 1, 0);
+        BorderColor3 = Color3.fromRGB(60, 60, 60);
+        Position = UDim2.new(0, 3, 0, 3);
+        Size = UDim2.new(1, -6, 1, -6),
         ZIndex = 101;
-        Parent = KeybindOuter;
+        Parent = BorderInner;
     });
 
     Library:AddToRegistry(KeybindInner, {
         BackgroundColor3 = 'MainColor';
-        BorderColor3 = 'OutlineColor';
     }, true);
 
     local ColorFrame = Library:Create('Frame', {
@@ -3216,8 +3244,8 @@ function Library:CreateWindow(...)
 
     local Accentline = Library:Create('Frame', {
         BackgroundColor3 = Library.AccentColor;
-        Position = UDim2.new(0, 1, 0, 1);
-        Size = UDim2.new(1, -2, 0, 2);
+        Position = UDim2.new(0, 0, 0, 0);
+        Size = UDim2.new(1, 0, 0, 2);
         BorderSizePixel = 0;
         ZIndex = 20;
         Parent = BorderInner;
