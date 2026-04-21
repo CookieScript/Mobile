@@ -3178,7 +3178,7 @@ function Library:CreateWindow(...)
         BorderSizePixel = 1;
         Position = UDim2.new(0, -6, 0, -6);
         Size = UDim2.new(1, 12, 1, 12),
-        ZIndex = -8;
+        ZIndex = -1;
         Parent = Outer;
     });
 
