@@ -3046,7 +3046,7 @@ end;
 function Library:Notify(Text, Time)
     local XSize, YSize = Library:GetTextBounds(Text, Library.Font, 14);
 
-    YSize = YSize + 7
+    YSize = YSize + 10
 
     local NotifyOuter = Library:Create('Frame', {
         BackgroundColor3 = Color3.fromRGB(0, 0, 0);
@@ -3132,7 +3132,7 @@ function Library:Notify(Text, Time)
         BackgroundColor3 = 'AccentColor';
     }, true);
 
-    pcall(NotifyOuter.TweenSize, NotifyOuter, UDim2.new(0, XSize + 8 + 4, 0, YSize), 'Out', Library.Notification.In, Library.Notification.Lerp, true);
+    pcall(NotifyOuter.TweenSize, NotifyOuter, UDim2.new(0, XSize + 8 + 8, 0, YSize), 'Out', Library.Notification.In, Library.Notification.Lerp, true);
 
     task.spawn(function()
         wait(Time or 5);
@@ -3216,8 +3216,8 @@ function Library:CreateWindow(...)
 
     local Accentline = Library:Create('Frame', {
         BackgroundColor3 = Library.AccentColor;
-        Position = UDim2.new(0, 1, 0, 1);
-        Size = UDim2.new(1, -2, 0, 2);
+        Position = UDim2.new(0, 0, 0, 0);
+        Size = UDim2.new(1, 0, 0, 2);
         ZIndex = 20;
         Parent = BorderInner;
     });
