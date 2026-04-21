@@ -1439,7 +1439,7 @@ do
             local Outer = Library:Create('Frame', {
                 BackgroundColor3 = Color3.new(0, 0, 0);
                 BorderColor3 = Color3.new(0, 0, 0);
-                Size = UDim2.new(1, -4, 0, 20);
+                Size = UDim2.new(1, -14, 0, 20);
                 ZIndex = 5;
             });
 
@@ -1566,12 +1566,12 @@ do
 
             ProcessButtonParams('SubButton', SubButton, ...)
 
-            self.Outer.Size = UDim2.new(0.5, -2, 0, 20)
+            self.Outer.Size = UDim2.new(0.5, -12, 0, 20)
 
             SubButton.Outer, SubButton.Inner, SubButton.Label = CreateBaseButton(SubButton)
 
             SubButton.Outer.Position = UDim2.new(1, 3, 0, 0)
-            SubButton.Outer.Size = UDim2.fromOffset(self.Outer.AbsoluteSize.X - 2, self.Outer.AbsoluteSize.Y)
+            SubButton.Outer.Size = UDim2.fromOffset(self.Outer.AbsoluteSize.X - 12, self.Outer.AbsoluteSize.Y)
             SubButton.Outer.Parent = self.Outer
 
             function SubButton:AddTooltip(tooltip)
@@ -1653,7 +1653,7 @@ do
         local Container = Groupbox.Container;
 
         local InputLabel = Library:CreateLabel({
-            Size = UDim2.new(1, 0, 0, 15);
+            Size = UDim2.new(1, -14, 0, 15);
             TextSize = 14;
             Text = Info.Text;
             TextXAlignment = Enum.TextXAlignment.Left;
@@ -1666,7 +1666,7 @@ do
         local TextBoxOuter = Library:Create('Frame', {
             BackgroundColor3 = Color3.new(0, 0, 0);
             BorderColor3 = Color3.new(0, 0, 0);
-            Size = UDim2.new(1, -4, 0, 20);
+            Size = UDim2.new(1, -14, 0, 20);
             ZIndex = 5;
             Parent = Container;
         });
@@ -1985,7 +1985,7 @@ do
 
         if not Info.Compact then
             Library:CreateLabel({
-                Size = UDim2.new(1, 0, 0, 10);
+                Size = UDim2.new(1, -14, 0, 10);
                 TextSize = 14;
                 Text = Info.Text;
                 TextXAlignment = Enum.TextXAlignment.Left;
@@ -2000,7 +2000,7 @@ do
         local SliderOuter = Library:Create('Frame', {
             BackgroundColor3 = Color3.new(0, 0, 0);
             BorderColor3 = Color3.new(0, 0, 0);
-            Size = UDim2.new(1, -4, 0, 13);
+            Size = UDim2.new(1, -14, 0, 8);
             ZIndex = 5;
             Parent = Container;
         });
@@ -2050,11 +2050,12 @@ do
         });
 
         local DisplayLabel = Library:CreateLabel({
+            Position = UDim2.new(0, 0, 1, 3);
             Size = UDim2.new(1, 0, 1, 0);
-            TextSize = 14;
+            TextSize = 10;
             Text = 'Infinite';
             ZIndex = 9;
-            Parent = SliderInner;
+            Parent = HideBorderRight;
         });
 
         Library:OnHighlight(SliderOuter, SliderOuter,
@@ -2184,14 +2185,14 @@ do
                 BackgroundColor3 = Color3.new(0,0,0);
                 BorderColor3 = Color3.new(0,0,0);
                 Position = UDim2.new(1,3,0,0);
-                Size = UDim2.fromOffset(SliderOuter.AbsoluteSize.X-2,SliderOuter.AbsoluteSize.Y);
+                Size = UDim2.fromOffset(SliderOuter.AbsoluteSize.X-12,SliderOuter.AbsoluteSize.Y);
                 ZIndex = 5;
                 Parent = SliderOuter;
             });
 
             if not Info.Compact then
                 Library:CreateLabel({
-                    Size = UDim2.new(1, 0, 0, 10);
+                    Size = UDim2.new(1, -14, 0, 10);
                     Position = UDim2.new(0, 0, 1, 3);
                     TextSize = 14;
                     Text = Info.Text;
@@ -2247,11 +2248,12 @@ do
             });
 
             local DisplayLabel = Library:CreateLabel({
+                Position = UDim2.new(0, 0, 1, 3);
                 Size = UDim2.new(1, 0, 1, 0);
-                TextSize = 14;
+                TextSize = 10;
                 Text = 'Infinite';
                 ZIndex = 9;
-                Parent = New.SliderInner;
+                Parent = HideBorderRight;
             });
 
             Library:OnHighlight(New.SliderOuter, New.SliderOuter,
@@ -2382,7 +2384,7 @@ do
 
         if not Info.Compact then
             local DropdownLabel = Library:CreateLabel({
-                Size = UDim2.new(1, 0, 0, 10);
+                Size = UDim2.new(1, -14, 0, 10);
                 TextSize = 14;
                 Text = Info.Text;
                 TextXAlignment = Enum.TextXAlignment.Left;
@@ -2403,7 +2405,7 @@ do
         local DropdownOuter = Library:Create('Frame', {
             BackgroundColor3 = Color3.new(0, 0, 0);
             BorderColor3 = Color3.new(0, 0, 0);
-            Size = UDim2.new(1, -4, 0, 20);
+            Size = UDim2.new(1, -14, 0, 20);
             ZIndex = 5;
             Parent = Container;
         });
