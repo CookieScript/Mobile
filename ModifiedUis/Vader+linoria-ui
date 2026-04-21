@@ -2912,7 +2912,7 @@ do
         BorderSizePixel = 1;
         BorderMode = 'Inset';
         ZIndex = 201;
-        Size = UDim2.new(1, 0, 1, 0),
+        Size = UDim2.new(1, 0, 1, 0);
         Parent = WatermarkOuter;
     });
 
@@ -2921,8 +2921,9 @@ do
         BorderColor3 = Color3.fromRGB(60, 60, 60);
         Position = UDim2.new(0, 3, 0, 3);
         Size = UDim2.new(1, -6, 1, -6);
+        BorderSizePixel = 1;
         ZIndex = 201;
-        Parent = WatermarkOuter;
+        Parent = BorderInner;
     });
 
     local AccentLine = Library:Create('Frame', {
@@ -2984,7 +2985,7 @@ do
         AnchorPoint = Vector2.new(0, 0.5);
         BorderColor3 = Color3.new(0, 0, 0);
         Position = UDim2.new(0, 10, 0.5, 0);
-        Size = UDim2.new(0, 213, 0, 23);
+        Size = UDim2.new(0, 216, 0, 26);
         Visible = false;
         ZIndex = 100;
         Parent = ScreenGui;
