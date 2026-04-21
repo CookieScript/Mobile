@@ -3216,8 +3216,9 @@ function Library:CreateWindow(...)
 
     local Accentline = Library:Create('Frame', {
         BackgroundColor3 = Library.AccentColor;
-        Position = UDim2.new(0, 0, 0, 0);
-        Size = UDim2.new(1, 0, 0, 2);
+        Position = UDim2.new(0, 1, 0, 1);
+        Size = UDim2.new(1, -2, 0, 2);
+        BorderSizePixel = 0;
         ZIndex = 20;
         Parent = BorderInner;
     });
