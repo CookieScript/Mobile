@@ -3183,7 +3183,7 @@ function Library:CreateWindow(...)
     });
 
     local BorderInner = Library:Create('Frame', {
-        BackgroundColor3 = Color3.fromRGB(20, 20, 20);
+        BackgroundColor3 = Color3.fromRGB(40, 40, 40);
         BorderColor3 = Color3.fromRGB(60, 60, 60);
         BorderSizePixel = 1;
         BorderMode = 'Inset';
@@ -3195,7 +3195,7 @@ function Library:CreateWindow(...)
 
     local Inner = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor;
-        BorderColor3 = Color3.fromRGB(80, 80, 80);
+        BorderColor3 = Color3.fromRGB(60, 60, 60);
         -- BorderMode = Enum.BorderMode.Inset;
         Position = UDim2.new(0, 1, 0, 1);
         Size = UDim2.new(1, -2, 1, -2);
@@ -3204,7 +3204,7 @@ function Library:CreateWindow(...)
     });
 
     local Accentline = Library:Create('Frame', {
-        BackgroundColor3 = Library.MainColor;
+        BackgroundColor3 = Library.AccentColor;
         Position = UDim2.new(0, 1, 0, 1);
         Size = UDim2.new(1, -2, 1, -2);
         ZIndex = 1;
