@@ -3196,16 +3196,23 @@ function Library:CreateWindow(...)
     local Inner = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor;
         BorderColor3 = Color3.fromRGB(80, 80, 80);
-        BorderMode = Enum.BorderMode.Inset;
+        -- BorderMode = Enum.BorderMode.Inset;
         Position = UDim2.new(0, 1, 0, 1);
         Size = UDim2.new(1, -2, 1, -2);
         ZIndex = 1;
         Parent = Outer;
     });
 
-    Library:AddToRegistry(Inner, {
-        BackgroundColor3 = 'MainColor';
-        BorderColor3 = 'AccentColor';
+    local Accentline = Library:Create('Frame', {
+        BackgroundColor3 = Library.MainColor;
+        Position = UDim2.new(0, 1, 0, 1);
+        Size = UDim2.new(1, -2, 1, -2);
+        ZIndex = 1;
+        Parent = Inner;
+    });
+
+    Library:AddToRegistry(Accentline, {
+        BackgroundColor3 = 'AccentColor';
     });
 
     local WindowLabel = Library:CreateLabel({
