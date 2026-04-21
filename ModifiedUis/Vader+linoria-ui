@@ -3188,7 +3188,6 @@ function Library:CreateWindow(...)
         BorderSizePixel = 1;
         BorderMode = 'Inset';
         Size = UDim2.new(1, 0, 1, 0),
-        ZIndex = 1;
         Parent = BorderOuter;
     });
 
@@ -3198,7 +3197,6 @@ function Library:CreateWindow(...)
         BorderSizePixel = 1;
         Position = UDim2.new(0, 3, 0, 3);
         Size = UDim2.new(1, -6, 1, -6),
-        ZIndex = 1;
         Parent = BorderInner;
     });
 
