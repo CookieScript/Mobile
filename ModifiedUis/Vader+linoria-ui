@@ -3183,8 +3183,8 @@ function Library:CreateWindow(...)
     });
 
     local BorderInner = Library:Create('Frame', {
-        BackgroundColor3 = Color3.new(40, 40, 40);
-        BorderColor3 = Color3.new(60, 60, 60);
+        BackgroundColor3 = Color3.fromRGB(40, 40, 40);
+        BorderColor3 = Color3.fromRGB(60, 60, 60);
         BorderSizePixel = 1;
         BorderMode = 'Inset';
         Size = UDim2.new(1, 0, 1, 0),
@@ -3192,8 +3192,8 @@ function Library:CreateWindow(...)
     });
 
     local BorderMain = Library:Create('Frame', {
-        BackgroundColor3 = Color3.new(40, 40, 40);
-        BorderColor3 = Color3.new(60, 60, 60);
+        BackgroundColor3 = Color3.fromRGB(40, 40, 40);
+        BorderColor3 = Color3.fromRGB(60, 60, 60);
         BorderSizePixel = 1;
         Position = UDim2.new(0, 3, 0, 3);
         Size = UDim2.new(1, -6, 1, -6),
