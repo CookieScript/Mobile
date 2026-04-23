@@ -523,7 +523,7 @@ do
 			end
 
 			Library:Connection(game:GetService("UserInputService").InputBegan, function(Input)
-				if Window.Visible and Input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+				if Window.Visible and Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
 					if not Library:IsMouseOverFrame(Window) and not Library:IsMouseOverFrame(Icon) then
 						Window.Visible = false
 					end
