@@ -3925,7 +3925,7 @@ local Library do
             Slider:Set(Value)
         end)
 
-        Items["RealSlider"]:Connect("InputEnded", function(Input)
+        Library:Connect(UserInputService.InputChanged, function(Input) -- i changed this because of a fucking bug
             if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                 Slider.Sliding = false
             end
