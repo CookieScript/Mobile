@@ -17,7 +17,7 @@ local CombatTab = Window:Page({Name = "Combat", Columns = 2, Subtabs = false})
 local MiscTab = Window:Page({Name = "Misc", Columns = 2, Subtabs = true})
 local VisualsTab = Window:Page({Name = "Visuals", Columns = 2, Subtabs = false})
 local PlayersTab = Window:Page({Name = "Players", Columns = 2, Subtabs = false})
-local SettingsTab = Library:CreateSettingsPage(Window, Watermark, KeybindList)
+-- local SettingsTab = Library:CreateSettingsPage(Window, Watermark, KeybindList) i think it got updated but this doesn't exist
 
 local NewSubtab = MiscTab:SubPage({Icon = "79080568477801", Columns = 2})
 local NewSubtab2 = MiscTab:SubPage({Icon = "84929780240463", Columns = 2})
