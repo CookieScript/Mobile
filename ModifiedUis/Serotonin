@@ -2,8 +2,10 @@ if getgenv().Library then
 	getgenv().Library:Unload()
 end
 
--- [[
+--[[
 Thanks for making it easier
+
+apperantly there was a glitch her
 ]]
 
 local Library
