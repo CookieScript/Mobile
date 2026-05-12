@@ -1489,6 +1489,8 @@ do
 			Size = udim2new(1, 0, 0, 8);
 			Parent = self.element_holder	
 		})
+
+        if info.name then
 		local Label = newObject("TextLabel", {
 			BackgroundColor3 = colorfromrgb(255, 255, 255);
 			BackgroundTransparency = 1.000;
@@ -1503,6 +1505,7 @@ do
 			TextXAlignment = Enum.TextXAlignment.Left;
 			Parent = Frame
 		})
+        end
 
 		local new_element = {
 			frame = Frame
@@ -1616,7 +1619,7 @@ do
 					BackgroundColor3 = colorfromrgb(12, 12, 12);
 					BorderColor3 = colorfromrgb(0, 0, 0);
 					BorderSizePixel = 0;
-					Position = udim2new(0, 19, 0, 11);
+					Position = udim2new(0, 19, 0, info.name and 11 or 3);
 					Size = udim2new(0.72, 0, 0, 20);
 					Parent = Frame
 				})
@@ -1890,7 +1893,7 @@ do
 					BackgroundColor3 = colorfromrgb(12, 12, 12);
 					BorderColor3 = colorfromrgb(0, 0, 0);
 					BorderSizePixel = 0;
-					Position = udim2new(0, 19, 0, 13);
+					Position = udim2new(0, 19, 0, info.name and 11 or 4);
 					Size = udim2new(0.72, 0, 0, 7);
 					Parent = Frame
 				})
