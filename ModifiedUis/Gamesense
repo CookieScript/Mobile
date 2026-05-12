@@ -4,8 +4,11 @@ i forgot to add a lot of variables omg fix yo shit
 
 creds ; Xander - Thanks for leaking gamesense!!
 
+and dino fixxed this
+
 if theres something broken in here fix it im tired
 
+example menu is in the bottom
 ]]
 
 local uis = game:GetService("UserInputService")
@@ -3084,8 +3087,7 @@ do
 	end)
 end
 
--- // Thanks xander uwu
-
+--[[ this is the example menu very short
 
 
 local window = menu:init(
@@ -3127,3 +3129,7 @@ target_section:newElement({name = "Horizontal distance", types = {slider = {flag
 target_section:newElement({name = "Vertical distance", types = {slider = {flag = "vertical_strafe", suffix = "", prefix = "", min = 1, max = 12}}})
 target_section:newElement({name = "Strafe speed", types = {slider = {flag = "strafe_speed", min = 1, max = 100, suffix = "%", prefix = ""}}})
 
+]]
+
+-- // Thanks xander uwu
+return menu -- // i dont fucking know what to return
