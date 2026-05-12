@@ -1742,12 +1742,17 @@ do
 				end
 
 				function new_element:setSelected(options)
+					options = (typeof(options) == "table") and options or {}
+
 					local string = ""
 					for _, label in OpenInside:GetChildren() do
 						if label.ClassName ~= "TextLabel" then 
-							continue end
+							continue 
+						end
+
 						local option = label.Name
-						if find(options, option) then
+
+						if table.find(options, option) then
 							string = #string == 0 and option or string..", "..option
 							label.Font = Enum.Font.SourceSansBold
 							label.TextColor3 = menu.accent_color
@@ -1756,6 +1761,7 @@ do
 							label.TextColor3 = colorfromrgb(208, 208, 208)
 						end
 					end
+
 					DropdownLabel.Text = string == "" and "-" or string
 					new_element.onDropdownChange:Fire(options)
 					flags[_info.flag] = options
