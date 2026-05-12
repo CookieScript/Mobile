@@ -303,7 +303,7 @@ local lerp = utility.lerp
 -- * Configs * --
 -----------------
 
-utility.saveConfig = function(name)
+menu.saveConfig = function(name)
 	local new_flags = utility.copyTable(flags)
 	for flag, info in new_flags do
 		if typeof(info) == "Color3" then
@@ -315,11 +315,12 @@ utility.saveConfig = function(name)
 	writefile(config_location.."/configs/"..name..".cfg", hs:JSONEncode(new_flags))
 end
 
-utility.loadConfig = function(name)
+menu.loadConfig = function(name)
 	local config = isfile(config_location.."/configs/"..name..".cfg")
 
 	if not config then
-		return end
+		return
+	end
 
 	config = readfile(config_location.."/configs/"..name..".cfg")
 
@@ -340,7 +341,7 @@ utility.loadConfig = function(name)
 	return config
 end
 
-utility.getConfigList = function()
+menu.getConfigList = function()
 	local list = {}
 	for _, config in listfiles(config_location.."/configs/") do
 		utility.insert(list, string.sub(config, #(config_location.."/configs/")+1, #config-4))
@@ -348,7 +349,7 @@ utility.getConfigList = function()
 	return list
 end
 
-utility.getScriptList = function()
+menu.getScriptList = function()
 	local list = {}
 	for _, config in listfiles(config_location.."/scripts/") do
 		utility.insert(list, string.sub(config, #(config_location.."/scripts/")+1, #config-4))
