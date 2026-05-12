@@ -1344,7 +1344,7 @@ do
 
 		utility.newConnection(ArrowDown.InputBegan, function(input, gpe)
 			if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
-				Scroller.CanvasPosition = Udim.new(0,Scroller.AbsoluteCanvasSize.Y)
+				Scroller.CanvasPosition = Vector2.new(0, Scroller.AbsoluteCanvasSize.Y)
 			end
 		end)
 
@@ -1730,13 +1730,13 @@ do
 					DropdownOpen.Position = udim2new(0, newPosition.X, 0, newPosition.Y + 2 + Border.AbsoluteSize.Y)
 					DropdownOpen.Visible = true
 
-					clickOutConnection = utility.newConnection(uis.InputBegan, LPH_NO_VIRTUALIZE(function(input, gpe)
+					clickOutConnection = utility.newConnection(uis.InputBegan, function(input, gpe)
 						if gpe then return end
 						if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
 							local pos = input.Position
 							if not isInFrame(Border, pos) and not isInFrame(DropdownOpen, pos) then closeDropdown() end
 						end
-					end), true)
+					end)
 
 					isOpen = true; menu.busy = true; utility.is_dragging_blocked = true
 				end
@@ -2135,13 +2135,13 @@ do
 
 					new_element:setColor(flags[_info.flag], flags[_info.transparency_flag])
 
-					clickOutConnection = utility.newConnection(uis.InputBegan, LPH_NO_VIRTUALIZE(function(input, gpe)
+					clickOutConnection = utility.newConnection(uis.InputBegan, function(input, gpe)
 						if gpe then return end
 						if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
 							local pos = input.Position
 							if not isInFrame(ColorBox, pos) and not isInFrame(ColorpickerOpen, pos) then closeColorpicker() end
 						end
-					end), true)
+					end)
 
 					isOpen = true; menu.busy = true; utility.is_dragging_blocked = true
 				end
@@ -3132,4 +3132,4 @@ target_section:newElement({name = "Strafe speed", types = {slider = {flag = "str
 ]]
 
 -- // Thanks xander uwu
-return menu -- // i dont fucking know what to return
+return menu
