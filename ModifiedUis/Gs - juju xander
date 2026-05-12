@@ -1012,7 +1012,7 @@ do
 		utility.newConnection(Button.InputBegan, function(input, gpe)
 			if gpe then return end
 			local inputType = input.UserInputType
-			if inputType == Enum.UserInputType.MouseButton1 then
+			if inputType == Enum.UserInputType.MouseButton1 or inputType == Enum.UserInputType.Touch then
 				if self.active_tab == int then return end
 				self:_setActiveTab(int)
 			end
