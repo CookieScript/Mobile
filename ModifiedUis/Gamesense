@@ -1764,7 +1764,7 @@ do
 
 					DropdownLabel.Text = string == "" and "-" or string
 					new_element.onDropdownChange:Fire(options)
-					flags[_info.flag] = options
+					flags[_info.flag] = {option}
 				end
 
 				utility.newConnection(menu.on_accent_change, function(color)
@@ -1778,7 +1778,7 @@ do
 					end
 				end)
 
-				flags[_info.flag] = {}
+				flags[_info.flag] = {option}
 
 				do
 					for _, option in _info.options do
