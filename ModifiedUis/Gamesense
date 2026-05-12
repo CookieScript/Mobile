@@ -1803,7 +1803,7 @@ do
 							utility.newConnection(DropdownOption.InputBegan, function(input, gpe)
 								if gpe then return end
 								if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
-									if not find(flags[_info.flag], option) then 
+									if flags[_info.flag] and table.find(flags[_info.flag], option) then 
 										insert(flags[_info.flag], option)
 									else
 										if _info.no_none and length(flags[_info.flag]) == 1 then return end
@@ -1815,20 +1815,20 @@ do
 						else
 							utility.newConnection(DropdownOption.MouseEnter, function()
 								DropdownOption.BackgroundTransparency = 0
-								if flags[_info.flag][1] == option then return end
+								if flags[_info.flag] and flags[_info.flag][1] == option then return end
 								DropdownOption.Font = Enum.Font.SourceSansBold
 							end)
 
 							utility.newConnection(DropdownOption.MouseLeave, function()
 								DropdownOption.BackgroundTransparency = 1
-								if flags[_info.flag][1] == option then return end
+								if flags[_info.flag] and flags[_info.flag][1] == option then return end
 								DropdownOption.Font = Enum.Font.SourceSans
 							end)
 
 							utility.newConnection(DropdownOption.InputBegan, function(input, gpe)
 								if gpe then return end
 								if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
-									if _info.no_none and find(flags[_info.flag], option) then return end
+									if _info.no_none and flags[_info.flag] and table.find(flags[_info.flag], option) then return end
 									flags[_info.flag] = find(flags[_info.flag], option) and nil or {option}
 									new_element:setSelected(flags[_info.flag])
 									closeDropdown()
