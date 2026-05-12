@@ -1,4 +1,4 @@
--- [[ fuck you broooooooooo
+--[[ fuck you broooooooooo
 and yes i dont fucking know how to use this ui
 ]]
 
@@ -46,9 +46,9 @@ do
 		Enum.KeyCode.Tilde,
 	}
 
-	utility.lerp = LPH_NO_VIRTUALIZE(function(initial, new, elapsed)
+	utility.lerp = function(initial, new, elapsed)
         return initial + (new - initial) * elapsed
-    end)
+    end
 
 	utility.newConnection = function(signal, callback, cache)
 		local connection = signal:Connect(callback)
@@ -75,22 +75,22 @@ do
 		return lower(string):gsub('[%p%c%s]', '')
 	end
 
-	utility.round = LPH_NO_VIRTUALIZE(function(num, decimals)
+	utility.round = function(num, decimals)
 		local mult = 10^(decimals or 0)
 		return floor(num * mult + 0.5) / mult
-	end)
+	end
 
-	utility.find = LPH_NO_VIRTUALIZE(function(array, find)
+	utility.find = function(array, find)
 		for _, obj in array do
 			if find == obj then return  _ end
 		end
-	end)
+	end
 
-	utility.insert = LPH_NO_VIRTUALIZE(function(array, _)
+	utility.insert = function(array, _)
 		local new = #array+1
 		array[new] = _
 		return new
-	end)
+	end
 
 	utility.isValidKey = function(keycode)
 		if utility.find(keybindBlacklist, keycode) then
@@ -119,14 +119,14 @@ do
 		return object
 	end
 
-	utility.tween = LPH_NO_VIRTUALIZE(function(...)
+	utility.tween = function(...)
 		tws:Create(...):Play()
-	end)
+	end
 
 	utility.setDraggable = function(object)
 		local dragging = false
 
-		utility.newConnection(object.InputBegan, LPH_JIT_MAX(function(input, gpe)
+		utility.newConnection(object.InputBegan, function(input, gpe)
 			if gpe then return end
 			if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and not utility.is_dragging_blocked then
 				local mouse_location = uis:GetMouseLocation()
@@ -143,7 +143,7 @@ do
 					end
 				end)
 			end
-		end))
+		end)
 
 		utility.newConnection(object.InputEnded, function(input, gpe)
 			if gpe then return end
@@ -292,7 +292,7 @@ local lerp = utility.lerp
 -- * Configs * --
 -----------------
 
-utility.saveConfig = LPH_NO_VIRTUALIZE(function(name)
+utility.saveConfig = function(name)
 	local new_flags = utility.copyTable(flags)
 	for flag, info in new_flags do
 		if typeof(info) == "Color3" then
@@ -302,9 +302,9 @@ utility.saveConfig = LPH_NO_VIRTUALIZE(function(name)
 		end
 	end
 	writefile(config_location.."/configs/"..name..".cfg", hs:JSONEncode(new_flags))
-end)
+end
 
-utility.loadConfig = LPH_NO_VIRTUALIZE(function(name)
+utility.loadConfig = function(name)
 	local config = isfile(config_location.."/configs/"..name..".cfg")
 
 	if not config then
@@ -327,23 +327,23 @@ utility.loadConfig = LPH_NO_VIRTUALIZE(function(name)
 	end
 
 	return config
-end)
+end
 
-utility.getConfigList = LPH_NO_VIRTUALIZE(function()
+utility.getConfigList = function()
 	local list = {}
 	for _, config in listfiles(config_location.."/configs/") do
 		utility.insert(list, string.sub(config, #(config_location.."/configs/")+1, #config-4))
 	end
 	return list
-end)
+end
 
-utility.getScriptList = LPH_NO_VIRTUALIZE(function()
+utility.getScriptList = function()
 	local list = {}
 	for _, config in listfiles(config_location.."/scripts/") do
 		utility.insert(list, string.sub(config, #(config_location.."/scripts/")+1, #config-4))
 	end
 	return list
-end)
+end
 
 
 local _screenGui = nil
@@ -3025,7 +3025,7 @@ do
 		self.frame.Visible = bool
 	end
 
-	utility.newConnection(uis.InputBegan, LPH_NO_VIRTUALIZE(function(input, gpe)
+	utility.newConnection(uis.InputBegan, function(input, gpe)
 		if gpe and input.UserInputType == Enum.UserInputType.Keyboard then 
 			lplr_data["typing"] = true
 			if find(flags["untarget"], "Typing") and aimbot.target then
@@ -3052,9 +3052,9 @@ do
 				end
 			end
 		end
-	end), true)
+	end)
 
-	utility.newConnection(uis.InputEnded, LPH_NO_VIRTUALIZE(function(input, gpe)
+	utility.newConnection(uis.InputEnded, function(input, gpe)
 		if gpe then 
 			if input.UserInputType == Enum.UserInputType.Keyboard then 
 				lplr_data["typing"] = false
@@ -3073,7 +3073,7 @@ do
 				end
 			end
 		end
-	end), true)
+	end)
 end
 
 -- // Thanks xander uwu
@@ -3114,7 +3114,7 @@ local rage = window:getTab(1)
 local target_section = rage:newSection({name = "Target", is_changeable = true, scale = 1})
 target_section:newElement({name = "Look at target", types = {toggle = {flag = "look_at"}}})
 target_section:newElement({name = "View target", types = {toggle = {flag = "view_target"}}})
-target_section:newElement({name = "Target strafe", types = {toggle = {flag = "target_strafe"}, flag = "target_strafe_keybind"}}})
+target_section:newElement({name = "Target strafe", types = {toggle = {flag = "target_strafe"}}})
 target_section:newElement({name = "Horizontal distance", types = {slider = {flag = "horizontal_strafe", suffix = "", prefix = "", min = 1, max = 12}}})
 target_section:newElement({name = "Vertical distance", types = {slider = {flag = "vertical_strafe", suffix = "", prefix = "", min = 1, max = 12}}})
 target_section:newElement({name = "Strafe speed", types = {slider = {flag = "strafe_speed", min = 1, max = 100, suffix = "%", prefix = ""}}})
