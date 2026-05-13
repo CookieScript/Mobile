@@ -1860,7 +1860,7 @@ do
 								if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
 									if _info.no_none and flags[_info.flag] and table.find(flags[_info.flag], option) then return end
 									flags[_info.flag] = find(flags[_info.flag], option) and nil or {option}
-									new_element:setSelected(flags[_info.flag])
+									new_element:setSelected(flags[_info.flag] or _info.default or {})
 									closeDropdown()
 								end
 							end)
