@@ -1859,12 +1859,12 @@ do
 							end)
 
 							utility.newConnection(DropdownOption.InputBegan, function(input, gpe)
-					    		if gpe or input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
-					    		if _info.no_none and flags[_info.flag] and flags[_info.flag][1] == option then return end
-				    			local new_value = (flags[_info.flag] and flags[_info.flag][1] == option) and {} or {option}
-				    			new_element:setSelected(new_value)
-				    			closeDropdown()
-						    end)
+ 							    if gpe or input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+  							    if _info.no_none and flags[_info.flag] == option then return end
+  							    local new_value = (flags[_info.flag] == option) and "" or option
+  							    new_element:setSelected(new_value)
+   							    closeDropdown()
+							end)
 						end
 					end
 				end
