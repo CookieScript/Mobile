@@ -1901,7 +1901,7 @@ do
 					end
 				end)
 
-				new_element:setSelected(_info.default ~= nil and _info.default or {})
+				new_element:setSelected(flags[_info.flag] or _info.default or {})
 
 				if not _info.no_load then
 					utility.newConnection(menu.on_load, function()
