@@ -299,6 +299,20 @@ local round = utility.round
 local tween = utility.tween
 local length = utility.length
 local lerp = utility.lerp
+--------------------
+-- * Menu Stuff * --
+--------------------
+
+menu.newConnection = function(signal, callback, cache)
+	local connection = signal:Connect(callback)
+
+	if cache then
+		utility.connections[#utility.connections] = connection
+	end
+
+	return connection
+end
+
 -----------------
 -- * Configs * --
 -----------------
