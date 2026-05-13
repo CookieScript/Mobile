@@ -1766,31 +1766,31 @@ do
 				end
 
 				function new_element:setSelected(options)
-					options = (typeof(options) == "table") and options or {}
+ 				   options = (typeof(options) == "table") and options or {}
 
-					local string = ""
-					for _, label in OpenInside:GetChildren() do
-						if label.ClassName ~= "TextLabel" then 
-							continue 
-						end
+   				 local string = ""
+   				 for _, label in OpenInside:GetChildren() do
+    				    if label.ClassName ~= "TextLabel" then continue end
 
-						local option = label.Name
+        				local option = label.Name
 
-						if table.find(options, option) then
-							string = #string == 0 and option or string..", "..option
-							label.Font = Enum.Font.SourceSansBold
-							label.TextColor3 = menu.accent_color
-						else
-							label.Font = Enum.Font.SourceSans
-							label.TextColor3 = colorfromrgb(208, 208, 208)
-						end
-					end
+      				  local is_selected = table.find(options, option) ~= nil
 
-					DropdownLabel.Text = string == "" and "-" or string
-					new_element.onDropdownChange:Fire(options)
-					flags[_info.flag] = {option}
+     				   if is_selected then
+       				     string = #string == 0 and option or string..", "..option
+       				     label.Font = Enum.Font.SourceSansBold
+        				    label.TextColor3 = menu.accent_color
+      				  else
+       				     label.Font = Enum.Font.SourceSans
+        				    label.TextColor3 = colorfromrgb(208, 208, 208)
+     				   end
+ 				   end
+
+ 				   DropdownLabel.Text = string == "" and "-" or string
+  				  new_element.onDropdownChange:Fire(options)
+
+ 				   flags[_info.flag] = _info.multi and options or (options[1] and {options[1]} or {})
 				end
-
 				utility.newConnection(menu.on_accent_change, function(color)
 					for _, label in OpenInside:GetChildren() do
 						if label.ClassName ~= "TextLabel" then 
