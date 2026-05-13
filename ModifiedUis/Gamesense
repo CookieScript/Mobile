@@ -1802,7 +1802,7 @@ do
 					end
 				end)
 
-				flags[_info.flag] = {option}
+				flags[_info.flag] = _info.default or {}
 
 				do
 					for _, option in _info.options do
