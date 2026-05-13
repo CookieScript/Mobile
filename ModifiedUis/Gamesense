@@ -912,6 +912,15 @@ do
 			Background.BackgroundTransparency = Background.ImageTransparency == 0 and 0 or 1
 		end)
 
+        -- // Custom close lol
+        function menu:set_menu(bool)
+            if bool then
+                menu.on_opening:Fire()
+            else
+                menu.on_closing:Fire()
+            end
+        end
+
 		setmetatable(new_window, window)
 
 		local window_tabs = new_window.tabs
