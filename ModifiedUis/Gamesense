@@ -331,28 +331,28 @@ end
 
 menu.loadConfig = function(name)
 	local config = isfile(config_location.."/configs/"..name..".cfg")
-
-	if not config then
-		return
-	end
+	if not config then return end
 
 	config = readfile(config_location.."/configs/"..name..".cfg")
+	local decoded = hs:JSONDecode(config)
+	if not decoded then return end
 
-	local config = hs:JSONDecode(config)
-	if config then
-		for flag, info in config do
-			if typeof(info) == "table" then
-				if typeof(info[1]) == "number" then
-					config[flag] = colorfromrgb(info[1], info[2], info[3])
-				elseif info["key"] then
-					config[flag]["key"] = info["key"]:find("Mouse") and Enum.UserInputType[info["key"]] or Enum.KeyCode[info["key"]]
-				end
+	for flag, value in decoded do
+		if typeof(value) == "table" then
+			if typeof(value[1]) == "number" and #value == 3 then
+				menu.flags[flag] = colorfromrgb(value[1], value[2], value[3])
+			elseif value["key"] then
+				menu.flags[flag] = menu.flags[flag] or {}
+				menu.flags[flag]["key"] = value["key"]:find("Mouse") and Enum.UserInputType[value["key"]] or Enum.KeyCode[value["key"]]
+			else
+				menu.flags[flag] = value
 			end
-			menu.flags[flag] = config[flag]
+		else
+			menu.flags[flag] = value
 		end
 	end
 
-	return config
+	return decoded
 end
 
 menu.getConfigList = function()
@@ -1766,31 +1766,31 @@ do
 				end
 
 				function new_element:setSelected(options)
- 				   options = (typeof(options) == "table") and options or {}
+ 				    options = (typeof(options) == "table") and options or {}
 
-   				 local string = ""
-   				 for _, label in OpenInside:GetChildren() do
-    				    if label.ClassName ~= "TextLabel" then continue end
+   			  	    local string = ""
+   				    for _, label in OpenInside:GetChildren() do
+    			        if label.ClassName ~= "TextLabel" then continue end
 
-        				local option = label.Name
+        			    local option = label.Name
+      				    local is_selected = table.find(options, option) ~= nil
 
-      				  local is_selected = table.find(options, option) ~= nil
-
-     				   if is_selected then
-       				     string = #string == 0 and option or string..", "..option
-       				     label.Font = Enum.Font.SourceSansBold
+     				    if is_selected then
+       				        string = #string == 0 and option or string..", "..option
+       				        label.Font = Enum.Font.SourceSansBold
         				    label.TextColor3 = menu.accent_color
-      				  else
-       				     label.Font = Enum.Font.SourceSans
+      				    else
+       				        label.Font = Enum.Font.SourceSans
         				    label.TextColor3 = colorfromrgb(208, 208, 208)
-     				   end
- 				   end
+     			  	    end
+ 				    end
 
- 				   DropdownLabel.Text = string == "" and "-" or string
-  				  new_element.onDropdownChange:Fire(options)
+ 				    DropdownLabel.Text = string == "" and "-" or string
+  				    new_element.onDropdownChange:Fire(options)
 
- 				   flags[_info.flag] = _info.multi and options or (options[1] and {options[1]} or {})
+ 				    flags[_info.flag] = _info.multi and options or (options[1] and {options[1]} or {})
 				end
+
 				utility.newConnection(menu.on_accent_change, function(color)
 					for _, label in OpenInside:GetChildren() do
 						if label.ClassName ~= "TextLabel" then 
@@ -1831,16 +1831,20 @@ do
 							end)
 
 							utility.newConnection(DropdownOption.InputBegan, function(input, gpe)
-								if gpe then return end
-								if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
-									if flags[_info.flag] and table.find(flags[_info.flag], option) then 
-										insert(flags[_info.flag], option)
-									else
-										if _info.no_none and length(flags[_info.flag]) == 1 then return end
-										remove(flags[_info.flag], option)
+								if gpe or input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+		
+								local current = flags[_info.flag] or {}
+								local idx = table.find(current, option)
+		
+								if idx then
+									if not (_info.no_none and #current == 1) then
+										table.remove(current, idx)
 									end
-									new_element:setSelected(flags[_info.flag])
+								else
+									table.insert(current, option)
 								end
+		
+								new_element:setSelected(current)
 							end)
 						else
 							utility.newConnection(DropdownOption.MouseEnter, function()
@@ -1856,14 +1860,12 @@ do
 							end)
 
 							utility.newConnection(DropdownOption.InputBegan, function(input, gpe)
-								if gpe then return end
-								if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
-									if _info.no_none and flags[_info.flag] and table.find(flags[_info.flag], option) then return end
-									flags[_info.flag] = find(flags[_info.flag], option) and nil or {option}
-									new_element:setSelected(flags[_info.flag] or _info.default or {})
-									closeDropdown()
-								end
-							end)
+					    		if gpe or input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+					    		if _info.no_none and flags[_info.flag] and flags[_info.flag][1] == option then return end
+				    			local new_value = (flags[_info.flag] and flags[_info.flag][1] == option) and {} or {option}
+				    			new_element:setSelected(new_value)
+				    			closeDropdown()
+						    end)
 						end
 					end
 				end
