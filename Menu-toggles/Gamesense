@@ -1,0 +1,78 @@
+--[[
+im feeling so cute rnn🥺🥺♥️
+]]
+
+local menu = {
+    gui = nil,
+    connections = {},
+}
+
+menu.gui = Instance.new("ScreenGui")
+menu.gui.Name = "Skeet.cc"
+menu.gui.Parent = game:GetService("CoreGui")
+
+menu.newconnection = function(data)
+    local name = data.name
+    local callback = data.callback
+
+    if not menu.connections[name] then
+        menu.connections[name] = {}
+    end
+
+    local OuterBorderMenuToggle = Instance.new("Frame")
+    OuterBorderMenuToggle.Size = UDim2.new(0, 100, 0, 38)
+    OuterBorderMenuToggle.Position = UDim2.new(0, 80, 0, 30)
+    OuterBorderMenuToggle.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    OuterBorderMenuToggle.BorderColor3 = Color3.fromRGB(12, 12, 12)
+    OuterBorderMenuToggle.Active = true
+    OuterBorderMenuToggle.BackgroundTransparency = 0 
+    OuterBorderMenuToggle.Draggable = true
+    OuterBorderMenuToggle.Parent = menu.gui
+
+    local MiddleBorderMenuToggle = Instance.new("Frame")
+    MiddleBorderMenuToggle.Position = UDim2.new(0, 2, 0, 2);
+    MiddleBorderMenuToggle.Size = UDim2.new(1, -4, 1, -4);
+    MiddleBorderMenuToggle.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    MiddleBorderMenuToggle.BorderColor3 = Color3.fromRGB(40, 40, 40)
+    MiddleBorderMenuToggle.BackgroundTransparency = 0
+    MiddleBorderMenuToggle.Parent = OuterBorderMenuToggle
+
+    local Background = Instance.new("ImageLabel")
+    Background.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Background.BorderColor3 = Color3.fromRGB(60, 60, 60)
+    Background.Position = UDim2.new(0, 3, 0, 3)
+    Background.Size = UDim2.new(1, -6, 1, -6)
+    Background.Image = "rbxassetid://15453092054"
+    Background.ScaleType = Enum.ScaleType.Tile
+    Background.TileSize = UDim2.new(0, 4, 0, 548)
+    Background.Parent = MiddleBorderMenuToggle
+
+    local TopBar_Menu = Instance.new("ImageLabel")
+    TopBar_Menu.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    TopBar_Menu.BorderColor3 = Color3.fromRGB(12, 12, 12)
+    TopBar_Menu.Position = UDim2.new(0, 1, 0, 1)
+    TopBar_Menu.BackgroundTransparency = 1
+    TopBar_Menu.Size = UDim2.new(1, -2, 0, 2)
+    TopBar_Menu.ZIndex = 2
+    TopBar_Menu.Image = "rbxassetid://15453122383"
+    TopBar_Menu.Parent = Background
+
+    local MenuToggleButton = Instance.new("TextButton")
+    MenuToggleButton.Size = UDim2.new(1, 0, 1, 0)
+    MenuToggleButton.Text = "Menu"
+    MenuToggleButton.TextSize = 15
+    MenuToggleButton.BackgroundTransparency = 1
+    MenuToggleButton.TextColor3 = Color3.fromRGB(198, 198, 198)
+    MenuToggleButton.Font = Enum.Font.SourceSansBold
+    MenuToggleButton.Parent = Background
+
+    local conn = MenuToggleButton.MouseButton1Click:Connect(function(...)
+        callback(...)
+    end)
+
+    table.insert(menu.connections[name], conn)
+
+    return MenuToggleButton
+end
+
+return menu
