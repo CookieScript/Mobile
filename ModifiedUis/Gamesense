@@ -1591,9 +1591,6 @@ do
 					if last_bool ~= bool or dont then
 						new_element.onToggleChange:Fire(bool)
 					end
-                    if _info.callback then
-						_info.callback(bool)
-					end
 					last_bool = bool
 					Inside.BackgroundColor3 = bool and menu.accent_color or colorfromrgb(77,77,77)
 					new_element.toggled = bool
