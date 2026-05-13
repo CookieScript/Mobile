@@ -1786,8 +1786,9 @@ do
  				    end
 
  				    DropdownLabel.Text = string == "" and "-" or string
-  				    flags[_info.flag] = _info.multi and options or options[1] or ""
-                    new_element.onDropdownChange:Fire(flags[_info.flag])
+  				    new_element.onDropdownChange:Fire(options)
+
+ 				    flags[_info.flag] = _info.multi and options or (options[1] and {options[1]} or {})
 				end
 
 				utility.newConnection(menu.on_accent_change, function(color)
@@ -1859,12 +1860,12 @@ do
 							end)
 
 							utility.newConnection(DropdownOption.InputBegan, function(input, gpe)
- 							    if gpe or input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
-  							    if _info.no_none and flags[_info.flag] == option then return end
-  							    local new_value = (flags[_info.flag] == option) and "" or option
-  							    new_element:setSelected(new_value)
-   							    closeDropdown()
-							end)
+					    		if gpe or input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+					    		if _info.no_none and flags[_info.flag] and flags[_info.flag][1] == option then return end
+				    			local new_value = (flags[_info.flag] and flags[_info.flag][1] == option) and {} or {option}
+				    			new_element:setSelected(new_value)
+				    			closeDropdown()
+						    end)
 						end
 					end
 				end
