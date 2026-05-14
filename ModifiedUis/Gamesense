@@ -921,6 +921,18 @@ do
             end
         end
 
+        function menu:unloadmenu()
+            menu.on_closing:Fire()
+            if _screenGui then
+                _screenGui:Destroy()
+            end
+            _screenGui = nil
+            menu.is_open = false
+            menu.busy = true
+            menu.active_keybind = nil
+            menu.active_colorpicker = nil
+        end
+
 		setmetatable(new_window, window)
 
 		local window_tabs = new_window.tabs
