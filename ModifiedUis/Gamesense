@@ -922,7 +922,15 @@ do
         end
 
         function menu:unloadmenu()
-            menu.on_closing:Fire()
+            menu.on_load:Fire()
+            for flag, value in pairs(menu.flags) do
+                if typeof(value) == "boolean" then
+                    menu.flags[flag] = false
+                end
+            end
+            for _, connection in utility.connections do
+				connection:Disconnect()
+			end
             if _screenGui then
                 _screenGui:Destroy()
             end
