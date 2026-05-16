@@ -3190,7 +3190,7 @@ function Library:Notify(Text, Time)
 
     Library:Create('UIGradient', {
         Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
-        Rotation = 0;
+        Rotation = 180;
         Parent = LeftColor;
     });
 
