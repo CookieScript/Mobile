@@ -29,6 +29,12 @@ local Library = {
 
     HudRegistry = {};
 
+    Notification = {
+        Lerp = 0.4;
+        In = 'Quad';
+        Out = 'Quad';
+    };
+
     FontColor = Color3.fromRGB(255, 255, 255);
     MainColor = Color3.fromRGB(28, 28, 28);
     BackgroundColor = Color3.fromRGB(20, 20, 20);
@@ -442,8 +448,8 @@ do
             Parent = ToggleLabel;
         });
 
-        local Gradient = Library:Create('UIGradient', {
-            Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 80, 80))};
+        Library:Create('UIGradient', {
+            Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
             Rotation = 90;
             Parent = DisplayFrame;
         });
@@ -493,12 +499,6 @@ do
             Size = UDim2.new(1, 0, 0, 2);
             ZIndex = 17;
             Parent = PickerFrameInner;
-        });
-
-        local Gradient = Library:Create('UIGradient', {
-            Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 80, 80))};
-            Rotation = 90;
-            Parent = Highlight;
         });
 
         local SatVibMapOuter = Library:Create('Frame', {
@@ -1448,6 +1448,12 @@ do
                 ZIndex = 5;
             });
 
+            Library:Create('UIGradient', {
+                Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
+                Rotation = 90;
+                Parent = Outer;
+            });
+
             local Inner = Library:Create('Frame', {
                 BackgroundColor3 = Library.MainColor;
                 BorderColor3 = Library.OutlineColor;
@@ -1630,12 +1636,6 @@ do
             Parent = DividerOuter;
         });
 
-        local Gradient = Library:Create('UIGradient', {
-            Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 80, 80))};
-            Rotation = 90;
-            Parent = DividerInner;
-        });
-
         Library:AddToRegistry(DividerOuter, {
             BorderColor3 = 'Black';
         });
@@ -1680,6 +1680,12 @@ do
             Size = UDim2.new(1, -4, 0, 20);
             ZIndex = 5;
             Parent = Container;
+        });
+
+        Library:Create('UIGradient', {
+            Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
+            Rotation = 90;
+            Parent = TextBoxOuter;
         });
 
         local TextBoxInner = Library:Create('Frame', {
@@ -1870,8 +1876,8 @@ do
             Parent = ToggleOuter;
         });
 
-        local Gradient = Library:Create('UIGradient', {
-            Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 80, 80))};
+        Library:Create('UIGradient', {
+            Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
             Rotation = 90;
             Parent = ToggleInner;
         });
@@ -2035,12 +2041,6 @@ do
             Parent = SliderOuter;
         });
 
-        local Gradient = Library:Create('UIGradient', {
-            Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 80, 80))};
-            Rotation = 90;
-            Parent = SliderInner;
-        });
-
         Library:AddToRegistry(SliderInner, {
             BackgroundColor3 = 'MainColor';
             BorderColor3 = 'OutlineColor';
@@ -2054,8 +2054,8 @@ do
             Parent = SliderInner;
         });
 
-        local Gradient = Library:Create('UIGradient', {
-            Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 80, 80))};
+        Library:Create('UIGradient', {
+            Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
             Rotation = 90;
             Parent = Fill;
         });
@@ -2072,6 +2072,12 @@ do
             Size = UDim2.new(0, 1, 1, 0);
             ZIndex = 8;
             Parent = Fill;
+        });
+
+        Library:Create('UIGradient', {
+            Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
+            Rotation = 90;
+            Parent = HideBorderRight;
         });
 
         Library:AddToRegistry(HideBorderRight, {
@@ -2179,12 +2185,214 @@ do
             end;
         end);
 
-        Slider.MaxSize = SliderInner.AbsoluteSize.X - 1
+        Slider.MaxSize = SliderInner.AbsoluteSize.X - 2
         Slider:Display();
         Groupbox:AddBlank(Info.BlankSize or 6);
         Groupbox:Resize();
 
         Options[Idx] = Slider;
+
+        function Slider:AddSlider(Idx2, Info2)
+            assert(Info2.Default, 'AddSlider: Missing default value.');
+            assert(Info2.Text, 'AddSlider: Missing slider text.');
+            assert(Info2.Min, 'AddSlider: Missing minimum value.');
+            assert(Info2.Max, 'AddSlider: Missing maximum value.');
+            assert(Info2.Rounding, 'AddSlider: Missing rounding value.');
+
+            local New = {
+                Value = Info2.Default;
+                Min = Info2.Min;
+                Max = Info2.Max;
+                Rounding = Info2.Rounding;
+                MaxSize = 232;
+                Type = 'Slider';
+                Callback = Info2.Callback or function(Value) end;
+            };
+
+            SliderOuter.Size = UDim2.new(0.5, -2, 0, 13)
+            task.defer(function()
+                Slider.MaxSize = SliderInner.AbsoluteSize.X - 2
+                Slider:Display()
+            end)
+
+            New.SliderOuter = Library:Create('Frame',{
+                BackgroundColor3 = Color3.new(0,0,0);
+                BorderColor3 = Color3.new(0,0,0);
+                Position = UDim2.new(1,3,0,0);
+                Size = UDim2.fromOffset(SliderOuter.AbsoluteSize.X-2,SliderOuter.AbsoluteSize.Y);
+                ZIndex = 5;
+                Parent = SliderOuter;
+            });
+
+            if not Info.Compact then
+                Library:CreateLabel({
+                    Size = UDim2.new(1, 0, 0, 10);
+                    Position = UDim2.new(0, 0, 1, 3);
+                    TextSize = 14;
+                    Text = Info.Text;
+                    TextXAlignment = Enum.TextXAlignment.Left;
+                    TextYAlignment = Enum.TextYAlignment.Bottom;
+                    ZIndex = 5;
+                    Parent = New.SliderOuter;
+                });
+            end
+
+            Library:AddToRegistry(New.SliderOuter,{
+                BorderColor3 = 'Black';
+            });
+
+            New.SliderInner = Library:Create('Frame',{
+                BackgroundColor3 = Library.MainColor;
+                BorderColor3 = Library.OutlineColor;
+                BorderMode = Enum.BorderMode.Inset;
+                Size = UDim2.new(1,0,1,0);
+                ZIndex = 6;
+                Parent = New.SliderOuter;
+            });
+
+            Library:AddToRegistry(New.SliderInner,{
+                BackgroundColor3 = 'MainColor';
+                BorderColor3 = 'OutlineColor';
+            });
+
+            local Fill = Library:Create('Frame',{
+                BackgroundColor3 = Library.AccentColor;
+                BorderColor3 = Library.AccentColorDark;
+                Size = UDim2.new(0,0,1,0);
+                ZIndex = 7;
+                Parent = New.SliderInner;
+            });
+
+            Library:Create('UIGradient', {
+                Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
+                Rotation = 90;
+                Parent = Fill;
+            });
+
+            Library:AddToRegistry(Fill, {
+                BackgroundColor3 = 'AccentColor';
+                BorderColor3 = 'AccentColorDark';
+            });
+
+            local HideBorderRight = Library:Create('Frame', {
+                BackgroundColor3 = Library.AccentColor;
+                BorderSizePixel = 0;
+                Position = UDim2.new(1, 0, 0, 0);
+                Size = UDim2.new(0, 1, 1, 0);
+                ZIndex = 8;
+                Parent = Fill;
+            });
+
+            Library:Create('UIGradient', {
+                Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
+                Rotation = 90;
+                Parent = HideBorderRight;
+            });
+
+            Library:AddToRegistry(HideBorderRight, {
+                BackgroundColor3 = 'AccentColor';
+            });
+
+            local DisplayLabel = Library:CreateLabel({
+                Size = UDim2.new(1, 0, 1, 0);
+                TextSize = 14;
+                Text = 'Infinite';
+                ZIndex = 9;
+                Parent = New.SliderInner;
+            });
+
+            Library:OnHighlight(New.SliderOuter, New.SliderOuter,
+                { BorderColor3 = 'AccentColor' },
+                { BorderColor3 = 'Black' }
+            );
+
+            if type(Info.Tooltip) == 'string' then
+                Library:AddToolTip(Info2.Tooltip, New.SliderOuter)
+            end
+
+            function New:Display()
+                local Suffix = Info2.Suffix or '';
+
+                if Info2.Compact then
+                    DisplayLabel.Text = Info2.Text .. ': ' .. New.Value .. Suffix
+                elseif Info2.HideMax then
+                    DisplayLabel.Text = string.format('%s', New.Value .. Suffix)
+                else
+                    DisplayLabel.Text = string.format('%s/%s', New.Value .. Suffix, New.Max .. Suffix);
+                end
+
+                local X = math.ceil(Library:MapValue(New.Value, New.Min, New.Max, 0, New.MaxSize));
+                Fill.Size = UDim2.new(0, X, 1, 0);
+
+                HideBorderRight.Visible = not (X == New.MaxSize or X == 0);
+            end;
+
+            function New:OnChanged(Func)
+                Slider.Changed = Func;
+                Func(Slider.Value);
+            end;
+
+            local function Round(Value)
+                if New.Rounding == 0 then
+                    return math.floor(Value);
+                end;
+
+
+                return tonumber(string.format('%.' .. Slider.Rounding .. 'f', Value))
+            end;
+
+            function New:GetValueFromXOffset(X)
+                return Round(Library:MapValue(X, 0, New.MaxSize, New.Min, New.Max))
+            end
+
+            function New:SetValue(Str)
+                local Num = tonumber(Str);
+
+                if not Num then
+                    return;
+                end;
+
+                Num = math.clamp(Num, New.Min, New.Max);
+
+                New.Value = Num;
+                New:Display();
+
+                Library:SafeCallback(New.Callback, New.Value);
+                Library:SafeCallback(New.Changed, New.Value);
+            end;
+
+            New.SliderInner.InputBegan:Connect(function(Input)
+                if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) and not Library:MouseIsOverOpenedFrame() then
+
+                    local mPos = Mouse.X
+                    local gPos = Fill.Size.X.Offset
+                    local Diff = mPos - (Fill.AbsolutePosition.X + gPos)
+
+                    while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+                        local nMPos = Mouse.X
+                        local nX = math.clamp(gPos + (nMPos - mPos) + Diff,0,New.MaxSize)
+
+                        local nValue = Round(Library:MapValue(nX,0,New.MaxSize,New.Min,New.Max))
+                        local OldValue = New.Value
+
+                        New.Value = nValue
+                        New:Display()
+
+                        if nValue ~= OldValue then
+                            Library:SafeCallback(New.Callback,New.Value)
+                        end
+
+                        RenderStepped:Wait()
+                    end
+                end
+            end)
+
+            New.MaxSize = New.SliderInner.AbsoluteSize.X-2
+            New:Display()
+
+            Options[Idx2] = New
+            return New
+        end
 
         return Slider;
     end;
@@ -2245,6 +2453,12 @@ do
             Size = UDim2.new(1, -4, 0, 20);
             ZIndex = 5;
             Parent = Container;
+        });
+
+        Library:Create('UIGradient', {
+            Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
+            Rotation = 90;
+            Parent = DropdownOuter;
         });
 
         Library:AddToRegistry(DropdownOuter, {
@@ -2426,6 +2640,12 @@ do
                     ZIndex = 23;
                     Active = true,
                     Parent = Scrolling;
+                });
+
+                Library:Create('UIGradient', {
+                    Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
+                    Rotation = 90;
+                    Parent = Button;
                 });
 
                 Library:AddToRegistry(Button, {
@@ -2754,6 +2974,12 @@ do
         Parent = WatermarkOuter;
     });
 
+    Library:Create('UIGradient', {
+        Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
+        Rotation = 90;
+        Parent = WatermarkInner;
+    });
+
     Library:AddToRegistry(WatermarkInner, {
         BorderColor3 = 'AccentColor';
     });
@@ -2832,8 +3058,8 @@ do
         Parent = KeybindInner;
     });
 
-    local Gradient = Library:Create('UIGradient', {
-        Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 80, 80))};
+    Library:Create('UIGradient', {
+        Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
         Rotation = 90;
         Parent = ColorFrame;
     });
@@ -2962,18 +3188,24 @@ function Library:Notify(Text, Time)
         Parent = NotifyOuter;
     });
 
+    Library:Create('UIGradient', {
+        Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
+        Rotation = 0;
+        Parent = LeftColor;
+    });
+
     Library:AddToRegistry(LeftColor, {
         BackgroundColor3 = 'AccentColor';
     }, true);
 
-    pcall(NotifyOuter.TweenSize, NotifyOuter, UDim2.new(0, XSize + 8 + 4, 0, YSize), 'Out', 'Quad', 0.4, true);
+    pcall(NotifyOuter.TweenSize, NotifyOuter, UDim2.new(0, XSize + 8 + 4, 0, YSize), 'Out', Library.Notification.In, Library.Notification.Lerp, true);
 
     task.spawn(function()
         wait(Time or 5);
 
-        pcall(NotifyOuter.TweenSize, NotifyOuter, UDim2.new(0, 0, 0, YSize), 'Out', 'Quad', 0.4, true);
+        pcall(NotifyOuter.TweenSize, NotifyOuter, UDim2.new(0, 0, 0, YSize), 'Out', Library.Notification.Out, Library.Notification.Lerp, true);
 
-        wait(0.4);
+        wait(Library.Notification.Lerp);
 
         NotifyOuter:Destroy();
     end);
@@ -3029,8 +3261,8 @@ function Library:CreateWindow(...)
         Parent = Outer;
     });
 
-    local Gradient = Library:Create('UIGradient', {
-        Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 80, 80))};
+    Library:Create('UIGradient', {
+        Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
         Rotation = 90;
         Parent = Inner;
     });
@@ -3275,8 +3507,8 @@ function Library:CreateWindow(...)
                 Parent = BoxInner;
             });
 
-            local Gradient = Library:Create('UIGradient', {
-                Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 80, 80))};
+            Library:Create('UIGradient', {
+                Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
                 Rotation = 90;
                 Parent = Highlight;
             });
@@ -3381,8 +3613,8 @@ function Library:CreateWindow(...)
                 Parent = BoxInner;
             });
 
-            local Gradient = Library:Create('UIGradient', {
-                Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 80, 80))};
+            Library:Create('UIGradient', {
+                Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 128, 128))});
                 Rotation = 90;
                 Parent = Highlight;
             });
