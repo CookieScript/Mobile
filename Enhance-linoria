@@ -3190,6 +3190,7 @@ function Library:CreateWindow(...)
 
     local WindowLabel = Library:CreateLabel({
         Position = UDim2.new(0.5, 0, 0, 0);
+        AnchorPoint = Vector2.new(0.5, 0);
         Size = UDim2.new(1, -5, 0, 25);
         Text = Config.Title or '';
         TextXAlignment = Enum.TextXAlignment.Center;
@@ -3201,6 +3202,7 @@ function Library:CreateWindow(...)
 
     local GameLabel = Library:CreateLabel({
         Position = UDim2.new(1, -5, 0, 0);
+        AnchorPoint = Vector2.new(1, 0);
         Size = UDim2.new(0, 80, 0, 25);
         Text = Config.Game or 'Roblox';
         TextColor3 = Color3.fromRGB(255, 0, 0);
