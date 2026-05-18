@@ -1,0 +1,77 @@
+--[[
+oh yes im very fucking happy xander😡
+hope theres a fixxed one
+]]
+
+
+
+local window = menu:init(
+	{
+		[1] = {
+			icon = "rbxassetid://18248771514"
+		},
+		[2] = {
+			icon = "rbxassetid://15453313321"
+		},
+		[3] = {
+			icon = "rbxassetid://15453335745",
+			subtabs = {
+				name = "Category",
+				options = {
+					{
+						image = "rbxassetid://18686402989"
+					},
+					{
+						image = "rbxassetid://18657040454"
+					},
+					{
+						image = "rbxassetid://18205704829"
+					},
+					{
+						image = "rbxassetid://18205706952"
+					},
+					{
+						image = "rbxassetid://18205822505"
+					}
+				}
+			}
+		},
+		[4] = {
+			icon = "rbxassetid://15453344494",
+			subtabs = {
+				name = "Category",
+				options = {
+					{
+						image = "rbxassetid://18334627891"
+					},
+					{
+						image = "rbxassetid://18334630306"
+					},
+					{
+						image = "rbxassetid://18334626899"
+					},
+					{
+						image = "rbxassetid://18334625304"
+					}
+				}
+			}
+		},
+		[5] = {
+			icon = "rbxassetid://15453349637"
+		},
+		[6] = {
+			icon = "rbxassetid://15453354931"
+		},
+		[7] = {
+			icon = "rbxassetid://15453359751"
+		},
+		[8] = {
+			icon = "rbxassetid://15453364412"
+		},
+		[9] = {
+			icon = "rbxassetid://18240049800"
+		}
+	},
+	4
+)
+
