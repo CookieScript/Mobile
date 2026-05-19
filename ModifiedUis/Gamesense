@@ -664,7 +664,7 @@ do
 		end
 	end)
 
-	utility.newConnection(SaturationImage.InputEnded, function(input)
+	utility.newConnection(uis.InputEnded, function(input)
 		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and dragging_sat then
 			dragging_sat = false
 			mouse_connection:Disconnect()
@@ -685,7 +685,7 @@ do
 		end
 	end)
 
-	utility.newConnection(HueFrame.InputEnded, function(input)
+	utility.newConnection(uis.InputEnded, function(input)
 		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and dragging_hue then
 			dragging_hue = false
 			mouse_connection:Disconnect()
@@ -704,7 +704,7 @@ do
 		end
 	end)
 
-	utility.newConnection(TransparencyFrame.InputEnded, function(input)
+	utility.newConnection(uis.InputEnded, function(input)
 		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and dragging_trans then
 			dragging_trans = false
 			mouse_connection:Disconnect()
