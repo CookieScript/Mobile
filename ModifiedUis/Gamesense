@@ -1896,7 +1896,7 @@ do
 					tween(DropdownLabel, newtweeninfo(0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {TextTransparency = 1})
 					tween(Arrow, newtweeninfo(0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {ImageTransparency = 1})
 					if isOpen then closeDropdown() end
-				end, true)
+				end)
 
 				utility.newConnection(menu.on_opening, function()
 					if not tab_frame.Visible then return end
@@ -1905,7 +1905,7 @@ do
 					tween(_Inside, newtweeninfo(0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {BackgroundTransparency = 0})
 					tween(DropdownLabel, newtweeninfo(0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {TextTransparency = 0})
 					tween(Arrow, newtweeninfo(0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {ImageTransparency = 0})
-				end, true)
+				end)
 
 				utility.newConnection(Border.MouseEnter, onHover)
 				utility.newConnection(Border.MouseLeave, onLeave)
@@ -2185,7 +2185,7 @@ do
 
 					new_element:setColor(flags[_info.flag], flags[_info.transparency_flag])
 
-					clickOutConnection = utility.newConnection(uis.InputBegan, function(input, gpe)
+					clickOutConnection = utility.newConnection(ColorBox.InputBegan, function(input, gpe)
 						if gpe then return end
 						if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
 							local pos = input.Position
