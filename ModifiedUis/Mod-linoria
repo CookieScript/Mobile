@@ -1,3 +1,4 @@
+-- // Modified by dino!!!
 local InputService = game:GetService('UserInputService');
 local TextService = game:GetService('TextService');
 local CoreGui = game:GetService('CoreGui');
@@ -1270,6 +1271,8 @@ do
                             Key = 'MB1';
                         elseif Input.UserInputType == Enum.UserInputType.MouseButton2 then
                             Key = 'MB2';
+                        elseif Input.UserInputType == Enum.UserInputType.Touch then
+                            Key = "Touch";
                         end
                     end;
 
