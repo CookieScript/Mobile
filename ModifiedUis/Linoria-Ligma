@@ -2933,7 +2933,7 @@ do
     Library:Create('UIListLayout', {
         Padding = UDim.new(0, 4);
         FillDirection = Enum.FillDirection.Vertical;
-        VerticalAlignment = Enum.VerticalAlignment.Bottom;
+        VerticalAlignment = Enum.VerticalAlignment.Top;
         HorizontalAlignment = Enum.HorizontalAlignment.Center;
         SortOrder = Enum.SortOrder.LayoutOrder;
         Parent = Library.BottomNotificationArea;
@@ -2951,7 +2951,7 @@ do
     Library:Create('UIListLayout', {
         Padding = UDim.new(0, 4);
         FillDirection = Enum.FillDirection.Vertical;
-        VerticalAlignment = Enum.VerticalAlignment.Top;
+        VerticalAlignment = Enum.VerticalAlignment.Bottom;
         HorizontalAlignment = Enum.HorizontalAlignment.Center;
         SortOrder = Enum.SortOrder.LayoutOrder;
         Parent = Library.TopNotificationArea;
@@ -3163,11 +3163,11 @@ function Library:Notify(Text, Time)
     });
 
     local NotifyLabel = Library:CreateLabel({
-        AnchorPoint = Side == "left" and Vector2.new(0, 0) or Vector2.new(1, 0);
-        Position = UDim2.new(0, 4, 0, 0);
+        AnchorPoint = (Side == "left" and Vector2.new(0, 0) or Side == "right" and Vector2.new(1, 0) or Side == "top" and Vector2.new(0.5, 0) or Side == "bottom" and Vector2.new(0.5, 1));
+        Position = (Side == "left" and UDim2.new(0, 4, 0, 0) or Side == "right" and UDim2.new(1, -4, 0, 0) or Side == "top" and UDim2.new(0.5, 0, 0, 0) or Side == "bottom" and UDim2.new(0.5, 0, 1, 0));
         Size = UDim2.new(1, -4, 1, 0);
         Text = Text;
-        TextXAlignment = (Side == "left" and Enum.TextXAlignment.Left or Side == "right" and Enum.TextXAlignment.Right or Enum.TextXAlignment.Center);
+        TextXAlignment = (Side == "left" and Enum.TextXAlignment.Left or Side == "right" and Enum.TextXAlignment.Right or Side == "top" and Enum.TextXAlignment.Center or Side == "bottom" and Enum.TextXAlignment.Center);
         TextSize = 14;
         ZIndex = 103;
         Parent = InnerFrame;
