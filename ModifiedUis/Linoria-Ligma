@@ -3595,7 +3595,7 @@ function Library:CreateWindow(...)
                     Size = UDim2.new(1, 0, 0, 2);
                     ZIndex = 10;
                     Visible = false;
-                    Parent = BoxInner;
+                    Parent = Button;
                 });
 
                 Library:AddToRegistry(Highlight, {
