@@ -3306,7 +3306,7 @@ function Library:CreateWindow(...)
             BorderSizePixel = 0;
             Size = UDim2.new(1, 0, 0, 2);
             ZIndex = 10;
-            Parent = Parent = TabButton;
+            Parent = TabButton;
         });
 
         Library:AddToRegistry(Highlight, {
@@ -3583,8 +3583,8 @@ function Library:CreateWindow(...)
                     BackgroundColor3 = Library.AccentColor;
                     BorderSizePixel = 0;
                     Size = UDim2.new(1, 0, 0, 2);
-                    ZIndex = 10;
-                    Parent = Parent = Button;
+                    ZIndex = 5;
+                    Parent = Button;
                 });
 
                 Library:AddToRegistry(Highlight, {
