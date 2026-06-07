@@ -3206,16 +3206,25 @@ function Library:CreateWindow(...)
         RichText = true;
     });
 
-    local GameLabel = Library:CreateLabel({
+    local GameLabel = Library:Create('TextLabel', {
         Position = UDim2.new(1, -5, 0, 0);
         AnchorPoint = Vector2.new(1, 0);
         Size = UDim2.new(0, 80, 0, 25);
         Text = Config.Game or 'Roblox';
-        TextColor3 = Color3.fromRGB(255, 0, 0);
+        TextColor3 = Library.AccentColor;
         TextXAlignment = Enum.TextXAlignment.Right;
         BackgroundTransparency = 1;
         ZIndex = 1;
+        Font = Library.Font;
+        TextSize = 16;
+        TextStrokeTransparency = 0;
         Parent = Inner;
+    });
+
+    Library:ApplyTextStroke(GameLabel);
+
+    Library:AddToRegistry(GameLabel, {
+        TextColor3 = 'AccentColor';
     });
 
     local MainSectionOuter = Library:Create('Frame', {
