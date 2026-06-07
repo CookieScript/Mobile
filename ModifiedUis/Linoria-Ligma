@@ -2922,7 +2922,7 @@ do
     })
 
     Library.BottomNotificationArea = Library:Create('Frame', {
-        AnchorPoint = Vector2.new(0.5, 1);
+        AnchorPoint = Vector2.new(0.5, 0);
         BackgroundTransparency = 1;
         Position = UDim2.new(0.5, 0, 1, -20);
         Size = UDim2.new(0, 300, 0, 200);
@@ -2940,9 +2940,9 @@ do
     });
 
     Library.TopNotificationArea = Library:Create('Frame', {
-        AnchorPoint = Vector2.new(0.5, 0);
+        AnchorPoint = Vector2.new(0.5, 1);
         BackgroundTransparency = 1;
-        Position = UDim2.new(0.5, 0, 0, -40);
+        Position = UDim2.new(0.5, 0, 0, 20);
         Size = UDim2.new(0, 300, 0, 200);
         ZIndex = 11000;
         Parent = ScreenGui;
@@ -3176,7 +3176,7 @@ function Library:Notify(Text, Time)
     local Highlight = Library:Create('Frame', {
         BackgroundColor3 = Library.AccentColor;
         BorderSizePixel = 0;
-        Position = (Side == "left" and UDim2.new(0, -1, 0, -1) or Side == "right" and UDim2.new(1, -2, 0, -1) or Side == "top" and UDim2.new(0, 0, 1, -2) or UDim2.new(0, 0, 0, -1));
+        Position = (Side == "left" and UDim2.new(0, -1, 0, -1) or Side == "right" and UDim2.new(1, -2, 0, -1) or Side == "top" and UDim2.new(0, 0, 0, -1) or UDim2.new(0, 0, 1, -2));
         Size = (Side == "left" and UDim2.new(0, 3, 1, 2) or Side == "right" and UDim2.new(0, 3, 1, 2) or Side == "top" and UDim2.new(1, 0, 0, 2) or UDim2.new(1, 0, 0, 2));
         ZIndex = 104;
         Parent = NotifyOuter;
