@@ -1,5 +1,6 @@
 -- // Modified by dino!!!
 -- And rinox bot
+-- i stole some parts in different linoria fork lol
 local InputService = game:GetService('UserInputService');
 local TextService = game:GetService('TextService');
 local CoreGui = game:GetService('CoreGui');
@@ -31,6 +32,7 @@ local Library = {
 
     HudRegistry = {};
 
+    NotifySide = "Left";
     Notification = {
         Lerp = 0.4;
         In = 'Quad';
@@ -2902,6 +2904,59 @@ do
         Parent = Library.NotificationArea;
     });
 
+    Library.RightNotificationArea = Library:Create("Frame", {
+        AnchorPoint = Vector2.new(1, 0);
+        BackgroundTransparency = 1;
+        Position = UDim2.new(1, 0, 0, 40);
+        Size = UDim2.new(0, 300, 0, 200);
+        ZIndex = 11000;
+        Parent = ScreenGui;
+    })
+
+    Library:Create("UIListLayout", {
+        Padding = UDim.new(0, 4);
+        FillDirection = Enum.FillDirection.Vertical;
+        HorizontalAlignment = Enum.HorizontalAlignment.Right;
+        SortOrder = Enum.SortOrder.LayoutOrder;
+        Parent = Library.RightNotificationArea;
+    })
+
+    Library.BottomNotificationArea = Library:Create('Frame', {
+        AnchorPoint = Vector2.new(0.5, 1);
+        BackgroundTransparency = 1;
+        Position = UDim2.new(0.5, 0, 1, -40);
+        Size = UDim2.new(0, 300, 0, 200);
+        ZIndex = 11000;
+        Parent = ScreenGui;
+    });
+
+    Library:Create('UIListLayout', {
+        Padding = UDim.new(0, 4);
+        FillDirection = Enum.FillDirection.Vertical;
+        VerticalAlignment = Enum.VerticalAlignment.Bottom;
+        HorizontalAlignment = Enum.HorizontalAlignment.Center;
+        SortOrder = Enum.SortOrder.LayoutOrder;
+        Parent = Library.BottomNotificationArea;
+    });
+
+    Library.TopNotificationArea = Library:Create('Frame', {
+        AnchorPoint = Vector2.new(0.5, 0);
+        BackgroundTransparency = 1;
+        Position = UDim2.new(0.5, 0, 0, 40);
+        Size = UDim2.new(0, 300, 0, 200);
+        ZIndex = 11000;
+        Parent = ScreenGui;
+    });
+
+    Library:Create('UIListLayout', {
+        Padding = UDim.new(0, 4);
+        FillDirection = Enum.FillDirection.Vertical;
+        VerticalAlignment = Enum.VerticalAlignment.Top;
+        HorizontalAlignment = Enum.HorizontalAlignment.Center;
+        SortOrder = Enum.SortOrder.LayoutOrder;
+        Parent = Library.TopNotificationArea;
+    });
+
     local WatermarkOuter = Library:Create('Frame', {
         BorderColor3 = Color3.new(0, 0, 0);
         Position = UDim2.new(0, 100, 0, -25);
@@ -3048,9 +3103,13 @@ function Library:SetWatermark(Text)
     Library.WatermarkText.Text = Text;
 end;
 
+function Library:SetNotifySide(Side)
+    Library.NotifySide = Side;
+end;
+
 function Library:Notify(Text, Time)
     local XSize, YSize = Library:GetTextBounds(Text, Library.Font, 14);
-
+    local Side = string.lower(Library.NotifySide)
     YSize = YSize + 7
 
     local NotifyOuter = Library:Create('Frame', {
@@ -3059,7 +3118,7 @@ function Library:Notify(Text, Time)
         Size = UDim2.new(0, 0, 0, YSize);
         ClipsDescendants = true;
         ZIndex = 100;
-        Parent = Library.NotificationArea;
+        Parent = (Side == "left" and Library.NotificationArea or Side == "right" and Library.RightNotificationArea or Side == "bottom" and Library.BottomNotificationArea or Side == "top" and Library.TopNotificationArea or Library.NotificationArea);
     });
 
     local NotifyInner = Library:Create('Frame', {
@@ -3104,25 +3163,26 @@ function Library:Notify(Text, Time)
     });
 
     local NotifyLabel = Library:CreateLabel({
+        AnchorPoint = Side == "left" and Vector2.new(0, 0) or Vector2.new(1, 0);
         Position = UDim2.new(0, 4, 0, 0);
         Size = UDim2.new(1, -4, 1, 0);
         Text = Text;
-        TextXAlignment = Enum.TextXAlignment.Left;
+        TextXAlignment = (Side == "left" and Enum.TextXAlignment.Left or Side == "right" and Enum.TextXAlignment.Right or Enum.TextXAlignment.Center);
         TextSize = 14;
         ZIndex = 103;
         Parent = InnerFrame;
     });
 
-    local LeftColor = Library:Create('Frame', {
+    local Highlight = Library:Create('Frame', {
         BackgroundColor3 = Library.AccentColor;
         BorderSizePixel = 0;
-        Position = UDim2.new(0, -1, 0, -1);
-        Size = UDim2.new(0, 3, 1, 2);
+        Position = (Side == "left" and UDim2.new(0, -1, 0, -1) or Side == "right" and UDim2.new(1, -2, 0, -1) or Side == "top" and UDim2.new(0, 0, 1, -2) or UDim2.new(0, 0, 0, -1));
+        Size = (Side == "left" and UDim2.new(0, 3, 1, 2) or Side == "right" and UDim2.new(0, 3, 1, 2) or Side == "top" and UDim2.new(1, 0, 0, 2) or UDim2.new(1, 0, 0, 2));
         ZIndex = 104;
         Parent = NotifyOuter;
     });
 
-    Library:AddToRegistry(LeftColor, {
+    Library:AddToRegistry(Highlight, {
         BackgroundColor3 = 'AccentColor';
     }, true);
 
