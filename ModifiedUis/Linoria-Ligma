@@ -3520,7 +3520,6 @@ function Library:CreateWindow(...)
         function Tab:AddTabbox(Info)
             local Tabbox = {
                 Tabs = {};
-                Element = {};
             };
 
             local BoxOuter = Library:Create('Frame', {
@@ -3551,19 +3550,6 @@ function Library:CreateWindow(...)
                 BackgroundColor3 = 'BackgroundColor';
             });
 
-            Tabbox.Element.AccentLine = Library:Create('Frame', {
-                BackgroundColor3 = Library.AccentColor;
-                BorderSizePixel = 0;
-                Size = UDim2.new(1, 0, 0, 2);
-                ZIndex = 10;
-                Visible = false;
-                Parent = BoxInner;
-            });
-
-            Library:AddToRegistry(Tabbox.Element.AccentLine, {
-                BackgroundColor3 = 'AccentColor';
-            });
-
             local TabboxButtons = Library:Create('Frame', {
                 BackgroundTransparency = 1;
                 Position = UDim2.new(0, 0, 0, 1);
@@ -3592,6 +3578,19 @@ function Library:CreateWindow(...)
 
                 Library:AddToRegistry(Button, {
                     BackgroundColor3 = 'MainColor';
+                });
+
+                local Highlight = Library:Create('Frame', {
+                    BackgroundColor3 = Library.AccentColor;
+                    BorderSizePixel = 0;
+                    Size = UDim2.new(1, 0, 0, 2);
+                    ZIndex = 10;
+                    Visible = false;
+                    Parent = BoxInner;
+                });
+
+                Library:AddToRegistry(Highlight, {
+                    BackgroundColor3 = 'AccentColor';
                 });
 
                 local ButtonLabel = Library:CreateLabel({
@@ -3639,7 +3638,7 @@ function Library:CreateWindow(...)
 
                     Container.Visible = true;
                     Block.Visible = true;
-                    Tabbox.Element.AccentLine.Visible = true;
+                    Highlight.Visible = true;
 
                     Button.BackgroundColor3 = Library.BackgroundColor;
                     Library.RegistryMap[Button].Properties.BackgroundColor3 = 'BackgroundColor';
@@ -3650,7 +3649,7 @@ function Library:CreateWindow(...)
                 function Tab:Hide()
                     Container.Visible = false;
                     Block.Visible = false;
-                    Tabbox.Element.AccentLine.Visible = false;
+                    Highlight.Visible = false;
 
                     Button.BackgroundColor3 = Library.MainColor;
                     Library.RegistryMap[Button].Properties.BackgroundColor3 = 'MainColor';
