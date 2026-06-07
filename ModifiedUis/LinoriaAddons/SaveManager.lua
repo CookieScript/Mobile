@@ -273,6 +273,20 @@ local SaveManager = {} do
 			end
 
 			self.Library:Notify(string.format('Overwrote config %q', name))
+		end):AddButton('Delete config', function()
+			local name = Options.SaveManager_ConfigList.Value
+
+			if name then
+				local file = self.Folder .. '/settings/' .. name .. '.json'
+
+				if isfile(file) then
+					delfile(file)
+					self.Library:Notify(string.format('Deleted config %q', name))
+
+					Options.SaveManager_ConfigList:SetValues(self:RefreshConfigList())
+					Options.SaveManager_ConfigList:SetValue(nil)
+				end
+			end
 		end)
 
 		section:AddButton('Refresh list', function()
