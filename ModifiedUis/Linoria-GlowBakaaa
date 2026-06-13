@@ -3115,10 +3115,15 @@ function Library:Notify(Text, Time)
     local NotifyOuter = Library:Create('Frame', {
         BorderColor3 = Color3.new(0, 0, 0);
         Position = UDim2.new(0, 100, 0, 10);
+        BackgroundColor3 = Library.MainColor;
         Size = UDim2.new(0, 0, 0, YSize);
         ClipsDescendants = true;
         ZIndex = 100;
         Parent = (Side == "left" and Library.NotificationArea or Side == "right" and Library.RightNotificationArea or Side == "bottom" and Library.BottomNotificationArea or Side == "top" and Library.TopNotificationArea or Library.NotificationArea);
+    });
+
+    Library:AddToRegistry(NotifyOuter, {
+        BackgroundColor3 = 'MainColor';
     });
 
     local NotifyInner = Library:Create('Frame', {
