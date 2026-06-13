@@ -3244,7 +3244,7 @@ function Library:CreateWindow(...)
         ZIndex = -67;
         Parent = Outer:
         Visible = false;
-    })
+    });
 
     local Shadow = Library:Create('ImageLabel', {
         Image = "rbxassetid://1316045217"; -- i stole this id from nebula
@@ -3257,7 +3257,7 @@ function Library:CreateWindow(...)
         Position = UDim2.new(0.5, 0, 0.5, 2);
         Size = UDim2.new(1, 4, 1, 4);
         Parent = ShadowHolder;
-    })
+    });
 
     Library:AddToRegistry(Shadow, {
         ImageColor3 = 'AccentColor';
