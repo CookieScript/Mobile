@@ -3242,7 +3242,7 @@ function Library:CreateWindow(...)
         Position = UDim2.new(0, -3, 0, -3);
         Size = UDim2.new(1, 6, 1, 6);
         ZIndex = -67;
-        Parent = Outer:
+        Parent = Outer;
         Visible = false;
     });
 
