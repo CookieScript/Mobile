@@ -1,9 +1,7 @@
 local httpService = game:GetService('HttpService')
 
 --[[
-if your ui
-doesn't save the cfg good enough
-its prob bc ur dumb and i just noticed how to fix mine
+testing something
 ]]
 
 function CreateGroupBox(option)
@@ -21,6 +19,7 @@ end
 local SaveManager = {} do
 	SaveManager.Folder = 'LinoriaLibSettings'
 	SaveManager.Ignore = {}
+    SaveManager.IsNotifyAllowed = false
 	SaveManager.Parser = {
 		Toggle = {
 			Save = function(idx, object) 
@@ -140,6 +139,10 @@ local SaveManager = {} do
 		return true
 	end
 
+    function SaveManager:SetNotifyRules(a)
+		SaveManager.IsNotifyAllowed = a
+	end
+
 	function SaveManager:Load(name)
 		if (not name) then
 			return false, 'no config file is selected'
@@ -218,11 +221,13 @@ local SaveManager = {} do
 			local name = readfile(self.Folder .. '/settings/autoload.txt')
 
 			local success, err = self:Load(name)
-			if not success then
-				return self.Library:Notify('Failed to load autoload config: ' .. err)
-			end
+			if not SaveManager.IsNotifyAllowed then
+		    	if not success then
+		    		return self.Library:Notify('Failed to load autoload config: ' .. err)
+		    	end
 
-			self.Library:Notify(string.format('Auto loaded config %q', name))
+			    self.Library:Notify(string.format('Auto loaded config %q', name))
+			end
 		end
 	end
 
