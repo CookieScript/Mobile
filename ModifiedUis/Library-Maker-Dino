@@ -16,6 +16,9 @@ local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Parent = (gethui and gethui()) or game:GetService("CoreGui")
 
 local Library = {
+    Registry = {};
+    RegistryMap = {};
+
     FontColor = Color3.fromRGB(255, 255, 255);
     MainColor = Color3.fromRGB(28, 28, 28);
     BackgroundColor = Color3.fromRGB(20, 20, 20);
@@ -31,6 +34,34 @@ local Library = {
 function Library:GetDarkerColor(Color)
     local H, S, V = Color3.toHSV(Color)
     return Color3.fromHSV(H, S, V / 1.5);
+end;
+Library.AccentColorDark = Library:GetDarkerColor(Library.AccentColor);
+
+function Library:AddToRegistry(Instance, Properties, IsHud)
+    local Data = {
+        Instance = Instance;
+        Properties = Properties;
+        Idx = Idx;
+    };
+
+    table.insert(Library.Registry, Data);
+    Library.RegistryMap[Instance] = Data;
+
+    if IsHud then
+        -- Removed
+    end;
+end;
+
+function Library:UpdateColorsUsingRegistry()
+    for Idx, Object in next, Library.Registry do
+        for Property, ColorIdx in next, Object.Properties do
+            if type(ColorIdx) == 'string' then
+                Object.Instance[Property] = Library[ColorIdx];
+            elseif type(ColorIdx) == 'function' then
+                Object.Instance[Property] = ColorIdx()
+            end
+        end;
+    end;
 end;
 
 function Library:Create(Class, Properties)
@@ -66,6 +97,10 @@ function Library:CreateLabel(Properties, IsHud)
         TextSize = 16;
         TextStrokeTransparency = 0;
     });
+
+    Library:AddToRegistry(_Instance, {
+        TextColor3 = 'FontColor';
+    }, IsHud);
 
     Library:ApplyTextStroke(_Instance);
 
@@ -136,6 +171,11 @@ function Library:CreateWindow(props)
         Parent = Outer;
     });
 
+    Library:AddToRegistry(Inner, {
+        BackgroundColor3 = 'MainColor';
+        BorderColor3 = 'AccentColor';
+    });
+
     local WindowLabel = Library:CreateLabel({
         Position = (Window.TitleAlignment == Enum.TextXAlignment.Center and UDim2.new(0, 0, 0, 0) or UDim2.new(0, 7, 0, 0));
         Size = (Window.TitleAlignment == Enum.TextXAlignment.Center and UDim2.new(1, 0, 0, Window.Gap) or UDim2.new(0, 0, 0, Window.Gap));
@@ -157,6 +197,11 @@ function Library:CreateWindow(props)
         Parent = Inner;
     });
 
+    Library:AddToRegistry(MainSectionOuter, {
+        BackgroundColor3 = 'BackgroundColor';
+        BorderColor3 = 'OutlineColor';
+    });
+
     local MainSectionInner = Library:Create('Frame', {
         BackgroundColor3 = Library.BackgroundColor;
         BorderColor3 = Color3.new(0, 0, 0);
@@ -165,6 +210,10 @@ function Library:CreateWindow(props)
         Size = UDim2.new(1, 0, 1, 0);
         ZIndex = 1;
         Parent = MainSectionOuter;
+    });
+
+    Library:AddToRegistry(MainSectionInner, {
+        BackgroundColor3 = 'BackgroundColor';
     });
 
     function Window:Toggle()
@@ -187,6 +236,11 @@ function Library:CreateWindow(props)
             Size = UDim2.new(1, -16, 1, -16);
             ZIndex = 2;
             Parent = MainSectionInner;
+        });
+
+        Library:AddToRegistry(TabContainer, {
+            BackgroundColor3 = 'MainColor';
+            BorderColor3 = 'OutlineColor';
         });
 
         return TabContainer;
