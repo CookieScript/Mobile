@@ -228,6 +228,15 @@ function Library:CreateWindow(props)
         Outer.Size = Size or Window.Size;
     end;
 
+    function Window:ChangeColor(Colors)
+        for Property, Value in next, Colors do
+            Library[Property] = Value;
+        end;
+
+        Library.AccentColorDark = Library:GetDarkerColor(Library.AccentColor);
+        Library:UpdateColorsUsingRegistry();
+    end;
+
     function Window:AddContainer()
         local TabContainer = Library:Create('Frame', {
             BackgroundColor3 = Library.MainColor;
