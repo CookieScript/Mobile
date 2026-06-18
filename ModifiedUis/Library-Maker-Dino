@@ -158,7 +158,6 @@ function Library:CreateWindow(props)
         Parent = ScreenGui;
     });
     
-    if Window.AlwaysShow then Outer.Visible = true; end;
     Library:MakeDraggable(Outer, 25);
 
     local Inner = Library:Create('Frame', {
@@ -254,6 +253,10 @@ function Library:CreateWindow(props)
 
         return TabContainer;
     end;
+
+    if Window.AlwaysShow then Outer.Visible = true; end;
+
+    Window.Holder = Outer;
 
     return Window;
 end;
