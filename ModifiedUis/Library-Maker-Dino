@@ -16,31 +16,36 @@ local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Parent = (gethui and gethui()) or game:GetService("CoreGui")
 
 local Library = {
-    Font = Enum.Font.Code;
-    Theme = {
-        MainColor = Color3.fromRGB(28, 28, 28);
-        Outline = Color3.fromRGB(50, 50, 50);
-        Background = Color3.fromRGB(20, 20, 20);
+    FontColor = Color3.fromRGB(255, 255, 255);
+    MainColor = Color3.fromRGB(28, 28, 28);
+    BackgroundColor = Color3.fromRGB(20, 20, 20);
+    AccentColor = Color3.fromRGB(0, 85, 255);
+    OutlineColor = Color3.fromRGB(50, 50, 50);
+    RiskColor = Color3.fromRGB(255, 50, 50);
 
-        AccentColor = Color3.fromRGB(104, 154, 189);
-        FontColor = Color3.fromRGB(255, 255, 255);
-    };
+    Black = Color3.new(0, 0, 0);
+
+    Font = Enum.Font.Code;
 };
 
 function Library:GetDarkerColor(Color)
     local H, S, V = Color3.toHSV(Color)
-    return Color3.fromHSV(H, S, V / 1.5)
-end
+    return Color3.fromHSV(H, S, V / 1.5);
+end;
 
-function Library:Create(ins, prop)
-    local obj = Instance.new(ins)
+function Library:Create(Class, Properties)
+    local _Instance = Class;
 
-    for property, value in pairs(prop or {}) do
-        obj[property] = value
-    end
+    if type(Class) == 'string' then
+        _Instance = Instance.new(Class);
+    end;
 
-    return obj
-end
+    for Property, Value in next, Properties do
+        _Instance[Property] = Value;
+    end;
+
+    return _Instance;
+end;
 
 function Library:ApplyTextStroke(Inst)
     Inst.TextStrokeTransparency = 1;
@@ -63,10 +68,6 @@ function Library:CreateLabel(Properties, IsHud)
     });
 
     Library:ApplyTextStroke(_Instance);
-
-    Library:AddToRegistry(_Instance, {
-        TextColor3 = 'FontColor';
-    }, IsHud);
 
     return Library:Create(_Instance, Properties);
 end;
@@ -105,11 +106,15 @@ function Library:CreateWindow(props)
         Size = props.Size or props.size or UDim2.new(0, 100, 0, 100);
         Position = props.Position or props.position or UDim2.new(0.5, 0, 0.5, 0);
         AnchorPoint = props.AnchorPoint or props.anchorpoint or Vector2.new(0, 0);
+        AlwaysShow = props.AlwaysShow or props.alwaysshow or props.Visible or props.visible or false;
+        TitleAlignment = props.TitleAlignment or props.titlealignment or Enum.TextXAlignment.Left;
+        Gap = props.Gap or props.gap or 25;
     };
 
     local Outer = Library:Create('Frame', {
         AnchorPoint = Window.AnchorPoint;
         BackgroundColor3 = Color3.new(0, 0, 0);
+        BorderColor3 = Color3.new(0, 0, 0);
         BorderSizePixel = 0;
         Position = Window.Position;
         Size = Window.Size;
@@ -117,6 +122,9 @@ function Library:CreateWindow(props)
         ZIndex = 1;
         Parent = ScreenGui;
     });
+    
+    if Window.AlwaysShow then Outer.Visible = true; end;
+    Library:MakeDraggable(Outer, 25);
 
     local Inner = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor;
@@ -129,30 +137,63 @@ function Library:CreateWindow(props)
     });
 
     local WindowLabel = Library:CreateLabel({
-        Position = UDim2.new(0, 7, 0, 0);
-        Size = UDim2.new(0, 0, 0, 25);
-        Text = Window.Title or '';
-        TextXAlignment = Enum.TextXAlignment.Left;
+        Position = (Window.TitleAlignment == Enum.TextXAlignment.Center and UDim2.new(0, 0, 0, 0) or UDim2.new(0, 7, 0, 0));
+        Size = (Window.TitleAlignment == Enum.TextXAlignment.Center and UDim2.new(1, 0, 0, Window.Gap) or UDim2.new(0, 0, 0, Window.Gap));
+        Text = Window.Name;
+        TextXAlignment = Window.TitleAlignment;
         ZIndex = 1;
         Parent = Inner;
         RichText = true;
     });
 
-    function Window:AddContainer(prop)
-        local Config = {
-        };
+    WindowLabel.TextSize = math.min(Window.Gap, 16)
 
-        local MainSectionOuter = Library:Create('Frame', {
-            BackgroundColor3 = Library.BackgroundColor;
+    local MainSectionOuter = Library:Create('Frame', {
+        BackgroundColor3 = Library.BackgroundColor;
+        BorderColor3 = Library.OutlineColor;
+        Position = UDim2.new(0, 8, 0, Window.Gap);
+        Size = UDim2.new(1, -16, 1, (-Window.Gap -9));
+        ZIndex = 1;
+        Parent = Inner;
+    });
+
+    local MainSectionInner = Library:Create('Frame', {
+        BackgroundColor3 = Library.BackgroundColor;
+        BorderColor3 = Color3.new(0, 0, 0);
+        BorderMode = Enum.BorderMode.Inset;
+        Position = UDim2.new(0, 0, 0, 0);
+        Size = UDim2.new(1, 0, 1, 0);
+        ZIndex = 1;
+        Parent = MainSectionOuter;
+    });
+
+    function Window:Toggle()
+        Outer.Visible = not Outer.Visible
+    end;
+
+    function Window:SetWindowTitle(Title)
+        WindowLabel.Text = Title;
+    end;
+
+    function Window:SetSize(Size)
+        Outer.Size = Size or Window.Size;
+    end;
+
+    function Window:AddContainer()
+        local TabContainer = Library:Create('Frame', {
+            BackgroundColor3 = Library.MainColor;
             BorderColor3 = Library.OutlineColor;
-            Position = UDim2.new(0, 8, 0, 25);
-            Size = UDim2.new(1, -16, 1, -33);
-            ZIndex = 1;
-            Parent = Inner;
+            Position = UDim2.new(0, 8, 0, 8);
+            Size = UDim2.new(1, -16, 1, -16);
+            ZIndex = 2;
+            Parent = MainSectionInner;
         });
 
-        return Config;
-    end
+        return TabContainer;
+    end;
 
     return Window;
-end
+end;
+
+getgenv().Library = Library
+return Library
