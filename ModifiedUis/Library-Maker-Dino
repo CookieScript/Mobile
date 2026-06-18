@@ -1,0 +1,158 @@
+-- // Made by dino
+-- RinoX Helped me
+-- And I Stole Some Parts Of Linoria
+local InputService = game:GetService('UserInputService');
+local TextService = game:GetService('TextService');
+local CoreGui = game:GetService('CoreGui');
+local Teams = game:GetService('Teams');
+local Players = game:GetService('Players');
+local RunService = game:GetService('RunService')
+local TweenService = game:GetService('TweenService');
+local RenderStepped = RunService.RenderStepped;
+local LocalPlayer = Players.LocalPlayer;
+local Mouse = LocalPlayer:GetMouse();
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = (gethui and gethui()) or game:GetService("CoreGui")
+
+local Library = {
+    Font = Enum.Font.Code;
+    Theme = {
+        MainColor = Color3.fromRGB(28, 28, 28);
+        Outline = Color3.fromRGB(50, 50, 50);
+        Background = Color3.fromRGB(20, 20, 20);
+
+        AccentColor = Color3.fromRGB(104, 154, 189);
+        FontColor = Color3.fromRGB(255, 255, 255);
+    };
+};
+
+function Library:GetDarkerColor(Color)
+    local H, S, V = Color3.toHSV(Color)
+    return Color3.fromHSV(H, S, V / 1.5)
+end
+
+function Library:Create(ins, prop)
+    local obj = Instance.new(ins)
+
+    for property, value in pairs(prop or {}) do
+        obj[property] = value
+    end
+
+    return obj
+end
+
+function Library:ApplyTextStroke(Inst)
+    Inst.TextStrokeTransparency = 1;
+
+    Library:Create('UIStroke', {
+        Color = Color3.new(0, 0, 0);
+        Thickness = 1;
+        LineJoinMode = Enum.LineJoinMode.Miter;
+        Parent = Inst;
+    });
+end;
+
+function Library:CreateLabel(Properties, IsHud)
+    local _Instance = Library:Create('TextLabel', {
+        BackgroundTransparency = 1;
+        Font = Library.Font;
+        TextColor3 = Library.FontColor;
+        TextSize = 16;
+        TextStrokeTransparency = 0;
+    });
+
+    Library:ApplyTextStroke(_Instance);
+
+    Library:AddToRegistry(_Instance, {
+        TextColor3 = 'FontColor';
+    }, IsHud);
+
+    return Library:Create(_Instance, Properties);
+end;
+
+function Library:MakeDraggable(Instance, Cutoff)
+    Instance.Active = true;
+
+    Instance.InputBegan:Connect(function(Input)
+        if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+            local ObjPos = Vector2.new(
+                Mouse.X - Instance.AbsolutePosition.X,
+                Mouse.Y - Instance.AbsolutePosition.Y
+            );
+
+            if ObjPos.Y > (Cutoff or 40) then
+                return;
+            end;
+
+            while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+                Instance.Position = UDim2.new(
+                    0,
+                    Mouse.X - ObjPos.X + (Instance.Size.X.Offset * Instance.AnchorPoint.X),
+                    0,
+                    Mouse.Y - ObjPos.Y + (Instance.Size.Y.Offset * Instance.AnchorPoint.Y)
+                );
+
+                RenderStepped:Wait();
+            end;
+        end;
+    end)
+end;
+
+function Library:CreateWindow(props)
+    local Window = {
+        Name = props.Title or props.title or props.Name or props.name or "No Title";
+        Size = props.Size or props.size or UDim2.new(0, 100, 0, 100);
+        Position = props.Position or props.position or UDim2.new(0.5, 0, 0.5, 0);
+        AnchorPoint = props.AnchorPoint or props.anchorpoint or Vector2.new(0, 0);
+    };
+
+    local Outer = Library:Create('Frame', {
+        AnchorPoint = Window.AnchorPoint;
+        BackgroundColor3 = Color3.new(0, 0, 0);
+        BorderSizePixel = 0;
+        Position = Window.Position;
+        Size = Window.Size;
+        Visible = false;
+        ZIndex = 1;
+        Parent = ScreenGui;
+    });
+
+    local Inner = Library:Create('Frame', {
+        BackgroundColor3 = Library.MainColor;
+        BorderColor3 = Library.AccentColor;
+        BorderMode = Enum.BorderMode.Inset;
+        Position = UDim2.new(0, 1, 0, 1);
+        Size = UDim2.new(1, -2, 1, -2);
+        ZIndex = 1;
+        Parent = Outer;
+    });
+
+    local WindowLabel = Library:CreateLabel({
+        Position = UDim2.new(0, 7, 0, 0);
+        Size = UDim2.new(0, 0, 0, 25);
+        Text = Window.Title or '';
+        TextXAlignment = Enum.TextXAlignment.Left;
+        ZIndex = 1;
+        Parent = Inner;
+        RichText = true;
+    });
+
+    function Window:AddContainer(prop)
+        local Config = {
+        };
+
+        local MainSectionOuter = Library:Create('Frame', {
+            BackgroundColor3 = Library.BackgroundColor;
+            BorderColor3 = Library.OutlineColor;
+            Position = UDim2.new(0, 8, 0, 25);
+            Size = UDim2.new(1, -16, 1, -33);
+            ZIndex = 1;
+            Parent = Inner;
+        });
+
+        return Config;
+    end
+
+    return Window;
+end
