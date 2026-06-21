@@ -120,10 +120,8 @@ local ThemeManager = {} do
 			self:ApplyTheme(Options.ThemeManager_ThemeList.Value)
 		end)
 
-		groupbox:AddDivider()
 		groupbox:AddInput('ThemeManager_CustomThemeName', { Text = 'Custom theme name' })
 		groupbox:AddDropdown('ThemeManager_CustomThemeList', { Text = 'Custom themes', Values = self:ReloadCustomThemes(), AllowNull = true, Default = 1 })
-		groupbox:AddDivider()
 		
 		groupbox:AddButton('Load theme', function() 
 			self:ApplyTheme(Options.ThemeManager_CustomThemeList.Value) 
