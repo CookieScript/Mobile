@@ -103,11 +103,11 @@ function Library:UpdateColorsUsingRegistry()
 end;
 
 function Library:GetAlphabeticalOrder(text)
-    text = text:lower();
     local order = 0;
+    local Text = string.lower(text);
 
-    for i = 1, math.min(#text, 6) do
-        order = order * 256 + text:byte(i);
+    for i = 1, math.min(#Text, 6) do
+        order = order * 256 + Text:byte(i);
     end;
 
     return order;
