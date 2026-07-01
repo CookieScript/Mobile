@@ -567,7 +567,7 @@ function Library:AddTab(props)
             BackgroundColor3 = Color3.new(0, 0, 0);
             BorderColor3 = Color3.new(0, 0, 0);
             Size = UDim2.new(1, 0, 0, 20);
-            LayoutOrder = Library:GetAlphabeticalOrder(Info.Text);
+            LayoutOrder = Library:GetAlphabeticalOrder(Info.Text) * 5000 + #Container:GetChildren();
             ZIndex = 5;
             Parent = Container;
         });
@@ -588,7 +588,7 @@ function Library:AddTab(props)
             BorderSizePixel = 0;
             BackgroundTransparency = 1;
             AutomaticSize = Enum.AutomaticSize.Y;
-            LayoutOrder = #ToggleOuter:GetChildren();
+            LayoutOrder = #ToggleOuter:GetChildren() + 1;
             Visible = false;
             ZIndex = 5;
             Parent = Container;
