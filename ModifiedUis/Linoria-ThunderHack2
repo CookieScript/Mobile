@@ -103,19 +103,16 @@ function Library:UpdateColorsUsingRegistry()
 end;
 
 function Library:GetAlphabeticalOrder(text)
-    -- ok
-    local firstChar = string.upper(text:sub(1, 1))
+    -- Im keeping this
+    local first = string.upper(text:sub(1, 1));
+    local byte = first:byte();
 
-    if firstChar:match("[A-Z]") then
-        return firstChar:byte() - 64
-    end
+    if byte and byte >= 65 and byte <= 90 then
+        return byte - 64;
+    end;
 
-    if firstChar:match("[0-9]") then
-        return 1000 + tonumber(firstChar)
-    end
-
-    return 2000 + (firstChar:byte() or 0)
-end
+    return 999;
+end;
 
 function Library:Create(Class, Properties)
     local _Instance = Class;
@@ -528,6 +525,7 @@ function Library:AddTab(props)
     Library:Create('UIListLayout', {
         Padding = UDim.new(0, 0);
         Parent = ElementHolder;
+        SortOrder = Enum.SortOrder.LayoutOrder;
     });
 
     local Window = {
@@ -569,7 +567,7 @@ function Library:AddTab(props)
             BackgroundColor3 = Color3.new(0, 0, 0);
             BorderColor3 = Color3.new(0, 0, 0);
             Size = UDim2.new(1, 0, 0, 20);
-            LayoutOrder = Library:GetAlphabeticalOrder(Info.Text) * 1000 + #Container:GetChildren();
+            LayoutOrder = Library:GetAlphabeticalOrder(Info.Text);
             ZIndex = 5;
             Parent = Container;
         });
