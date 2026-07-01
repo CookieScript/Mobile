@@ -103,16 +103,19 @@ function Library:UpdateColorsUsingRegistry()
 end;
 
 function Library:GetAlphabeticalOrder(text)
-    -- someone helped me with this
-    local FirstLetter = string.upper(text:sub(1, 1));
-    local Byte = FirstLetter:byte();
+    -- ok
+    local firstChar = string.upper(text:sub(1, 1))
 
-    if Byte and Byte >= 65 and Byte <= 90 then
-        return Byte - 64;
-    end;
+    if firstChar:match("[A-Z]") then
+        return firstChar:byte() - 64
+    end
 
-    return 999;
-end;
+    if firstChar:match("[0-9]") then
+        return 1000 + tonumber(firstChar)
+    end
+
+    return 2000 + (firstChar:byte() or 0)
+end
 
 function Library:Create(Class, Properties)
     local _Instance = Class;
