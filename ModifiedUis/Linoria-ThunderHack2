@@ -102,6 +102,17 @@ function Library:UpdateColorsUsingRegistry()
     end;
 end;
 
+function Library:GetAlphabeticalOrder(text)
+    text = text:lower();
+    local order = 0;
+
+    for i = 1, math.min(#text, 6) do
+        order = order * 256 + text:byte(i);
+    end;
+
+    return order;
+end;
+
 function Library:Create(Class, Properties)
     local _Instance = Class;
 
@@ -554,7 +565,7 @@ function Library:AddTab(props)
             BackgroundColor3 = Color3.new(0, 0, 0);
             BorderColor3 = Color3.new(0, 0, 0);
             Size = UDim2.new(1, 0, 0, 20);
-            LayoutOrder = #Container:GetChildren();
+            LayoutOrder = Library:GetAlphabeticalOrder(Info.Text)
             ZIndex = 5;
             Parent = Container;
         });
