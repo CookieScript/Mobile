@@ -588,7 +588,7 @@ function Library:AddTab(props)
             BorderSizePixel = 0;
             BackgroundTransparency = 1;
             AutomaticSize = Enum.AutomaticSize.Y;
-            LayoutOrder = #ToggleOuter:GetChildren() + 1;
+            LayoutOrder = ToggleOuter.LayoutOrder + 1;
             Visible = false;
             ZIndex = 5;
             Parent = Container;
