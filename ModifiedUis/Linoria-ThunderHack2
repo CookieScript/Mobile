@@ -729,9 +729,9 @@ function Library:AddTab(props)
         Library:GiveSignal(InputService.InputBegan:Connect(function(Input)
             if Toggle.Keybind.Picking then return end;
 
-            if KeyPicker.Value == "MB1" and Input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end;
-            if KeyPicker.Value == "MB2" and Input.UserInputType ~= Enum.UserInputType.MouseButton2 then return end;
-            if Input.UserInputType == Enum.UserInputType.Keyboard and Input.KeyCode.Name ~= KeyPicker.Value then return end;
+            if Toggle.Keybind.Value == "MB1" and Input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end;
+            if Toggle.Keybind.Value == "MB2" and Input.UserInputType ~= Enum.UserInputType.MouseButton2 then return end;
+            if Input.UserInputType == Enum.UserInputType.Keyboard and Input.KeyCode.Name ~= Toggle.Keybind.Value then return end;
 
             Toggle.Keybind.Toggled = not Toggle.Keybind.Toggled;
 
