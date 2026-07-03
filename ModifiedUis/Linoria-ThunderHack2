@@ -735,7 +735,7 @@ function Library:AddTab(props)
 
             Toggle.Keybind.Toggled = not Toggle.Keybind.Toggled;
 
-            Toggle:SetValue(Toggle.Keybind..Toggled);
+            Toggle:SetValue(Toggle.Keybind.Toggled);
         end));
 
         function Toggle:AddColorPicker(Idx, Info)
