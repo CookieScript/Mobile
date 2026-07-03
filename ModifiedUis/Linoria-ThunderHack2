@@ -557,6 +557,11 @@ function Library:AddTab(props)
         local Toggle = {
             Value = Info.Default or false;
             Type = 'Toggle';
+            Keybind = {
+                Value = '';
+                Toggled = false;
+                Picking = false;
+            };
 
             Callback = Info.Callback or function(Value) end;
         };
@@ -682,84 +687,56 @@ function Library:AddTab(props)
 
         Toggles[Idx] = Toggle;
         Toggle.SubElementHolder = SubElementHolder;
-        Toggle.ToggleInner = ToggleInner;
-        Toggle.ToggleLabel = ToggleLabel;
 
-        function Toggle:AddKeyPicker(Idx, Info)
-            local KeyPicker = {
-                Value = Info.Default;
-                Toggled = false;
-                Callback = Info.Callback or function(Value) end;
-            }
+        local DisplayLabel = Library:CreateLabel({
+            Size = UDim2.new(1, 0, 1, 0);
+            TextSize = 13;
+            Text = Toggle.Keybind.Value;
+            TextWrapped = true;
+            ZIndex = 8;
+            Parent = ToggleLabel;
+        });
 
-            local Container = self.ToggleLabel;
+        ToggleLabel.InputBegan:Connect(function(Input)
+            if Input.UserInputType == Enum.UserInputType.MouseButton2 then
+                Toggle.Keybind.Picking = true;
 
-            local DisplayLabel = Library:CreateLabel({
-                BackgroundTransparency = 1;
-                Size = UDim2.new(1, 0, 1, 0);
-                TextSize = 13;
-                Text = Info.Default;
-                TextWrapped = true;
-                ZIndex = 8;
-                Parent = PickInner;
-            });
+                DisplayLabel.Text = "";
 
-            local Picking = false;
+                local Event;
+                Event = InputService.InputBegan:Connect(function(Input)
+                    local Key;
 
-            Container.InputBegan:Connect(function(Input)
-                if Input.UserInputType == Enum.UserInputType.MouseButton2 then
-                    Picking = true;
+                    if Input.UserInputType == Enum.UserInputType.Keyboard then
+                        Key = Input.KeyCode.Name;
+                    elseif Input.UserInputType == Enum.UserInputType.MouseButton1 then
+                        Key = "MB1";
+                    elseif Input.UserInputType == Enum.UserInputType.MouseButton2 then
+                        Key = "MB2";
+                    end;
 
-                    DisplayLabel.Text = "";
+                    if Key then
+                        Toggle.Keybind.Value = Key;
+                        DisplayLabel.Text = Key;
+                        Toggle.Keybind.Picking = false;
 
-                    local Event;
-                    Event = InputService.InputBegan:Connect(function(Input)
-                        local Key;
-
-                        if Input.UserInputType == Enum.UserInputType.Keyboard then
-                            Key = Input.KeyCode.Name;
-                        elseif Input.UserInputType == Enum.UserInputType.MouseButton1 then
-                            Key = "MB1";
-                        elseif Input.UserInputType == Enum.UserInputType.MouseButton2 then
-                            Key = "MB2";
-                        end;
-
-                        if Key then
-                            KeyPicker.Value = Key;
-                            DisplayLabel.Text = Key;
-                            Picking = false;
-
-                            Library:SafeCallback(KeyPicker.Callback, Key);
-
-                            Event:Disconnect();
-                        end;
-                    end);
-                end;
-            end);
-
-            Library:GiveSignal(InputService.InputBegan:Connect(function(Input)
-                if Picking then
-                    return
-                end;
-
-                if KeyPicker.Value == "MB1" and Input.UserInputType ~= Enum.UserInputType.MouseButton1 then
-                    return
-                end;
-                if KeyPicker.Value == "MB2" and Input.UserInputType ~= Enum.UserInputType.MouseButton2 then
-                    return
-                end;
-                if Input.UserInputType == Enum.UserInputType.Keyboard and Input.KeyCode.Name ~= KeyPicker.Value then
-                    return
-                end;
-
-                KeyPicker.Toggled = not KeyPicker.Toggled;
-
-                Toggle:SetValue(KeyPicker.Toggled);
-                KeyPicker.Callback(KeyPicker.Toggled);
-            end));
-
-            return Toggle;
+                        Event:Disconnect();
+                    end;
+                end);
+            end;
         end;
+
+        Library:GiveSignal(InputService.InputBegan:Connect(function(Input)
+            if Toggle.Keybind.Picking then return end;
+
+            if KeyPicker.Value == "MB1" and Input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end;
+            if KeyPicker.Value == "MB2" and Input.UserInputType ~= Enum.UserInputType.MouseButton2 then return end;
+            if Input.UserInputType == Enum.UserInputType.Keyboard and Input.KeyCode.Name ~= KeyPicker.Value then return end;
+
+            Toggle.Keybind..Toggled = not Toggle.Keybind..Toggled;
+
+            Toggle:SetValue(Toggle.Keybind..Toggled);
+        end);
 
         function Toggle:AddColorPicker(Idx, Info)
             local ToggleLabel = self.TextLabel;
