@@ -682,8 +682,8 @@ function Library:AddTab(props)
 
         Toggles[Idx] = Toggle;
         Toggle.SubElementHolder = SubElementHolder;
-        Toggle.ToggleInner = ToggleInner
-        Toggle.ToggleLabel = ToggleLabel
+        Toggle.ToggleInner = ToggleInner;
+        Toggle.ToggleLabel = ToggleLabel;
 
         function Toggle:AddKeyPicker(Idx, Info)
             local KeyPicker = {
@@ -756,7 +756,7 @@ function Library:AddTab(props)
 
                 Toggle:SetValue(KeyPicker.Toggled);
                 KeyPicker.Callback(KeyPicker.Toggled);
-            end);
+            end));
 
             return Toggle;
         end;
