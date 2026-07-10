@@ -76,11 +76,15 @@ table.insert(Library.Signals, RenderStepped:Connect(function(Delta)
     end
 end))
 
-local function GetPlayersString()
+local function GetPlayersString(IncludeSelf)
     local PlayerList = Players:GetPlayers();
 
-    for i = 1, #PlayerList do
-        PlayerList[i] = PlayerList[i].Name;
+    for i = #PlayerList, 1, -1 do
+        if not IncludeSelf and PlayerList[i] == Players.LocalPlayer then
+            table.remove(PlayerList, i);
+        else
+            PlayerList[i] = PlayerList[i].Name;
+        end;
     end;
 
     table.sort(PlayerList, function(str1, str2) return str1 < str2 end);
@@ -2376,6 +2380,7 @@ do
         local Dropdown = {
             Values = Info.Values;
             Value = Info.Multi and {};
+            IncludeSelf = Info.IncludeSelf or false;
             Multi = Info.Multi;
             Type = 'Dropdown';
             SpecialType = Info.SpecialType; -- can be either 'Player' or 'Team'
@@ -4001,11 +4006,9 @@ function Library:CreateWindow(...)
 end;
 
 local function OnPlayerChange()
-    local PlayerList = GetPlayersString();
-
     for _, Value in next, Options do
         if Value.Type == 'Dropdown' and Value.SpecialType == 'Player' then
-            Value:SetValues(PlayerList);
+            Value:SetValues(GetPlayersString(Value.IncludeSelf));
         end;
     end;
 end;
