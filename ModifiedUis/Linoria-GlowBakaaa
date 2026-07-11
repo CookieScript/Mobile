@@ -2380,11 +2380,14 @@ do
         local Dropdown = {
             Values = Info.Values;
             Value = Info.Multi and {};
+            FilteredValues = Info.Values;
             IncludeSelf = Info.IncludeSelf or false;
             Multi = Info.Multi;
             Type = 'Dropdown';
             SpecialType = Info.SpecialType; -- can be either 'Player' or 'Team'
             Callback = Info.Callback or function(Value) end;
+            Searchable = Info.Searchable or false;
+            SearchQuery = '';
         };
 
         local Groupbox = self;
@@ -2541,6 +2544,38 @@ do
             Parent = Scrolling;
         });
 
+        local SearchBox = nil;
+        if Dropdown.Searchable then
+            SearchBox = Library:Create('TextBox', {
+                BackgroundColor3 = Library.MainColor;
+                BorderColor3 = Library.OutlineColor;
+                BorderMode = Enum.BorderMode.Inset;
+                Size = UDim2.new(1, 0, 0, 20);
+                Position = UDim2.new(0, 0, 0, 0);
+                Font = Library.Font;
+                PlaceholderColor3 = Color3.fromRGB(190, 190, 190);
+                PlaceholderText = 'Search...';
+                Text = '';
+                TextColor3 = Library.FontColor;
+                TextSize = 14;
+                TextStrokeTransparency = 0;
+                TextXAlignment = Enum.TextXAlignment.Left;
+                ZIndex = 22;
+                Parent = ListInner;
+                ClipsDescendants = true;
+            });
+
+            Library:ApplyTextStroke(SearchBox);
+            Library:AddToRegistry(SearchBox, {
+                TextColor3 = 'FontColor';
+                BackgroundColor3 = 'MainColor';
+                BorderColor3 = 'OutlineColor';
+            });
+
+            Scrolling.Position = UDim2.new(0, 0, 0, 20);
+            Scrolling.Size = UDim2.new(1, 0, 1, -20);
+        end
+
         function Dropdown:Display()
             local Values = Dropdown.Values;
             local Str = '';
@@ -2560,6 +2595,23 @@ do
             ItemList.Text = (Str == '' and '--' or Str);
         end;
 
+        function Dropdown:FilterValues(Query)
+            Query = string.lower(Query or '');
+            Dropdown.FilteredValues = {};
+    
+            if Query == '' then
+                Dropdown.FilteredValues = Dropdown.Values;
+            else
+                for _, Value in ipairs(Dropdown.Values) do
+                    if string.find(string.lower(Value), Query, 1, true) then
+                        table.insert(Dropdown.FilteredValues, Value);
+                    end;    
+                end;
+            end;
+    
+            Dropdown:BuildDropdownList();
+        end;
+
         function Dropdown:GetActiveValues()
             if Info.Multi then
                 local T = {};
@@ -2575,7 +2627,7 @@ do
         end;
 
         function Dropdown:BuildDropdownList()
-            local Values = Dropdown.Values;
+            local Values = Dropdown.FilteredValues or Dropdown.Values;
             local Buttons = {};
 
             for _, Element in next, Scrolling:GetChildren() do
@@ -2689,6 +2741,9 @@ do
             Scrolling.CanvasSize = UDim2.fromOffset(0, (Count * 20) + 1);
 
             local Y = math.clamp(Count * 20, 0, MAX_DROPDOWN_ITEMS * 20) + 1;
+            if SearchBox then
+                Y = Y + 20;
+            end
             RecalculateListSize(Y);
         end;
 
@@ -2704,12 +2759,21 @@ do
             ListOuter.Visible = true;
             Library.OpenedFrames[ListOuter] = true;
             DropdownArrow.Rotation = 180;
+    
+            if SearchBox then
+                SearchBox:CaptureFocus();
+            end;
         end;
 
         function Dropdown:CloseDropdown()
             ListOuter.Visible = false;
             Library.OpenedFrames[ListOuter] = nil;
             DropdownArrow.Rotation = 0;
+    
+            if SearchBox then
+                SearchBox.Text = '';
+                Dropdown:FilterValues('');
+            end;
         end;
 
         function Dropdown:OnChanged(Func)
@@ -2751,6 +2815,13 @@ do
                 end;
             end;
         end);
+
+        if SearchBox then
+            SearchBox:GetPropertyChangedSignal('Text'):Connect(function()
+                Dropdown.SearchQuery = SearchBox.Text;
+                Dropdown:FilterValues(SearchBox.Text);
+            end);
+        end
 
         InputService.InputBegan:Connect(function(Input)
             if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
