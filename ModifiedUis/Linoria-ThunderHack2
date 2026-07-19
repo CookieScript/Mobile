@@ -1842,7 +1842,7 @@ function Library:AddTab(props)
                 BorderColor3 = 'OutlineColor';
             });
 
-            Library:OnHighlight(Outer, Outer,
+            Library:OnHighlight(Outer,
                 { BorderColor3 = 'AccentColor' };
                 { BorderColor3 = 'Black' };
             );
