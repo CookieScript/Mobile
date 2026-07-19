@@ -1791,6 +1791,75 @@ function Library:AddTab(props)
             return Toggle;
         end;
 
+        function Toggle:AddButton(Info)
+            local Button = {
+                Text = Info.Text or Info.text or "Botnet.cc";
+                Callback = Info.Callback or Info.callback or Info.Func of Info.func or function() end;
+            };
+
+            local Container = self.SubElementHolder;
+
+            local Outer = Library:Create('Frame', {
+                BackgroundColor3 = Color3.new(0, 0, 0);
+                BorderColor3 = Color3.new(0, 0, 0);
+                Size = UDim2.new(1, -4, 0, 20);
+                ZIndex = 5;
+                Parent = Container;
+            });
+
+            local Inner = Library:Create('Frame', {
+                BackgroundColor3 = Library.MainColor;
+                BorderColor3 = Library.OutlineColor;
+                BorderMode = Enum.BorderMode.Inset;
+                Size = UDim2.new(1, 0, 1, 0);
+                ZIndex = 6;
+                Parent = Outer;
+            });
+
+            local Label = Library:CreateLabel({
+                Size = UDim2.new(1, 0, 1, 0);
+                TextSize = 14;
+                Text = Button.Text;
+                ZIndex = 6;
+                Parent = Inner;
+            });
+
+            Library:Create('UIGradient', {
+                Color = ColorSequence.new({
+                    ColorSequenceKeypoint.new(0, Color3.new(1, 1, 1)),
+                    ColorSequenceKeypoint.new(1, Color3.fromRGB(212, 212, 212))
+                });
+                Rotation = 90;
+                Parent = Inner;
+            });
+
+            Library:AddToRegistry(Outer, {
+                BorderColor3 = 'Black';
+            });
+
+            Library:AddToRegistry(Inner, {
+                BackgroundColor3 = 'MainColor';
+                BorderColor3 = 'OutlineColor';
+            });
+
+            Library:OnHighlight(Outer, Outer,
+                { BorderColor3 = 'AccentColor' };
+                { BorderColor3 = 'Black' };
+            );
+
+            if type(Info.Tooltip) == 'string' then
+                Library:AddToolTip(Info.Tooltip, Outer);
+            end;
+
+            Outer.InputBegan:Connect(function(Input)
+                if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+                    Library:SafeCallback(Button.Callback);
+                end;
+            end);
+
+            return Toggle;
+        end;
+
         function Toggle:AddDropdown(Idx, Info)
             assert(Info.Values, 'AddDropdown: Missing dropdown value list.');
             assert(Info.AllowNull or Info.Default, 'AddDropdown: Missing default value. Pass `AllowNull` as true if this was intentional.')
