@@ -1794,7 +1794,7 @@ function Library:AddTab(props)
         function Toggle:AddButton(Info)
             local Button = {
                 Text = Info.Text or Info.text or "Botnet.cc";
-                Callback = Info.Callback or Info.callback or Info.Func of Info.func or function() end;
+                Callback = Info.Callback or Info.callback or Info.Func or Info.func or function() end;
             };
 
             local Container = self.SubElementHolder;
