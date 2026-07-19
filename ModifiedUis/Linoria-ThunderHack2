@@ -1842,9 +1842,9 @@ function Library:AddTab(props)
                 BorderColor3 = 'OutlineColor';
             });
 
-            Library:OnHighlight(Outer,
-                { BorderColor3 = 'AccentColor' };
-                { BorderColor3 = 'Black' };
+            Library:OnHighlight(Outer, Outer,
+                { BorderColor3 = 'AccentColor' },
+                { BorderColor3 = 'Black' }
             );
 
             if type(Info.Tooltip) == 'string' then
