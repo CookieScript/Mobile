@@ -2209,12 +2209,12 @@ do
                 BackgroundColor3 = Color3.new(0, 0, 0);
                 BorderColor3 = Color3.new(0, 0, 0);
                 BackgroundTransparency = 1;
-                Size = UDim2.new(1, -25, 0, 15);
+                Size = UDim2.new(1, -25, 0, 13);
                 ZIndex = 5;
                 Parent = Container;
             });
 
-            SliderOuter.Size = UDim2.new(0.5, -2, 0, 8);
+            SliderOuter.Size = UDim2.new(0.5, -1, 0, 8);
             SliderOuter.Parent = Mainbackground;
             task.defer(function()
                 Slider.MaxSize = SliderInner.AbsoluteSize.X - 2;
@@ -2225,7 +2225,7 @@ do
                 BackgroundColor3 = Color3.new(0,0,0);
                 BorderColor3 = Color3.new(0,0,0);
                 Position = UDim2.new(1,3,0,0);
-                Size = UDim2.fromOffset(SliderOuter.AbsoluteSize.X-2,SliderOuter.AbsoluteSize.Y);
+                Size = UDim2.fromOffset(SliderOuter.AbsoluteSize.X-1,SliderOuter.AbsoluteSize.Y);
                 ZIndex = 5;
                 Parent = SliderOuter;
             });
