@@ -2209,7 +2209,7 @@ do
                 BackgroundColor3 = Color3.new(0, 0, 0);
                 BorderColor3 = Color3.new(0, 0, 0);
                 BackgroundTransparency = 1;
-                Size = UDim2.new(1, -25, 0, 18);
+                Size = UDim2.new(1, -25, 0, 15);
                 ZIndex = 5;
                 Parent = Container;
             });
@@ -2225,7 +2225,7 @@ do
                 BackgroundColor3 = Color3.new(0,0,0);
                 BorderColor3 = Color3.new(0,0,0);
                 Position = UDim2.new(1,3,0,0);
-                Size = UDim2.fromOffset(SliderOuter.AbsoluteSize.X-17,SliderOuter.AbsoluteSize.Y);
+                Size = UDim2.fromOffset(SliderOuter.AbsoluteSize.X-2,SliderOuter.AbsoluteSize.Y);
                 ZIndex = 5;
                 Parent = SliderOuter;
             });
