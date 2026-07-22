@@ -2026,8 +2026,8 @@ do
         end
 
         local SliderOuter = Library:Create('Frame', {
-            AnchorPoint = Vector2.new(0.5, 0);
-            Position = UDim2.new(0.5, 0, 0, 0);
+            AnchorPoint = Vector2.new(0, 0);
+            Position = UDim2.new(0, 0, 0, 0);
             BackgroundColor3 = Color3.new(0, 0, 0);
             BorderColor3 = Color3.new(0, 0, 0);
             Size = UDim2.new(1, -25, 0, 8);
