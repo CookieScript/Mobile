@@ -1556,7 +1556,7 @@ do
             BackgroundColor3 = Color3.new(0, 0, 0);
             BorderColor3 = Color3.new(0, 0, 0);
             BackgroundTransparency = 1;
-            Size = UDim2.new(1, -19, 0, 16);
+            Size = UDim2.new(1, -25, 0, 18);
             ZIndex = 5;
             Parent = Container;
         });
@@ -1579,12 +1579,12 @@ do
 
             ProcessButtonParams('SubButton', SubButton, ...)
 
-            self.Outer.Size = UDim2.new(0.5, -2, 0, 20)
+            self.Outer.Size = UDim2.new(0.5, -1, 0, 20)
 
             SubButton.Outer, SubButton.Inner, SubButton.Label = CreateBaseButton(SubButton)
 
             SubButton.Outer.Position = UDim2.new(1, 3, 0, 0)
-            SubButton.Outer.Size = UDim2.fromOffset(self.Outer.AbsoluteSize.X - 2, self.Outer.AbsoluteSize.Y)
+            SubButton.Outer.Size = UDim2.fromOffset(self.Outer.AbsoluteSize.X - 1, self.Outer.AbsoluteSize.Y)
             SubButton.Outer.Parent = self.Outer
 
             function SubButton:AddTooltip(tooltip)
@@ -1668,7 +1668,7 @@ do
         local InputLabel = Library:CreateLabel({
             AnchorPoint = Vector2.new(0.5, 0);
             Position = UDim2.new(0.5, 0, 0, 0);
-            Size = UDim2.new(1, -19, 0, 15);
+            Size = UDim2.new(1, -25, 0, 15);
             TextSize = 14;
             Text = Info.Text;
             TextXAlignment = Enum.TextXAlignment.Left;
@@ -1683,7 +1683,7 @@ do
             Position = UDim2.new(0.5, 0, 0, 0);
             BackgroundColor3 = Color3.new(0, 0, 0);
             BorderColor3 = Color3.new(0, 0, 0);
-            Size = UDim2.new(1, -19, 0, 20);
+            Size = UDim2.new(1, -25, 0, 20);
             ZIndex = 5;
             Parent = Container;
         });
@@ -2013,7 +2013,7 @@ do
             Library:CreateLabel({
                 AnchorPoint = Vector2.new(0.5, 0);
                 Position = UDim2.new(0.5, 0, 0, 0);
-                Size = UDim2.new(1, -19, 0, 10);
+                Size = UDim2.new(1, -25, 0, 10);
                 TextSize = 14;
                 Text = Info.Text;
                 TextXAlignment = Enum.TextXAlignment.Left;
@@ -2030,7 +2030,7 @@ do
             Position = UDim2.new(0.5, 0, 0, 0);
             BackgroundColor3 = Color3.new(0, 0, 0);
             BorderColor3 = Color3.new(0, 0, 0);
-            Size = UDim2.new(1, -19, 0, 8);
+            Size = UDim2.new(1, -25, 0, 8);
             ZIndex = 5;
             Parent = Container;
         });
@@ -2416,7 +2416,7 @@ do
             local DropdownLabel = Library:CreateLabel({
                 AnchorPoint = Vector2.new(0.5, 0);
                 Position = UDim2.new(0.5, 0, 0, 0);
-                Size = UDim2.new(1, -19, 0, 10);
+                Size = UDim2.new(1, -25, 0, 10);
                 TextSize = 14;
                 Text = Info.Text;
                 TextXAlignment = Enum.TextXAlignment.Left;
@@ -2439,7 +2439,7 @@ do
             Position = UDim2.new(0.5, 0, 0, 0);
             BackgroundColor3 = Color3.new(0, 0, 0);
             BorderColor3 = Color3.new(0, 0, 0);
-            Size = UDim2.new(1, -19, 0, 20);
+            Size = UDim2.new(1, -25, 0, 20);
             ZIndex = 5;
             Parent = Container;
         });
