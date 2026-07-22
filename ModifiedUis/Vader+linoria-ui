@@ -2205,11 +2205,21 @@ do
                 Callback = Info2.Callback or function(Value) end;
             };
 
-            SliderOuter.Size = UDim2.new(0.5, -2, 0, 8)
+            local Mainbackground = Library:Create('Frame', {
+                BackgroundColor3 = Color3.new(0, 0, 0);
+                BorderColor3 = Color3.new(0, 0, 0);
+                BackgroundTransparency = 1;
+                Size = UDim2.new(1, -25, 0, 18);
+                ZIndex = 5;
+                Parent = Container;
+            });
+
+            SliderOuter.Size = UDim2.new(0.5, -2, 0, 8);
+            SliderOuter.Parent = Mainbackground;
             task.defer(function()
-                Slider.MaxSize = SliderInner.AbsoluteSize.X - 2
-                Slider:Display()
-            end)
+                Slider.MaxSize = SliderInner.AbsoluteSize.X - 2;
+                Slider:Display();
+            end);
 
             New.SliderOuter = Library:Create('Frame',{
                 BackgroundColor3 = Color3.new(0,0,0);
@@ -2857,6 +2867,7 @@ do
 
         local Layout = Library:Create('UIListLayout', {
             FillDirection = Enum.FillDirection.Vertical;
+            HorizontalAlignment = Enum.HorizontalAlignment.Center;
             SortOrder = Enum.SortOrder.LayoutOrder;
             Parent = Frame;
         });
