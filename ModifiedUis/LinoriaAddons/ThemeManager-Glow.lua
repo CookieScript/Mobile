@@ -238,7 +238,7 @@ local ThemeManager = {} do
 			ThemeManager.Window:UpdateShadow({Spread = UDim2.new(0, ThemeManager.BackgroundSettings["Spread"], 0, ThemeManager.BackgroundSettings["Spread"]), Transparency = ThemeManager.BackgroundSettings["Transparency"], Radius = UDim.new(0, ThemeManager.BackgroundSettings["BlurRadius"])})
 		end
 		
-		groupbox:AddToggle('BackgroundManagerGlowEnabled', {Text = 'Glow', Default = false, Callback = function(a) self.Window:SetGlowVisibility(a) end})
+		groupbox:AddToggle('BackgroundManagerGlowEnabled', {Text = 'Glow', Default = false, Callback = function(a) self.Window:SetShadowVisiblity(a) end})
 		groupbox:AddSlider('BackgroundManagerSpread', {Text = 'Spread', Default = self.BackgroundSettings["Spread"], Min = 0, Max = 50, Rounding = 2, Compact = true, HideMax = true, Callback = function(a) self.BackgroundSettings["Spread"] = a BackgroundUpdate() end}):AddSlider('BackgroundManagerTransparency', {Text = 'Transparency', Default = self.BackgroundSettings["Transparency"], Min = 0, Max = 1, Rounding = 2, Compact = true, HideMax = true, Callback = function(a) self.BackgroundSettings["Transparency"] = a BackgroundUpdate() end})
 		groupbox:AddSlider('BackgroundManagerBlurRadius', {Text = 'Blur Radius', Default = self.BackgroundSettings["BlurRadius"], Min = 0, Max = 50, Rounding = 2, Compact = true, HideMax = true, Callback = function(a) self.BackgroundSettings["BlurRadius"] = a BackgroundUpdate() end})
 	end
