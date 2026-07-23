@@ -3325,6 +3325,7 @@ function Library:CreateWindow(...)
         Spread = UDim2.new(0, 5, 0, 5);
         Transparency = 0.5;
         Offset = UDim2.new(0, 0, 0, 0);
+        Enabled = false;
         Parent = Outer;
     });
 
