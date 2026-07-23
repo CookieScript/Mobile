@@ -23,7 +23,6 @@ local ThemeManager = {} do
 	-- if not isfolder(ThemeManager.Folder) then makefolder(ThemeManager.Folder) end
 
 	ThemeManager.Library = nil
-	ThemeManager.Window = nil
 	ThemeManager.BuiltInThemes = {
 		['Default'] 		= { 1, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1c1c1c","AccentColor":"0055ff","BackgroundColor":"141414","OutlineColor":"323232"}') },
 		['BBot'] 			= { 2, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1e1e1e","AccentColor":"7e48a3","BackgroundColor":"232323","OutlineColor":"141414"}') },
@@ -34,12 +33,6 @@ local ThemeManager = {} do
 		['Ubuntu'] 			= { 7, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"3e3e3e","AccentColor":"e2581e","BackgroundColor":"323232","OutlineColor":"191919"}') },
 		['Quartz'] 			= { 8, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"232330","AccentColor":"426e87","BackgroundColor":"1d1b26","OutlineColor":"27232f"}') },
         ['Soft Blue'] 		= { 9, httpService:JSONDecode('{"MainColor":"181818","AccentColor":"4d78b2","OutlineColor":"1a1a1a","BackgroundColor":"141414","FontColor":"ffffff"}') },
-	}
-
-	ThemeManager.BackgroundSettings = {
-		['Spread'] = 5,
-	    ['Transparency'] = 0.5,
-		['BlurRadius'] = 8,
 	}
 
 	function ThemeManager:ApplyTheme(theme)
@@ -233,22 +226,8 @@ local ThemeManager = {} do
 		return out
 	end
 
-    function ThemeManager:CreateBackgroundManager(groupbox)
-	    local function BackgroundUpdate()
-			ThemeManager.Window:UpdateShadow({Spread = ThemeManager.BackgroundSettings["Spread"], Transparency = ThemeManager.BackgroundSettings["Transparency"], Radius = ThemeManager.BackgroundSettings["BlurRadius"]})
-		end
-		
-		groupbox:AddToggle('BackgroundManagerGlowEnabled', {Text = 'Glow', Default = false, Callback = function(a) self.Window:SetGlowVisibility(a) end})
-		groupbox:AddSlider('BackgroundManagerSpread', {Text = 'Spread', Default = self.BackgroundSettings["Spread"], Min = 0, Max = 50, Rounding = 2, Compact = true, HideMax = true, Callback = function(a) self.BackgroundSettings["Spread"] = a BackgroundUpdate() end}):AddSlider('BackgroundManagerTransparency', {Text = 'Transparency', Default = self.BackgroundSettings["Transparency"], Min = 0, Max = 1, Rounding = 2, Compact = true, HideMax = true, Callback = function(a) self.BackgroundSettings["Transparency"] = a BackgroundUpdate() end})
-		groupbox:AddSlider('BackgroundManagerBlurRadius', {Text = 'Blur Radius', Default = self.BackgroundSettings["BlurRadius"], Min = 0, Max = 50, Rounding = 2, Compact = true, HideMax = true, Callback = function(a) self.BackgroundSettings["BlurRadius"] = a BackgroundUpdate() end})
-	end
-
 	function ThemeManager:SetLibrary(lib)
 		self.Library = lib
-	end
-
-	function ThemeManager:SetWindow(win)
-		self.Window = win
 	end
 
 	function ThemeManager:BuildFolderTree()
@@ -280,14 +259,13 @@ local ThemeManager = {} do
 
 	function ThemeManager:CreateGroupBox(tab)
 		assert(self.Library, 'Must set ThemeManager.Library first!')
-		return CreateGroupBox({TabGroup = tab, side = "left", Name = {"Themes", "Background"}})
+		return CreateGroupBox({TabGroup = tab, side = "left", Name = "Themes"})
 	end
 
 	function ThemeManager:ApplyToTab(tab)
 		assert(self.Library, 'Must set ThemeManager.Library first!')
-		local groupbox, background = self:CreateGroupBox(tab)
+		local groupbox = self:CreateGroupBox(tab)
 		self:CreateThemeManager(groupbox)
-        self:CreateBackgroundManager(background)
 	end
 
 	function ThemeManager:ApplyToGroupbox(groupbox)
