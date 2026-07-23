@@ -235,7 +235,7 @@ local ThemeManager = {} do
 
     function ThemeManager:CreateBackgroundManager(groupbox)
 	    local function BackgroundUpdate()
-			ThemeManager.Window:UpdateShadow({Spread = ThemeManager.BackgroundSettings["Spread"], Transparency = ThemeManager.BackgroundSettings["Transparency"], Radius = ThemeManager.BackgroundSettings["BlurRadius"]})
+			ThemeManager.Window:UpdateShadow({Spread = UDim2.new(0, ThemeManager.BackgroundSettings["Spread"], 0, ThemeManager.BackgroundSettings["Spread"]), Transparency = ThemeManager.BackgroundSettings["Transparency"], Radius = UDim.new(0, ThemeManager.BackgroundSettings["BlurRadius"])})
 		end
 		
 		groupbox:AddToggle('BackgroundManagerGlowEnabled', {Text = 'Glow', Default = false, Callback = function(a) self.Window:SetGlowVisibility(a) end})
