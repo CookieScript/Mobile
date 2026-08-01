@@ -1,34 +1,93 @@
 local Library = {}
 --
-Library = {
-    ["Theme"] = {
-        ["AccentColor"] = Color3.fromRGB(180, 57, 57),
-        ["MainColor"] = Color3.fromRGB(60, 60, 60),
-        ["Outline"] = Color3.fromRGB(45, 45, 45),
-        ["Background"] = Color3.fromRGB(20, 20, 20),
+do --
+    Library = {
+        ["Registers"] = {},
+        ["Theme"] = {
+            ["AccentColor"] = Color3.fromRGB(180, 57, 57),
+            ["MainColor"] = Color3.fromRGB(60, 60, 60),
+            ["Outline"] = Color3.fromRGB(45, 45, 45),
+            ["Background"] = Color3.fromRGB(20, 20, 20),
+            ["Black"] = Color3.fromRGB(0, 0, 0),
+        },
+        ["ScreenGui"] = {},
     }
-}
---
-function Library:Create(class, prop)
-    local obj = Instance.new(class)
-    for i, v in prop do
-        obj[i] = v
+    --
+    local Players = game:GetService("Players")
+    local UserInputService = game:GetService("UserInputService")
+    local LocalPlayer = Players.LocalPlayer
+    local Mouse = LocalPlayer:GetMouse()
+    --
+    function Library:Create(class, prop)
+        local obj = Instance.new(class)
+        for i, v in prop do
+            obj[i] = v
+        end
+        return obj
     end
-    return obj
-end
---
-do
-    -- // Ui Creation Omg???
+    --
     Library["ScreenGui"] = Library:Create("ScreenGui", {
         ["Name"] = "brainsense",
         ["Parent"] = game:GetService("CoreGui"),
     })
+    --
+    function Library:AddThemeColor(ins, prop)
+        local i = #Library["Registers"] + 1
+        local d = {
+            ["Instance"] = ins,
+            ["Prop"] = prop,
+            ["I"] = i,
+        }
+        table.insert(Library["Registers"], d)
+    end
+    --
+    function Library:UpdateThemeColor()
+        for i, v in Library["Registers"] do
+            for p, c in v["Prop"] do
+                v["Instance"][p] = Library["Theme"][c]
+            end
+        end
+    end
+    --
+    function Library:MakeDraggable(ins)
+        ins["Active"] = true
 
-    local MenuFrame = Library:Create("Frame", {
-        ["Size"] = UDim2.new(0, 576, 0, 450),
-        ["Position"] = UDim2.new(0.5, 0, 0.5, 0),
-        ["BackgroundColor3"] = Library["Theme"]["Background"],
-        ["Parent"] = Library["ScreenGui"],
-        ["Visible"] = true,
-    })
+        ins.InputBegan:Connect(function(Input)
+            if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+                local Pos = Vector2.new(Mouse.X - ins.AbsolutePosition.X, Mouse.Y - ins.AbsolutePosition.Y)
+                while UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+                    ins["Position"] = UDim2.new(0, Mouse.X - Pos.X + (ins["Size"]["X"]["Offset"] * ins["AnchorPoint"]["X"]), 0, Mouse.Y - Pos.Y + (ins["Size"]["Y"]["Offset"]  * ins["AnchorPoint"]["Y"]))
+                    task.wait()
+                end
+            end
+        end)
+    end
+    --
+    function Library:CreateWindow(prop)
+        local window = {
+            ["size"] = prop.Size or prop.size or UDim2.new(0, 576, 0, 450),
+            ["position"] = prop.Position or prop.position or prop.Pos or prop.pos or UDim2.new(0.5, -288, 0.5, -225),
+        }
+        --
+        local MenuFrame = Library:Create("Frame", {
+            ["Size"] = window["size"],
+            ["Position"] = window["position"],
+            ["BackgroundColor3"] = Library["Theme"]["Background"],
+            ["Parent"] = Library["ScreenGui"],
+            ["Visible"] = true,
+        })
+        --
+        Library:MakeDraggable(MenuFrame)
+        --
+        Library:Create("UICorner", {
+            ["CornerRadius"] = UDim.new(0, 4),
+            ["Parent"] = MenuFrame,
+        })
+        --
+        Library:AddThemeColor(MenuFrame, {
+            ["BackgroundColor3"] = "Background",
+        })
+    end
 end
+
+return Library
