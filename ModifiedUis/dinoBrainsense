@@ -8,9 +8,11 @@ do --
             ["MainColor"] = Color3.fromRGB(60, 60, 60),
             ["Outline"] = Color3.fromRGB(45, 45, 45),
             ["Background"] = Color3.fromRGB(20, 20, 20),
+            ["FontColor"] = Color3.fromRGB(255, 255, 255),
             ["Black"] = Color3.fromRGB(0, 0, 0),
         },
         ["ScreenGui"] = {},
+        ["Font"] = nil,
     }
     --
     local Players = game:GetService("Players")
@@ -30,6 +32,8 @@ do --
         ["Name"] = "brainsense",
         ["Parent"] = game:GetService("CoreGui"),
     })
+    --
+    Library["Font"] = Enum["Font"]["GothamBold"]
     --
     function Library:AddThemeColor(ins, prop)
         local i = #Library["Registers"] + 1
@@ -67,12 +71,15 @@ do --
         local window = {
             ["size"] = prop.Size or prop.size or UDim2.new(0, 576, 0, 450),
             ["position"] = prop.Position or prop.position or prop.Pos or prop.pos or UDim2.new(0.5, -288, 0.5, -225),
+            ["title"] = prop.Title or prop.title or "brainsense",
+            ["icon"] = prop.Icon or prop.icon,
         }
         --
         local MenuFrame = Library:Create("Frame", {
             ["Size"] = window["size"],
             ["Position"] = window["position"],
             ["BackgroundColor3"] = Library["Theme"]["Background"],
+            ["BorderSizePixel"] = 0,
             ["Parent"] = Library["ScreenGui"],
             ["Visible"] = true,
         })
@@ -86,6 +93,41 @@ do --
         --
         Library:AddThemeColor(MenuFrame, {
             ["BackgroundColor3"] = "Background",
+        })
+        --
+        local WindowIcon = Library:Create("ImageLabel", {
+            ["Size"] = UDim2.new(0, 35, 0, 35),
+            ["Position"] = UDim2.new(0, 15, 0, 15),
+            ["BackgroundTransparency"] = 1,
+            ["BorderSizePixel"] = 0,
+            ["Image"] = window["icon"] or "",
+            ["ImageColor3"] = Library["Theme"]["AccentColor"],
+            ["ImageTransparency"] = 0,
+            ["ScaleType"] = Enum["ScaleType"]["Slice"],
+            ["Parent"] = MenuFrame,
+            ["Visible"] = true,
+        })
+        --
+        Library:AddThemeColor(WindowIcon, {
+            ["ImageColor3"] = Library["Theme"]["AccentColor"],
+        })
+        --
+        local WindowTitle = Library:Create("TextLabel", {
+            ["Size"] = UDim2.new(0, 65, 0, 10),
+            ["Position"] = UDim2.new(1, 5, 0, 3),
+            ["BorderSizePixel"] = 0,
+            ["BackgroundTransparency"] = 1,
+            ["Text"] = window["title"],
+            ["TextSize"] = 13,
+            ["TextXAlignment"] = Enum["TextXAlignment"]["Left"],
+            ["Font"] = Library["Font"],
+            ["TextColor3"] = Library["Theme"]["FontColor"],
+            ["Parent"] = WindowIcon,
+            ["Visible"] = true,
+        })
+        --
+        Library:AddThemeColor(WindowTitle, {
+            ["TextColor3"] = "FontColor",
         })
     end
 end
