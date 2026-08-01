@@ -134,7 +134,7 @@ end
 
 -- return Library
 
-local window = Library:CreateWindow({icon = "rbxassetid://87369894709952"})
+local window = Library:CreateWindow({title = "RinoX", icon = "rbxassetid://87369894709952"})
 
 task.wait(9e9)
 Library["Theme"]["AccentColor"] = Color3.fromRGB(25, 25, 25)
