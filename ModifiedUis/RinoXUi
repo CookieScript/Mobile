@@ -4,7 +4,7 @@ do --
     Library = {
         ["Registers"] = {},
         ["Theme"] = {
-            ["AccentColor"] = Color3.fromRGB(180, 57, 57),
+            ["AccentColor"] = Color3.fromRGB(104, 154, 189),
             ["MainColor"] = Color3.fromRGB(60, 60, 60),
             ["Outline"] = Color3.fromRGB(45, 45, 45),
             ["Background"] = Color3.fromRGB(20, 20, 20),
@@ -132,4 +132,11 @@ do --
     end
 end
 
-return Library
+-- return Library
+
+local window = Library:CreateWindow({icon = "rbxassetid://87369894709952"})
+
+task.wait(9e9)
+Library["Theme"]["AccentColor"] = Color3.fromRGB(25, 25, 25)
+Library["Theme"]["Background"] = Color3.fromRGB(255, 255, 255)
+Library:UpdateThemeColor()
