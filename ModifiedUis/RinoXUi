@@ -14,9 +14,12 @@ do --
         ["ScreenGui"] = {},
         ["Font"] = nil,
     }
-    --
-    local Players = game:GetService("Players")
+    -- // Services
     local UserInputService = game:GetService("UserInputService")
+    local TweenService = game:GetService("TweenService")
+    local Players = game:GetService("Players")
+    local CoreGui = game:GetService("CoreGui")
+    -- // Variables
     local LocalPlayer = Players.LocalPlayer
     local Mouse = LocalPlayer:GetMouse()
     --
@@ -28,12 +31,19 @@ do --
         return obj
     end
     --
+    function Library:Tween(ins, info, prop)
+        local Tween = TweenService:Create(ins, info, prop)
+        Tween:Play()
+
+        return Tween
+    end
+    --
     Library["ScreenGui"] = Library:Create("ScreenGui", {
         ["Name"] = "brainsense",
-        ["Parent"] = game:GetService("CoreGui"),
+        ["Parent"] = CoreGui,
     })
     --
-    Library["Font"] = Enum["Font"]["Arial"]
+    Library["Font"] = Enum["Font"]["ArialBold"]
     --
     function Library:AddThemeColor(ins, prop)
         local i = #Library["Registers"] + 1
@@ -53,7 +63,7 @@ do --
         end
     end
     --
-    function Library:MakeDraggable(ins)
+    function Library:MakeDraggable(ins, val)
         ins["Active"] = true
 
         ins.InputBegan:Connect(function(Input)
@@ -61,7 +71,15 @@ do --
                 local Pos = Vector2.new(Mouse.X - ins.AbsolutePosition.X, Mouse.Y - ins.AbsolutePosition.Y)
                 while UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
                     ins["Position"] = UDim2.new(0, Mouse.X - Pos.X + (ins["Size"]["X"]["Offset"] * ins["AnchorPoint"]["X"]), 0, Mouse.Y - Pos.Y + (ins["Size"]["Y"]["Offset"]  * ins["AnchorPoint"]["Y"]))
+                    if val and ins["MainFrame"] and ins["CenterIcon"] then
+                        ins["MainFrame"]["Visible"] = false
+                        ins["CenterIcon"]["Visible"] = true
+                    end
                     task.wait()
+                end
+                if val and ins["MainFrame"] and ins["CenterIcon"] then
+                    ins["MainFrame"]["Visible"] = true
+                    ins["CenterIcon"]["Visible"] = false
                 end
             end
         end)
@@ -74,6 +92,12 @@ do --
             ["BorderSizePixel"] = 0,
             ["BackgroundTransparency"] = 1,
             ["TextSize"] = 13,
+        })
+        --
+        local uistroke = Library:Create("UIStroke", {
+            ["Color"] = Color3.fromRGB(0, 0, 0),
+            ["LineJoinMode"] = Enum.LineJoinMode.Miter,
+            ["Parent"] = obj,
         })
         --
         Library:AddThemeColor(obj, {
@@ -104,7 +128,40 @@ do --
             ["Visible"] = true,
         })
         --
-        Library:MakeDraggable(MenuFrame)
+        local Shadow = Library:Create("UIShadow", {
+            ["Color"] = Color3.fromRGB(0, 0, 0),
+            ["Spread"] = UDim2.fromOffset(5, 5),
+            ["BlurRadius"] = UDim.new(0, 4),
+            ["Transparency"] = 0.5,
+            ["Offset"] = UDim2.fromOffset(0, 0),
+            ["Parent"] = MenuFrame,
+        })
+        --
+        local MainFrame = Library:Create("Frame", {
+            ["Size"] = UDim2.new(1, 0, 1, 0),
+            ["BorderSizePixel"] = 0,
+            ["Name"] = "MainFrame",
+            ["BackgroundTransparency"] = 1,
+            ["Parent"] = MenuFrame,
+            ["Visible"] = true,
+        })
+        --
+        local CenterIcon = Library:Create("ImageLabel", {
+            ["Size"] = UDim2.new(0, 35, 0, 35),
+            ["Position"] = UDim2.new(0.5, 0, 0.5, 0),
+            ["AnchorPoint"] = Vector2.new(0.5, 0.5),
+            ["BackgroundTransparency"] = 1,
+            ["BorderSizePixel"] = 0,
+            ["Name"] = "CenterIcon",
+            ["Image"] = window["icon"] or "",
+            ["ImageColor3"] = Library["Theme"]["AccentColor"],
+            ["ImageTransparency"] = 0,
+            ["ScaleType"] = Enum["ScaleType"]["Slice"],
+            ["Parent"] = MenuFrame,
+            ["Visible"] = true,
+        })
+        --
+        Library:MakeDraggable(MenuFrame, true)
         --
         Library:Create("UICorner", {
             ["CornerRadius"] = UDim.new(0, 4),
@@ -124,7 +181,7 @@ do --
             ["ImageColor3"] = Library["Theme"]["AccentColor"],
             ["ImageTransparency"] = 0,
             ["ScaleType"] = Enum["ScaleType"]["Slice"],
-            ["Parent"] = MenuFrame,
+            ["Parent"] = MainFrame,
             ["Visible"] = true,
         })
         --
@@ -145,7 +202,7 @@ end
 
 -- return Library
 
-local window = Library:CreateWindow({title = "RinoX", icon = "rbxassetid://87369894709952"})
+local window = Library:CreateWindow({title = "RinoSense", icon = "rbxassetid://699259085"})
 
 task.wait(9e9)
 Library["Theme"]["AccentColor"] = Color3.fromRGB(25, 25, 25)
