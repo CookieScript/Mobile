@@ -226,7 +226,7 @@
 	writefile("ffff.ttf", game:HttpGet("https://github.com/CookieScript/Mobile/raw/main/Assets/fs-tahoma-8px.ttf"))
 
 	local tahoma = {
-		name = "SmallestPixel7",
+		name = "fs-tahoma-8px",
 		faces = {
 			{
 				name = "Regular",
